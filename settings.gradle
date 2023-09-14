@@ -1,0 +1,5 @@
+rootProject.name = 'picasso'
+include('Api')
+include('Common')
+include('Infra')
+include('Domain')

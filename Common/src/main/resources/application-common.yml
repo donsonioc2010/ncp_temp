@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: common-local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: common-dev

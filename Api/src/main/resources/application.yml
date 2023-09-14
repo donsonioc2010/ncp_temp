@@ -1,0 +1,57 @@
+spring:
+  profiles:
+    active: local
+    group:
+      local:
+        - infra-local
+        - commons-local
+        - domain-local
+      dev:
+        - infra-dev
+        - common-dev
+        - domain-dev
+    include:
+      - infra
+      - common
+      - domain
+  mvc:
+    static-path-pattern: static/**
+  servlet:
+    multipart:
+      file-size-threshold: 1MB
+#      TODO : MultiPart 활용시 경로 변경 필요
+      location: ~/template-project/upload
+      max-file-size: 20MB
+      max-request-size: 200MB
+  web:
+    resources:
+      static-locations:
+        - classpath:/static/
+#      add-mappings: true
+
+
+server:
+  port: 8080
+  shutdown: graceful
+  servlet:
+    session:
+      timeout: 7200
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  devtools:
+    livereload:
+      enabled: true
+
+
+test-message : local-test
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+test-message : dev-test
+

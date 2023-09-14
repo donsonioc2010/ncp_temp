@@ -1,0 +1,10 @@
+spring:
+  config:
+    activate:
+      on-profile: infra-local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: infra-dev
