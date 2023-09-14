@@ -56,3 +56,7 @@
 
 ---
 ## 구현 기능
+
+---
+## CI/CD
+![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=Github-Actions&logoColor=white)

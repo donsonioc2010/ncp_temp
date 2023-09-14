@@ -13,3 +13,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+bootJar{
+    archivesBaseName = 'app'
+    archiveFileName = 'app.jar'
+}
