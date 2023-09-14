@@ -33,7 +33,7 @@ jobs:
 
       # Proxy Server Connect with SSH
       # scp로 proxy server에 build된 Jar 파일을 보낸다
-      - name: Deploy From Github Action to Proxy Server
+      - name: Deploy From Github Action to Application Server via Proxy Server
         uses: appleboy/scp-action@master
         with:
           proxy_host: ${{ secrets.NCP_PROXY_HOST }}
@@ -46,4 +46,4 @@ jobs:
           port: 22
           timeout: 60s
           source: ./Api/build/libs/app.jar
-          target: ncloud-application-server:~/appJar
+          target: /var/app
