@@ -1,0 +1,29 @@
+/* footer */
+footer {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    background-color: #bdbdbd;
+}
+footer .title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #242424;
+    padding-left: 10px;
+    margin-bottom: 0;
+}
+footer .footer-menu {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+footer .footer-menu li a {
+    font-size: 12px;
+    color: #6f6f6f;
+}
+footer .copyright {
+    color: #6f6f6f;
+    font-size: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
