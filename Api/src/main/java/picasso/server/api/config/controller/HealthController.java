@@ -1,21 +1,18 @@
-package picasso.server.api.test;
+package picasso.server.api.config.controller;
 
-
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@RequestMapping("/test")
-@RequiredArgsConstructor
 @RestController
-public class TestController {
-    private final TestMessage testMessage;
+@RequestMapping("/health")
+public class HealthController {
 
     @GetMapping
-    public String rtnMsg() {
-        return testMessage.toString();
+    public ResponseEntity healthCheck() {
+        return ResponseEntity.ok().build();
     }
 }

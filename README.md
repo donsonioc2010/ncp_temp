@@ -53,7 +53,12 @@
 
 ---
 ## ERD
+> [!NOTE]
+> DBDocs의 문서화 내용 변경하고싶은 경우   
+> `./Docs/Picasso.dbml`의 파일 내용을 변경한 다음 `dev`브랜치에 Push가 진행될 경우 자동 갱신됩니다.
 
+
+- [DBDocs 링크](https://dbdocs.io/donsonioc2010/Picasso)
 ---
 ## 구현 기능
 
