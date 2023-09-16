@@ -4,7 +4,7 @@ spring:
     group:
       local:
         - infra-local
-        - commons-local
+        - common-local
         - domain-local
       dev:
         - infra-dev
