@@ -37,18 +37,14 @@ jobs:
       - name: Transfer BuildFile Git Actions To ApplicationServer
         uses: appleboy/scp-action@master
         with:
-#          proxy_host: ${{ secrets.NCP_PROXY_HOST }}
-#          proxy_username: root
-#          proxy_key: ${{ secrets.NCP_PEM }}
-#          proxy_port: 2222
-#          host: ${{ secrets.NCP_APP_HOST }}
-#          username: root
-#          key: ${{ secrets.NCP_PEM }}
-#          port: 22
-          host: ${{ secrets.NCP_PROXY_HOST }}
+          proxy_host: ${{ secrets.NCP_PROXY_HOST }}
+          proxy_username: root
+          proxy_key: ${{ secrets.NCP_PEM }}
+          proxy_port: 2222
+          host: ${{ secrets.NCP_APP_HOST }}
           username: root
           key: ${{ secrets.NCP_PEM }}
-          port: 2222
+          port: 22
           source: ./Api/build/libs/app.jar
           target: /var/app
 
