@@ -15,4 +15,5 @@ public class NaverObjectStorageProperties {
     private String regionName;
     private String accessKey;
     private String secretKey;
+    private String bucketName;
 }
