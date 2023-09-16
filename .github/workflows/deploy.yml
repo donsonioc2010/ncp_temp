@@ -44,6 +44,6 @@ jobs:
           username: root
           key: ${{ secrets.NCP_PEM }}
           port: 22
-          timeout: 60s
           source: ./Api/build/libs/app.jar
           target: /var/app
+          run: java -jar ./var/app/app.jar -D${{ secrets.ACCESS_KEY }} -D${{ secrets.SECRET_KEY }}
