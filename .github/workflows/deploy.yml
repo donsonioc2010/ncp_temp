@@ -46,4 +46,4 @@ jobs:
           port: 22
           source: ./Api/build/libs/app.jar
           target: /var/app
-          run: java -jar ./var/app/app.jar -D${{ secrets.ACCESS_KEY }} -D${{ secrets.SECRET_KEY }}
+          run: java -jar ./var/app/app.jar -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }}
