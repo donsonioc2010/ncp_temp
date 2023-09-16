@@ -34,7 +34,7 @@ jobs:
       # Proxy Server Connect with SSH
       # scp로 proxy server에 build된 Jar 파일을 보낸다
       # jar 파일을 실행한다. 이 때 storage에 대한 VM Option을 추가하여 실행한다.
-      - name: Deploy From Github Action to Application Server via Proxy Server
+      - name: Transfer BuildFile Git Actions To ApplicationServer
         uses: appleboy/scp-action@master
         with:
           proxy_host: ${{ secrets.NCP_PROXY_HOST }}
@@ -47,9 +47,20 @@ jobs:
           port: 22
           source: ./Api/build/libs/app.jar
           target: /var/app
+
+      - name: Run Application
+        uses: appleboy/ssh-action@master
+        with:
+          proxy_host: ${{ secrets.NCP_PROXY_HOST }}
+          proxy_username: root
+          proxy_key: ${{ secrets.NCP_PEM }}
+          proxy_port: 2222
+          host: ${{ secrets.NCP_APP_HOST }}
+          username: root
+          key: ${{ secrets.NCP_PEM }}
+          port: 22
           script: |
             pwd
             cd /var/app
             ls -al
-            cd ../..
-            java -jar ./var/app/app.jar -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }}
+            nohup java -jar -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }} app.jar > nohup.log &
