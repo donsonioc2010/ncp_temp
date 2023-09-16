@@ -63,7 +63,4 @@ jobs:
           key: ${{ secrets.NCP_PEM }}
           port: 22
           script: |
-            pwd
-            cd /var/app
-            ls -al
-            nohup java -jar -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }} app.jar > nohup.log &
+            nohup java -jar -Dspring.profiles.active=dev -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }} /var/app/app.jar > nohup.log &
