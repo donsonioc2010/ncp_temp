@@ -1,8 +1,13 @@
+naver:
+  storage:
+    end-point: https://kr.object.ncloudstorage.com
+    region-name: kr-standard
+
+---
 spring:
   config:
     activate:
       on-profile: common-local
-
 ---
 spring:
   config:
