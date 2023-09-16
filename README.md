@@ -1,4 +1,5 @@
 # Picasso
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdonsonioc2010%2Fpicasso&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 ## 주제
 > [!NOTE]  
 > 미술품 경매 사이트
@@ -52,10 +53,16 @@
 
 ---
 ## ERD
+> [!NOTE]
+> DBDocs의 문서화 내용 변경하고싶은 경우   
+> `./Docs/Picasso.dbml`의 파일 내용을 변경한 다음 `dev`브랜치에 Push가 진행될 경우 자동 갱신됩니다.
 
+
+- [DBDocs 링크](https://dbdocs.io/donsonioc2010/Picasso)
 ---
 ## 구현 기능
 
 ---
 ## CI/CD
+> Test RADME
 ![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=Github-Actions&logoColor=white)

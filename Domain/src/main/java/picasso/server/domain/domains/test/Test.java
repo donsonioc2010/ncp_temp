@@ -21,4 +21,10 @@ public class Test {
 
     @Column
     private String name;
+
+    private String param1;
+    private String param2;
+    private String param3;
+    private String param4;
+
 }
