@@ -31,25 +31,24 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Move App.jar
+        run : mv ./Api/build/libs/app.jar ./
+
       # Proxy Server Connect with SSH
       # scp로 proxy server에 build된 Jar 파일을 보낸다
       # jar 파일을 실행한다. 이 때 storage에 대한 VM Option을 추가하여 실행한다.
       - name: Transfer BuildFile Git Actions To ApplicationServer
         uses: appleboy/scp-action@master
         with:
-#          proxy_host: ${{ secrets.NCP_PROXY_HOST }}
-#          proxy_username: root
-#          proxy_key: ${{ secrets.NCP_PEM }}
-#          proxy_port: 2222
-#          host: ${{ secrets.NCP_APP_HOST }}
-#          username: root
-#          key: ${{ secrets.NCP_PEM }}
-#          port: 22
-          host: ${{ secrets.NCP_PROXY_HOST }}
+          proxy_host: ${{ secrets.NCP_PROXY_HOST }}
+          proxy_username: root
+          proxy_key: ${{ secrets.NCP_PEM }}
+          proxy_port: 2222
+          host: ${{ secrets.NCP_APP_HOST }}
           username: root
           key: ${{ secrets.NCP_PEM }}
-          port: 2222
-          source: ./Api/build/libs/app.jar
+          port: 22
+          source: app.jar
           target: /var/app
 
       - name: Run Application
