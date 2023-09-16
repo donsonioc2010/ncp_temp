@@ -31,6 +31,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Move App.jar
+        run : mv ./Api/build/libs/app.jar ./
+
       # Proxy Server Connect with SSH
       # scp로 proxy server에 build된 Jar 파일을 보낸다
       # jar 파일을 실행한다. 이 때 storage에 대한 VM Option을 추가하여 실행한다.
@@ -45,7 +48,7 @@ jobs:
           username: root
           key: ${{ secrets.NCP_PEM }}
           port: 22
-          source: ./Api/build/libs/app.jar
+          source: app.jar
           target: /var/app
 
       - name: Run Application
