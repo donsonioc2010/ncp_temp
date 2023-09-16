@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<!-- TODO : 기능개발 완료이후 삭제해야 할 파일 -->
+<head th:replace="~{fragment/config :: configFragment}"></head>
+<body>
+    <h1>Upload Test Page</h1>
+    <form action='/naver/file-upload-test' method='post' enctype='multipart/form-data'>
+        업로드 대상 파일 (프로필) : <input type='file' name="profile" /><br>
+        업로드 대상 파일 (미술품게시판) : <input type="file" name="paint" /><br>
+        <button>등록</button>
+    </form>
+</body>
+<script>
+</script>
+</html>
