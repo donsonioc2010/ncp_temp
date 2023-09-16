@@ -41,6 +41,8 @@ spring:
   devtools:
     livereload:
       enabled: true
+server:
+  port: 8080
 
 
 test-message : local-test
