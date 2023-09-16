@@ -15,7 +15,8 @@ public enum GlobalException implements BaseErrorCode {
     INTERNAL_SERVER_ERRORS(INTERNAL_SERVER_ERROR.value(), "서버 내부 오류입니다."),
     DATE_FORMAT_ERROR(BAD_REQUEST.value(), "날짜 형식을 확인해주세요."),
     FILE_UPLOAD_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 업로드 중 오류가 발생하였습니다"),
-    FILE_DELETE_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 삭제 중 오류가 발생하였습니다")
+    FILE_DELETE_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 삭제 중 오류가 발생하였습니다"),
+    FILE_IO_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 변환 중 오류가 발생하였습니다")
     ;
 
     private final Integer statusCode;
