@@ -12,11 +12,8 @@
 <div>
     <h1>결제하기</h1>
 </div>
-<button type="button" th:onclick="paymentResult(${T(picasso.server.payment.PGName).KAKAO.value()})" id="kakaopay">카카오페이 결제하기</button>
-<label>
-    <input type="text" th:value="${T(picasso.server.payment.PGName).KAKAO.getValue()}" />
-</label>
-<button type="button" onclick=paymentResult("kakaopay.TC0ONETIME")>카카오페이 결제하기 without th</button>
+<button id="kakaopay" onclick="paymentResult(this)" th:value="${T(picasso.server.payment.PGName).KAKAO.getValue()}" type="button">카카오페이 결제하기</button>
+<button id="tosspay" onclick="paymentResult(this)" th:value="${T(picasso.server.payment.PGName).TOSS.getValue()}" type="button">토스페이 결제하기</button>
 <div>
     <h3 class="amount" id="price_amount">결제 금액</h3>
     <label>

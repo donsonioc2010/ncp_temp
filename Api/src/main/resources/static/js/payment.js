@@ -13,7 +13,8 @@ var requestPayment = pg_name  => {
     });
 }
 
-var paymentResult = pg_name => {
+var paymentResult = obj => {
+    var pg_name = obj.value
     return (requestPayment(pg_name), function(response) {
         if (response.success) {
             var msg = "결제 완료";
