@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Picasso</title>
+</head>
+<body>
+<h1>Picasso</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>게시물 번호</th>
+        <th>파는사람</th>
+        <th>그림명</th>
+        <th>시작가</th>
+        <th>생성일</th>
+        <th>승인 상태</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="picture : ${pictures}">
+        <td th:text="${picture.boardNo}"></td>
+        <td th:text="${picture.picture_id}"></td>
+        <td th:text="${picture.pictureName}"></td>
+        <td th:text="${picture.startingPrice}"></td>
+        <td th:text="${picture.createdDate}"></td>
+        <td>
+            <button th:onclick="'approve(' + ${approve} + ')'" th:text="Approve"></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script th:inline="javascript">
+    function approve(pictureId) {
+        alert('Picture with ID ' + approve + ' approved!');
+    }
+</script>
+</body>
+</html>

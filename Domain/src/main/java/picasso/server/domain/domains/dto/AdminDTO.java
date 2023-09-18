@@ -13,6 +13,7 @@ public class AdminDTO {
     private int boardNo;
     private Timestamp createdDate;
     private String changeToApproveStatue;
+    private boolean approve;
 
 
 

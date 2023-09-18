@@ -15,8 +15,9 @@ public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int boardNo;
-    private Timestamp createdDate;
-    private String changeToApproveStatue;
+    private int boardNo; // 게시물 번호
+    private Timestamp createdDate; // 게시물 생성일
+    private String changeToApproveStatue; // 승인상태변경
+        private boolean approve;           // 승인
         }
 

@@ -3,6 +3,7 @@ package picasso.server.domain.domains.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter @Setter
@@ -17,3 +18,9 @@ public class PictureDTO {
     private LocalDateTime dateTime;
     private String imgUrl; //그림 url
 }
+
+
+
+
+
+
