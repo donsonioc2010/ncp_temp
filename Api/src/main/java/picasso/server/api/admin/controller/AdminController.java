@@ -1,10 +1,15 @@
 package picasso.server.api.admin.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.admin.dto.response.BoardResponseDTO;
+import picasso.server.api.admin.service.DefaultAdminService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -46,5 +51,8 @@ public class AdminController {
                 .status("대기중")
                 .build());
     return "admin/detail";
+    }
+
+
     }
 }
