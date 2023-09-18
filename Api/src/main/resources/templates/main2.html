@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경매</title>
+    <link rel="stylesheet" th:href="@{/static/css/slide.css}" />
+    <link rel="icon" href="data:,">
+</head>
+
+<body class="img12">
+
+
+<main id="main">
+    <section id="sliderType01">
+        <div class="slider__wrap">
+            <div class="slider__img">
+                <div class="slider__inner">
+                    <div class="slider__inner">
+                        <div th:each="image, index : ${images}" class="slider" role="group" th:attr="aria-label=${'${index.index + 1}/' + ${images.size()}}">
+                            <span>낙찰</span>
+                            <!-- 이미지 경로를 Thymeleaf로 지정 -->
+                            <img th:src="@{'/static/asset/' + ${image}}" th:alt="'이미지' + (${index.index} + 1)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider__btn">
+            <button href="#" class="prev" role="button" aria-label="왼쪽 이미지">prev</button>
+            <button href="#" class="next" role="button" aria-label="오른쪽 이미지">next</button>
+        </div>
+        <div class="slider__dot">
+            <a th:each="image, index : ${images}" th:href="'#' + ${'image-' + index.index}" th:text="'이미지' + (${index.index} + 1)" class="dot" th:class="${index.index == 0} ? 'active'"></a>
+        </div>
+    </section>
+</main>
+
+<script th:src="@{/static/js/slide2.js}"></script>
+</script>
+
+</body>
+
+</html>
