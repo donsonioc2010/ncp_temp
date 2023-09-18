@@ -2,7 +2,7 @@ naver:
   storage:
     end-point: https://kr.object.ncloudstorage.com
     region-name: kr-standard
-    bucket-name: picasso-bucket
+    bucket-name: bitcamp-auction
 
 ---
 spring:
