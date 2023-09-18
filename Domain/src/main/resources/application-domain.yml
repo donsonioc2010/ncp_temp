@@ -46,7 +46,7 @@ spring:
 
   # DB접속 그래봐야 못해서 공개되도 상관없음
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://db-ik892.vpc-cdb.ntruss.com:3306/project
     username: project
     password: qwer1234!!

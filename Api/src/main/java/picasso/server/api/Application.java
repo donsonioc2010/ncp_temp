@@ -7,11 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 // EnableJpaRepositories Reference : https://stackoverflow.com/questions/46732402/spring-boot-autowiring-of-beans-is-not-working-in-maven-multi-module-project
 @Slf4j
 @EntityScan("picasso.server.domain")
 @ComponentScan(basePackages = {"picasso.server"})
 @EnableJpaRepositories(basePackages = {"picasso.server.domain"})
+@EnableScheduling // Schedule사용을 위한 Annotation
 @SpringBootApplication
 @RequiredArgsConstructor
 public class Application {
