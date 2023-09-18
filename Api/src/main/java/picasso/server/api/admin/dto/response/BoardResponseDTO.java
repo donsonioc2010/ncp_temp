@@ -1,64 +1,44 @@
 package picasso.server.api.admin.dto.response;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
+import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
+//vo
+@Getter
+@Setter
 @Data
 @Builder
 @AllArgsConstructor
+
+@Entity
 public class BoardResponseDTO {
+
+@Id @GeneratedValue
     private long id;
     private long startAmount;
     private String title;
     private Timestamp created_at;
+    private DateTime requestTime;
+    private DateTime approvalTime;
+
+    @Column(name = "status")
     private String status;
     private String painter;
     private String content;
-    private String photo_link;
 
 
+    private static int request;
 
-    public class RequestManager {
 
-    private List<Request> requests;
-        public RequestManager() {
-            this.requests = new ArrayList<>();
-        }
+    public BoardResponseDTO() {
 
-        public Request getRequest(long id, String content) {
-            Request request = getRequestByIdAndContent(id, content);
-
-            if (request != null) {
-                return request;
-            }
-
-            return null;
-        }
-
-        public boolean approveRequest(long id) {
-            for (Request request : requests) {
-                if (request.getRequestApprove() == 1) {
-                    request.setRequestApproved(true);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public boolean rejectRequest(long id) {
-            for (Request request : requests) {
-                if (request.getRequestId() == id) {
-                    requests.remove(request);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private Request getRequestByIdAndContent(long id, String content) {
-            return new Request(id, content);
-        }
     }
-
 }
+
