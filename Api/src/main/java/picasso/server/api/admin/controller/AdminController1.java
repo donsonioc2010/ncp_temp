@@ -7,7 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import picasso.server.api.admin.dto.response.BoardResponseDTO;
+import picasso.server.api.admin.service.AdminService;
+import picasso.server.domain.domains.dto.AdminBoardDTO;
 
 @Slf4j
 @RequestMapping("/admin1")
@@ -36,7 +37,7 @@ public class AdminController1 {
 
     @GetMapping("detail/{category}/{no}")
     public String detail(@PathVariable int category, @PathVariable int no, Model model) throws Exception {
-        Board board = boardService.get(no);
+        AdminBoardDTO adminBoardDTO = AdminService.get(no);
         if (board != null) {
             boardService.increaseViewCount(no);
             model.addAttribute("board", board);

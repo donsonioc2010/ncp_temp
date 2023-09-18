@@ -3,7 +3,6 @@ package picasso.server.api.admin.service;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import picasso.server.api.admin.dto.response.BoardResponseDTO;
 
 import java.util.List;
 
