@@ -11,15 +11,25 @@
 <form th:object="${PictureDTO}" th:action="@{/pictures}" method="post" enctype="multipart/form-data">
 
     <!-- Display selected image preview -->
+<!--    <div id="imagePreview" style="display: none;">-->
+<!--        <h3>Selected Image Preview:</h3>-->
+<!--        <img id="preview" alt="Selected Image">-->
+<!--    </div>-->
+
+<!--    <div class="input-group mb-3">-->
+<!--&lt;!&ndash;    <label for="imageFile">Image File:</label>&ndash;&gt;-->
+<!--    <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required onchange="handleImageUpload(event)"><br>-->
+<!--    </div>-->
+
     <div id="imagePreview" style="display: none;">
         <h3>Selected Image Preview:</h3>
-        <img id="preview" alt="Selected Image">
+        <img id="resizedPreview" alt="Selected Image">
     </div>
 
     <div class="input-group mb-3">
-<!--    <label for="imageFile">Image File:</label>-->
-    <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required onchange="handleImageUpload(event)"><br>
+        <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required onchange="handleImageUpload(event)"><br>
     </div>
+
 
     <div class="input-group mb-3">
 <!--        <label class="input-group-text" for="imageFile">Upload</label>-->

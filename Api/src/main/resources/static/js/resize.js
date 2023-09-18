@@ -44,3 +44,4 @@ function handleImageUpload(event) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
