@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class Picture {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long picture_id;
@@ -30,8 +29,5 @@ public class Picture {
 
     private String size; //그림 사이즈
     private LocalDateTime dateTime;
-
-    @Enumerated(EnumType.STRING)
-    private PictureStatus status; //그림 상태
 
 }
