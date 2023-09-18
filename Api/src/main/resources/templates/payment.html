@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- PortOne SDK -->
-    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <script src="../static/js/payment.js"></script>
-    <meta charset="UTF-8">
-    <title>Sample Payment</title>
-</head>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}"></head>
 <body>
-    <button onclick="requestKakaoPay()">카카오페이 결제하기</button> <!-- 결제하기 버튼 생성 -->
-    <button onclick="requestTossPay()">토스페이 결제하기</button> <!-- 결제하기 버튼 생성 -->
-    <button onclick="requestKGInicis()">KG이니시스 결제하기</button> <!-- 결제하기 버튼 생성 -->
+<input class="inputPrice" type="hidden">
+<input class="amountValue" type="text">
+<div>
+    <h1>결제하기</h1>
+</div>
+<button type="button" th:onclick="paymentResult(${T(picasso.server.payment.PGName).KAKAO.value()})" id="kakaopay">카카오페이 결제하기</button>
+<label>
+    <input type="text" th:value="${T(picasso.server.payment.PGName).KAKAO.getValue()}" />
+</label>
+<button type="button" onclick=paymentResult("kakaopay.TC0ONETIME")>카카오페이 결제하기 without th</button>
+<div>
+    <h3 class="amount" id="price_amount">결제 금액</h3>
+    <label>
+        <input onchange="inputPrice(this)"/>
+    </label>
+</div>
+<script src="/static/js/pay_modal.js"></script>
+<script src="/static/js/payment.js"></script>
 </body>
 </html>
 
