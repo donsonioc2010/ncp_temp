@@ -29,7 +29,7 @@ public class TestMailController {
         return sendMailUtil.sendMail(
                 mail,
                 "테스트메일입니다.",
-                "mail/sample",
+                MailPathConstants.SAMPLE_MAIL,
                 new HashMap<>() {{
                     put("a", "A변수 데이터 입니다.");
                     put("b", "B변수 데이터 입니다.");
