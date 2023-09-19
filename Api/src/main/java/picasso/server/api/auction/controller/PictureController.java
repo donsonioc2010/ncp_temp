@@ -76,7 +76,7 @@ public class PictureController {
         picture.setStartingPrice(dto.getStartingPrice());
         picture.setIncrementAmount(dto.getIncrementAmount());
         picture.setDateTime(dto.getDateTime());
-        PictureStatus status = PictureStatus.BEFORE_APPROVE;
+        PictureStatus status = PictureStatus.BEFORE_APPROVE; // Enum값 변경할것
         picture.setPictureStatus(status);
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
