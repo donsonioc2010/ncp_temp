@@ -3,13 +3,98 @@
         lang="ko"
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-    <head th:replace="~{fragment/config :: configFragment}"></head>
-    <body>
-        인덱스냐옹
-    </body>
-    <script>
-        console.log('a')
-    </script>
+<head th:replace="~{fragment/config :: configFragment}"></head>
+<body>
+<link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+
+<div class="header">
+    <div class="row text-center">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <div class="title">
+                <img src="/static/asset/logo.png" alt="logo" height="100px"/>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="plan-auction-container">
+        <h1>경매 예정작</h1>
+        <swiper-container
+                class="swiper"
+                navigation="true"
+                speed=500
+                autoplay="true"
+                loop="true"
+        >
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        alt="미쯔"
+                />
+            </swiper-slide>
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
+                        alt="페페"
+                />
+            </swiper-slide>
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        alt="미쯔"
+                />
+            </swiper-slide>
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
+                        alt="페페"
+                />
+            </swiper-slide>
+        </swiper-container>
+    </div>
+
+    <div class="process-auction-container">
+        <h1>경매 진행중</h1>
+        <swiper-container
+                class="swiper"
+                navigation="true"
+                speed=500
+                autoHeight="true"
+                autoplay="true"
+                loop="true"
+        >
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        alt="미쯔"
+                />
+            </swiper-slide>
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
+                        alt="페페"
+                />
+            </swiper-slide>
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        alt="미쯔"
+                />
+            </swiper-slide>
+            <swiper-slide>
+                <img
+                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
+                        alt="페페"
+                />
+            </swiper-slide>
+        </swiper-container>
+    </div>
+</div>
+</body>
 </html>
