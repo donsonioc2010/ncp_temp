@@ -24,12 +24,12 @@ var paymentResult = obj => {
             msg += '// 카드 승인번호 : ' + response.apply_num;
 
             postPayInfo(true);
-            console.log(msg);
+            alert("결제가 완료되었습니다.");
         } else {
             var msg = "결제 실패"
             msg += "에러 내용" + response.error_msg;
             postPayInfo(false);
-            console.log(msg);
+            alert("결제 실패입니다.");
         }
     });
 }
