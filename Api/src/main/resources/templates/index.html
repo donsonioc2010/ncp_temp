@@ -11,7 +11,10 @@
 <header th:replace="~{fragment/header :: headerFragment}"></header>
 <div class="container body">
     <div class="auction-container">
-        <h1>경매 예정작</h1>
+        <div class="title-sector">
+            <h1 class="title">경매 예정작</h1>
+            <button type="button" class="btn btn-primary more" onclick="">more</button>
+        </div>
         <swiper-container
                 class="swiper"
                 navigation="true"
@@ -56,7 +59,10 @@
     </div>
 
     <div class="auction-container">
-        <h1>경매 진행중</h1>
+        <div class="title-sector">
+            <h1 class="title">경매 진행중</h1>
+            <button type="button" class="btn btn-primary more" onclick="">more</button>
+        </div>
         <swiper-container
                 class="swiper"
                 navigation="true"

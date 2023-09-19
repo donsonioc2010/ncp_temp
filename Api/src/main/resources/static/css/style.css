@@ -18,7 +18,7 @@ button.before-login-btn {
     line-height: normal;
 }
 /* header */
-.main-header>div.before-login-area {
+header .main-header > div .before-login-area {
     display: flex;
     align-items: center;
 }
