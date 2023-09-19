@@ -1,12 +1,9 @@
 package picasso.server.api.auction.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,34 +33,6 @@ public class PictureController {
         model.addAttribute("PictureDTO", new PictureDTO());
         return "pictures/createPictureForm";
     }
-
-//    @PostMapping
-//    public String add(PictureDTO dto, MultipartFile imageFile, Model model) {
-//
-//        Picture picture = new Picture();
-//        picture.setPicture_id(dto.getPicture_id());
-//        picture.setPictureName(dto.getPictureName());
-//        picture.setPainterName(dto.getPainterName());
-//        picture.setSize(dto.getSize());
-//        picture.setDetails(dto.getDetails());
-//        picture.setIncrementAmount(dto.getIncrementAmount());
-//
-//        if (imageFile != null && !imageFile.isEmpty()) {
-//            try {
-//                String imageUrl = naverObjectStorageUtil.storageFileUpload(NaverObjectStorageUsageType.PAINT, imageFile);
-//                picture.setImgUrl(imageUrl);
-//                model.addAttribute("imgURL", imageUrl);
-//                uploadedImageUrls.add(imageUrl);
-//                System.out.println(imageUrl);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                return "redirect:/error"; // Redirect to an error page
-//            }
-//        }
-//        pictureService.saveItem(picture);
-//        return "redirect:/";
-//    }
-
 
     @PostMapping
     public String add(PictureDTO dto, MultipartFile imageFile, Model model) {
@@ -103,8 +72,5 @@ public class PictureController {
             System.out.println(imageUrls.get(1));
         return "imageList"; // Change to your Thymeleaf template name
     }
-
-
-
 
 }
