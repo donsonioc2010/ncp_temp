@@ -15,6 +15,7 @@ import picasso.server.common.util.NaverObjectStorageUtil;
 import picasso.server.domain.domains.dto.PictureDTO;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.api.auction.service.PictureService;
+import picasso.server.domain.domains.items.PictureStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,8 @@ public class PictureController {
         picture.setStartingPrice(dto.getStartingPrice());
         picture.setIncrementAmount(dto.getIncrementAmount());
         picture.setDateTime(dto.getDateTime());
+        PictureStatus status = PictureStatus.BEFORE_APPROVE;
+        picture.setPictureStatus(status);
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
                 String imageUrl = naverObjectStorageUtil.storageFileUpload(NaverObjectStorageUsageType.PAINT, imageFile);
@@ -100,5 +103,8 @@ public class PictureController {
             System.out.println(imageUrls.get(1));
         return "imageList"; // Change to your Thymeleaf template name
     }
+
+
+
 
 }
