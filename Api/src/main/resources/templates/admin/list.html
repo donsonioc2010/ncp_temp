@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Picasso</title>
+    <title>Picasso - Picture List</title>
 </head>
 <body>
-<h1>Picasso</h1>
-
+<h1>Picture List</h1>
 <table border="1">
     <thead>
     <tr>
-        <th>게시물 번호</th>
         <th>파는사람</th>
         <th>그림명</th>
         <th>시작가</th>
@@ -19,13 +17,13 @@
     </thead>
     <tbody>
     <tr th:each="picture : ${pictures}">
-        <td th:text="${picture.boardNo}"></td>
         <td th:text="${picture.picture_id}"></td>
         <td th:text="${picture.pictureName}"></td>
         <td th:text="${picture.startingPrice}"></td>
-        <td th:text="${picture.createdDate}"></td>
+        <td th:text="${picture.dateTime}"></td>
+<!--        <td>승인상태</td>-->
         <td>
-            <button th:onclick="'approve(' + ${approve} + ')'" th:text="Approve"></button>
+            <button onclick="approve([[${picture.picture_id}]])">Approve</button>
         </td>
     </tr>
     </tbody>
@@ -33,7 +31,7 @@
 
 <script th:inline="javascript">
     function approve(pictureId) {
-        alert('Picture with ID ' + approve + ' approved!');
+        alert('Picture with ID ' + pictureId + ' approved!');
     }
 </script>
 </body>
