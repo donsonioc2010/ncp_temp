@@ -1,9 +1,12 @@
 package picasso.server.api.auction.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,14 +27,7 @@ public class PictureController {
 
     private final PictureService pictureService;
     private final NaverObjectStorageUtil naverObjectStorageUtil;
-    private List<String> uploadedImageUrls = new ArrayList<>();
-
-    private String getImageUrlFromFilename(String filename) {
-        // 기본 URL과 쿼리 파라미터를 이용하여 동적으로 이미지 URL 생성
-        String baseUrl = "http://kr.object.ncloudstorage.com/bitcamp-auction/";
-        String queryParams = "type=f&w=300&h=400";
-        return baseUrl + filename + "?" + queryParams;
-    }
+    List<String> imageUrls = new ArrayList<>();
 
 
     @GetMapping("/new")
@@ -76,19 +72,16 @@ public class PictureController {
         picture.setPainterName(dto.getPainterName());
         picture.setSize(dto.getSize());
         picture.setDetails(dto.getDetails());
+        picture.setStartingPrice(dto.getStartingPrice());
         picture.setIncrementAmount(dto.getIncrementAmount());
-
+        picture.setDateTime(dto.getDateTime());
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
                 String imageUrl = naverObjectStorageUtil.storageFileUpload(NaverObjectStorageUsageType.PAINT, imageFile);
                 picture.setImgUrl(imageUrl);
+                imageUrls.add(imageUrl);
+                model.addAttribute("imageUrls", imageUrls);
                 model.addAttribute("imgURL", imageUrl);
-
-                // 동적으로 생성된 이미지 URL 생성
-                String dynamicImageUrl = getImageUrlFromFilename(imageUrl);
-                model.addAttribute("dynamicImageUrl", dynamicImageUrl);
-                System.out.println(dynamicImageUrl);
-
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -100,6 +93,12 @@ public class PictureController {
         return "redirect:/";
     }
 
-
+    @GetMapping("/list")
+    public String imgUrls(Model model) {
+        List<String> imageUrls = pictureService.extractImageUrlsSortedByDateTime();
+        model.addAttribute("imageUrls", imageUrls);
+            System.out.println(imageUrls.get(1));
+        return "imageList"; // Change to your Thymeleaf template name
+    }
 
 }

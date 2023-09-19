@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.repository.PictureRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,18 @@ public class PictureService {
 
     public Optional<Picture> findOne(Long id) {
         return pictureRepository.findById(id);
+    }
+
+    public List<String> extractImageUrlsSortedByDateTime() {
+        List<Picture> pictures = pictureRepository.findAllByOrderByDateTimeAsc();
+        List<String> imageUrls = new ArrayList<>();
+
+        for (Picture picture : pictures) {
+            String imageUrl = picture.getImgUrl();
+            imageUrls.add(imageUrl);
+        }
+
+        return imageUrls;
     }
 
 }
