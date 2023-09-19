@@ -1,11 +1,11 @@
 package picasso.server.common.exception;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import picasso.server.common.dto.ErrorDetail;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @Getter
 @AllArgsConstructor
@@ -16,8 +16,9 @@ public enum GlobalException implements BaseErrorCode {
     DATE_FORMAT_ERROR(BAD_REQUEST.value(), "날짜 형식을 확인해주세요."),
     FILE_UPLOAD_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 업로드 중 오류가 발생하였습니다"),
     FILE_DELETE_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 삭제 중 오류가 발생하였습니다"),
-    FILE_IO_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 변환 중 오류가 발생하였습니다")
-    ;
+    FILE_IO_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 변환 중 오류가 발생하였습니다"),
+    ILLEGAL_ARGUMENT_ERROR(BAD_REQUEST.value(), "인자 값 문제로 인한 오류가 발생하였습니다"),
+    MAIL_SEND_ERROR(INTERNAL_SERVER_ERROR.value(), "메일 발송중 오류가 발생하였습니다");
 
     private final Integer statusCode;
     private final String reason;

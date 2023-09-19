@@ -12,4 +12,9 @@ public class HomeController {
     public String index() {
         return "메인화면test";
     }
+    
+    @GetMapping("/payment-test")
+    public String payment() {
+        return "payment";
+    }
 }
