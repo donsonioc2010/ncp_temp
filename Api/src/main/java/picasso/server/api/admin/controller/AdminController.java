@@ -35,17 +35,18 @@ public class AdminController {
         return "admin/list";
 
         }
+
     @GetMapping("/detail/{picture_id}/{pictureName}")
     public String detail(@PathVariable Long picture_id, @PathVariable String pictureName, Model model) {
-        Optional<Picture> pictureOptional = adminService.findById(picture_id);
+        Optional<Picture> IDOptional = adminService.findById(picture_id);
 
-        pictureOptional.ifPresent(picture -> {
+        IDOptional.ifPresent(picture -> {
             model.addAttribute("picture", picture);
         });
 
-        Optional<Picture> pictureOptional1 = adminService.findByName(pictureName);
+        Optional<Picture> NameOptional = adminService.findBypictureName(pictureName);
 
-        pictureOptional1.ifPresent(picture -> {
+        NameOptional.ifPresent(picture -> {
             model.addAttribute("picture", picture);
         });
 

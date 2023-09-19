@@ -24,8 +24,10 @@ public class AdminService {
     public Optional<Picture> findById(Long id) {
         return pictureRepository.findById(id);
     }
-    public Optional<Picture> findByName(String pictureName) {
-        return pictureRepository.findByName(pictureName);
+
+    public Optional<Picture> findBypictureName(String pictureName) {
+        return pictureRepository.findBypictureName(pictureName);
 
 
+    }
 }
