@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경매</title>
+    <link rel="stylesheet" href="../static/css/image.css">
+    <link rel="icon" href="data:,">
+</head>
+<body class="img12">
+<header th:include="fragment/header2.html :: header"></header>
+    <section class="special-section">
+        <div>
+            <div th:each="imageUrl : ${imageUrls}">
+                <div class="img-box">
+                    <img th:src="'http://ixsvvzqnjzre19609214.cdn.ntruss.com/' + ${imageUrl} + '?type=f&w=300&h=400' "alt="Image">
+                    <span>이거 얼마야 </span><br>
+                    <span>이거 이름~~</span><br>
+                    <span>이거 설명~~</span><br>
+                    <span>이거 최소 ###만큼 가격올릴수있어~~</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="../static/js/imgURL.js"></script>
+</body>
+</html>
