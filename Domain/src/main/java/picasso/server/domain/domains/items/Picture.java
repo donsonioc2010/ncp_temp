@@ -23,6 +23,9 @@ public class Picture {
     @Column(nullable = false)
     private String details; //그림 설명
 
+    @Enumerated(EnumType.STRING)
+    private PictureStatus pictureStatus;
+
     private int startingPrice; //시작 가격
 
     private int incrementAmount; //최소 입찰 단위
