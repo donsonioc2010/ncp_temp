@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.items.PictureStatus;
 import picasso.server.domain.domains.repository.PictureRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,25 +33,10 @@ public class PictureService {
         return pictureRepository.findById(id);
     }
 
-//    public List<Picture> findEnum(PictureStatus status) {
-//        return pictureRepository.findByPictureStatus();
-//    }
-
-//    public List<String> extractImageUrlsSortedByDateTime() {
-//        List<Picture> pictures = pictureRepository.findAllByOrderByDateTimeAsc();
-//        List<String> imageUrls = new ArrayList<>();
-//
-//
-//        for (Picture picture : pictures) {
-//            String imageUrl = picture.getImgUrl();
-//            imageUrls.add(imageUrl);
-//        }
-//
-//        return imageUrls;
-//    }
 
     public List<String> extractImageUrlsSortedByDateTime() {
-        List<Picture> pictures = pictureRepository.findAllByOrderByDateTimeAsc();
+
+        /*List<Picture> pictures = pictureRepository.findAllByOrderByDateTimeAsc();
         List<String> imageUrls = new ArrayList<>();
 
 
@@ -64,8 +47,12 @@ public class PictureService {
                 imageUrls.add(imageUrl);
             }
         }
+        return imageUrls;*/
 
-        return imageUrls;
+        return pictureRepository.findAllByPictureStatusOrderByDateTimeAsc(BIDDING)
+                .stream()
+                .map(Picture::getImgUrl)
+                .toList();
     }
 
 
