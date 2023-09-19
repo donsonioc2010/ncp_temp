@@ -105,16 +105,15 @@ Table Board.article_amount_history [
   created_at datetime [default: 'now()', note: '해당 금액 갱신 시간']
 }
 
-Table Payment.payment_info [
-  headercolor: #2563eb
+Table Exchange.payment_info [
+  headercolor: #2563eb,
   note: '결제 히스토리'
 ] {
   id long [pk, increment, note: '결제 정보 하나하나에 대한 ID']
-  payment_id long
   pg varchar(20) [not null, note: '''
   결제 플랫폼
   ex) 카카오페이, 토스페이, 이니시스
-  '''
+  ''']
   pay_method varchar(20) [not null, default: 'card', note: '결제 방법']
   merchant_uid int [not null, unique, note: ''''
   주문 번호 : 서버에서 고유하게 지정할 예정.
@@ -122,9 +121,9 @@ Table Payment.payment_info [
   ''']
   product_name varchar(100) [not null, note: '상품 이름']
   amount int [not null, note: '결제 가격']
-  buyer_id [not null, ref > Auth.user.id, note: '구매자 ID'
-  buyer_email [not null, note: '구매자 Email']
-  buyer_name [not null, note: '구매자 이름']
+  buyer_id int [not null, ref: > Auth.user.id, note: '구매자 ID']
+  buyer_email varchar [not null, note: '구매자 Email']
+  buyer_name varchar [not null, note: '구매자 이름']
 }
 
 //사용자 정보 관련 그룹
@@ -138,4 +137,9 @@ TableGroup User {
 TableGroup Board_Article {
   Board.article
   Board.article_amount_history
+}
+
+// 포인트 환전 관련 그룹
+TableGroup Exchange {
+  Exchange.payment_info
 }

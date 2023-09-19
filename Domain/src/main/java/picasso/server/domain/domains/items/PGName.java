@@ -1,4 +1,4 @@
-package picasso.server.payment;
+package picasso.server.api.exchange;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
