@@ -13,8 +13,8 @@ public class HomeController {
         return "index";
     }
     
-    @GetMapping("/payment-test")
+    @GetMapping("/exchange-test")
     public String payment() {
-        return "payment";
+        return "exchange";
     }
 }

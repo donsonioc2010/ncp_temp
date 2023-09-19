@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PGName {
-  KAKAO("kakaopay.TC0ONETIME"),
-  TOSS("tosspay.tosstest");
+public enum PayMethod {
   
-  private final String value;
+  CARD("카드결제"),
+  ;
+  
+  private final String method;
 }
-
