@@ -8,89 +8,78 @@
 <body>
 <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
 
-<div class="header">
-    <div class="row text-center">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col">
-            <div class="title">
-                <img src="/static/asset/logo.png" alt="logo" height="100px"/>
-            </div>
-        </div>
-        <div class="col"></div>
-        <div class="col"></div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="plan-auction-container">
+<header th:replace="~{fragment/header :: headerFragment}"></header>
+<div class="container body">
+    <div class="auction-container">
         <h1>경매 예정작</h1>
         <swiper-container
                 class="swiper"
                 navigation="true"
                 speed=500
+                delay="500"
                 autoplay="true"
                 loop="true"
         >
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="1000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
                         alt="미쯔"
                 />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="1000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
-                        alt="페페"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                        alt="아리"
                 />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="1000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
                         alt="미쯔"
                 />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="1000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
-                        alt="페페"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                        alt="아리"
                 />
             </swiper-slide>
         </swiper-container>
     </div>
 
-    <div class="process-auction-container">
+    <div class="auction-container">
         <h1>경매 진행중</h1>
         <swiper-container
                 class="swiper"
                 navigation="true"
                 speed=500
+                delay="3000"
                 autoHeight="true"
                 autoplay="true"
                 loop="true"
         >
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="3000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
                         alt="미쯔"
                 />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="3000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
-                        alt="페페"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                        alt="아리"
                 />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="3000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/profile/f5207de1-983c-48ec-8f35-eabef0068ab9.JPG"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
                         alt="미쯔"
                 />
             </swiper-slide>
-            <swiper-slide>
+            <swiper-slide data-swiper-autoplay="3000">
                 <img
-                        src="https://kr.object.ncloudstorage.com/picasso-bucket/local/paint/913c8d1a-9b21-4180-9b69-cb37a9151cb6.png"
-                        alt="페페"
+                        src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                        alt="아리"
                 />
             </swiper-slide>
         </swiper-container>

@@ -1,3 +1,11 @@
+body {
+    background: linear-gradient(180deg, #7B37EA 0%, rgba(42, 70, 50, 0.00) 100%);
+}
+
+.container {
+    max-width:936px !important;
+}
+
 /* footer */
 footer {
     border-top: 1px solid #eee;
@@ -27,3 +35,4 @@ footer .copyright {
     margin-top: 10px;
     padding-left: 10px;
 }
+
