@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.repository.PictureRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +21,11 @@ public class AdminService {
         return pictureRepository.findAll();
     }
 
-    public Optional<Picture> findOne(Long id) {
+    public Optional<Picture> findById(Long id) {
         return pictureRepository.findById(id);
     }
+    public Optional<Picture> findByName(String pictureName) {
+        return pictureRepository.findByName(pictureName);
+
 
 }

@@ -8,7 +8,7 @@
 <table border="1">
     <thead>
     <tr>
-        <th>파는사람</th>
+        <th>ID</th>
         <th>그림명</th>
         <th>시작가</th>
         <th>생성일</th>
@@ -17,13 +17,18 @@
     </thead>
     <tbody>
     <tr th:each="picture : ${pictures}">
-        <td th:text="${picture.picture_id}"></td>
-        <td th:text="${picture.pictureName}"></td>
+        <td>
+            <!-- Link to detail page -->
+            <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.picture_id}"></span></a>
+        </td>
+        <td>
+            <!-- Link to detail page -->
+            <a th:href="@{'/admin/detail/' + ${picture.pictureName}}"><span th:text="${picture.pictureName}"></span></a>
+        </td>
         <td th:text="${picture.startingPrice}"></td>
         <td th:text="${picture.dateTime}"></td>
-<!--        <td>승인상태</td>-->
         <td>
-            <button onclick="approve([[${picture.picture_id}]])">Approve</button>
+            <button th:onclick="'approve(' + ${picture.picture_id} + ')'">Approve</button>
         </td>
     </tr>
     </tbody>
