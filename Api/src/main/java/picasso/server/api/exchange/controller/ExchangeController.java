@@ -25,10 +25,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/*
- * TODO : 해당 컨트롤러 사용법 안내를 위한 TestController로 추후 삭제가 필요합니다.
- */
-
 @Slf4j
 @RequestMapping("/exchange")
 @RequiredArgsConstructor
@@ -38,18 +34,5 @@ public class ExchangeController {
   private final ExchangeService exchangeService;
   private IamportClient api = new IamportClient("REST API KEY", "REST SECRET KEY");
   private String impKey = System.getProperty("IMP");
-  
-  
-  @GetMapping("/{pictureId}")
-  public void testExchange(@PathVariable Long pictureId, @RequestBody @Valid PostCreateExchangeRequest body) {
-    // TODO: User Entity 구현 후 User 정보 넣어 execute
-//    UserUtils.getCurrentUser(UserUtils.getUserId());
-    exchangeService.execute(body);
-  }
-  
-  @PostMapping(value="/imp_validate/{imp_uid}")
-  public IamportResponse<Payment> paymentByImpUid(@PathVariable String imp_uid) throws IamportResponseException, IOException {
-    return api.paymentByImpUid(imp_uid);
-  }
   
 }

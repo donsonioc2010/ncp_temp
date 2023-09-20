@@ -2,7 +2,7 @@ package picasso.server.api.exchange.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import picasso.server.domain.domains.items.Exchange;
+import picasso.server.domain.domains.items.PaymentHistory;
 import picasso.server.domain.domains.items.PGName;
 import picasso.server.domain.domains.items.PayMethod;
 
@@ -20,13 +20,13 @@ public class ExchangeDTO {
 //  private String userName;
 //  private String userEmail;
   
-  public static ExchangeDTO of(Exchange exchange) {
+  public static ExchangeDTO of(PaymentHistory paymentHistory) {
     return ExchangeDTO.builder()
-            .pgName(exchange.getPgName())
-            .payMethod(exchange.getPayMethod())
-            .merchantUUID(exchange.getMerchantUUID())
-            .productName(exchange.getProductName())
-            .price(exchange.getPrice())
+            .pgName(paymentHistory.getPgName())
+            .payMethod(paymentHistory.getPayMethod())
+            .merchantUUID(paymentHistory.getMerchantUUID())
+            .productName(paymentHistory.getProductName())
+            .price(paymentHistory.getPrice())
             .build();
   }
   
