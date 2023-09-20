@@ -1,6 +1,7 @@
 package picasso.server.domain.domains.member.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,7 +40,7 @@ public class Member {
   private Long point;
 
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
+  @NotNull
   private LoginType loginType;
 
   @Enumerated(EnumType.STRING)
