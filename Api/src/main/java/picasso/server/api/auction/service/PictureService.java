@@ -3,7 +3,6 @@ package picasso.server.api.auction.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.repository.PictureRepository;
 
@@ -21,8 +20,7 @@ public class PictureService {
 
     //아이템등록
     public Picture saveItem(Picture picture) {
-        Picture savedPicture = pictureRepository.save(picture);
-        return savedPicture;
+        return pictureRepository.save(picture);
     }
 
     public List<Picture> findItem() {
@@ -49,7 +47,7 @@ public class PictureService {
         }
         return imageUrls;*/
 
-        return pictureRepository.findAllByPictureStatusOrderByDateTimeAsc(BIDDING)
+        return pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING)
                 .stream()
                 .map(Picture::getImgUrl)
                 .toList();

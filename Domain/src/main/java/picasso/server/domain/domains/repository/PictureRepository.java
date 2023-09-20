@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, Long>{
 
-    List<Picture> findAllByOrderByDateTimeAsc();
+    List<Picture> findAllByOrderByBidStartDateAsc();
 
-    List<Picture> findAllByPictureStatusOrderByDateTimeAsc(PictureStatus status);
+    List<Picture> findAllByPictureStatusOrderByBidStartDateAsc(PictureStatus status);
 
 }
