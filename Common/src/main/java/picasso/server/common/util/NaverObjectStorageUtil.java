@@ -36,7 +36,7 @@ public class NaverObjectStorageUtil {
      * @return
      * @throws FileUploadException
      */
-    public String storageFileUpload(NaverObjectStorageUsageType usageType, MultipartFile file) throws FileUploadException {
+    public String storageFileUpload(NaverObjectStorageUsageType usageType, MultipartFile file){
         try {
             String filePath = getPath(usageType, getFileUUIDNameByMultipartFile(file));
 
