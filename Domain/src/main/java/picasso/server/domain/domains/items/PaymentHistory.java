@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,15 +23,24 @@ public class PaymentHistory {
   @Enumerated(EnumType.STRING)
   private PGName pgName;
   
-  @Enumerated(EnumType.STRING)
-  private PayMethod payMethod;
-  
   @NotNull
   private String productName;
+  
+  @NotNull
+  private String merchantUid;
   
   @NotNull
   private int amount;
   
   @NotNull
   private Long userId;
+  
+  @Builder
+  public PaymentHistory(PGName pgName, String productName, String merchantUid, int amount, Long userId) {
+    this.pgName = pgName;
+    this.productName = productName;
+    this.merchantUid = merchantUid;
+    this.amount = amount;
+    this.userId = userId;
+  }
 }

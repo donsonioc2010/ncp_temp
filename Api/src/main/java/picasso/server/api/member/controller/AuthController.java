@@ -68,6 +68,8 @@ public class AuthController {
     return "redirect:/";
   }
   
+  
+  // TODO: 테스트용 Controller 입니다. 추후 삭제 혹은 변경이 필요합니다.
   @ResponseBody
   @PostMapping("/session-info")
   public Map<String, Long> paymentSessionInfoRtn(HttpSession session) {

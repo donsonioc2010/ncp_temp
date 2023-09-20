@@ -15,10 +15,9 @@ var paymentResult = obj => {
         url : '/member/session-info',
         success : function(data, status, xhr) {
             userId = data.userId
-            console.log("SuccessBong >>> ", userId, data)
         },
-        error	: function(xhr, status, error) {
-            alert('결제중 오류가 발생해서 Fucking Bong 합니다.')
+        error : function(xhr, status, error) {
+            alert('결제중 오류가 발생했습니다.')
         },
     })
 
@@ -26,7 +25,11 @@ var paymentResult = obj => {
     return IMP.request_pay({
         pg : pg_name,
         pay_method : 'card',
-        merchant_uid: "picasso_" + new Date().getDate() + new Date().getMilliseconds(), // 계속 바뀌게 설정해야함. 결제에서 가장 중요한 정보 -> 이걸로 결제 하나하나를 식별함
+        merchant_uid: "picasso_" + new Date().getFullYear()
+            + new Date().getMonth()
+            + new Date().getDate()
+            + new Date().getHours()
+            + new Date().getMilliseconds(),
         name : '피카소 포인트 환전',
         amount : amount.value
     }, response => {

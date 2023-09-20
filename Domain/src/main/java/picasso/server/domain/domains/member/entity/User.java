@@ -59,4 +59,8 @@ public class User {
 
   @NotNull
   private LocalDateTime loginAt;
+  
+  public void updatePoint(Long point) {
+    this.point += point;
+  }
 }

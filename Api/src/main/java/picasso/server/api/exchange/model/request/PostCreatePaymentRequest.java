@@ -5,11 +5,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PostCreateExchangeRequest {
+public class PostCreatePaymentRequest {
   private Boolean payResult;
   private Long userId;
   private String merchantUid;
   private String productName;
   private String pgProvider;
-  private Integer paidAmount;
+  private Long paidAmount;
 }
