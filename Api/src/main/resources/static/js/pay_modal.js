@@ -7,5 +7,3 @@ function inputPrice(e){
     inputP.value = e.value;
     priceAmount.textContent = "결제 금액 : " + paynum + "원";
 }
-// var price = inputP.value;
-// document.getElementById("price_amount").innerHTML = price;
