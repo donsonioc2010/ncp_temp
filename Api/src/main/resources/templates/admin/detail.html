@@ -45,14 +45,11 @@
     </tr>
 
     <td>
-        <button th:onclick="'approve(' + ${picture.picture_id} + ')'">Approve</button>
+        <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" >
+            <button type="submit">Approve</button>
+        </form>
     </td>
 
-    <script th:inline="javascript">
-        function approve(pictureId) {
-            alert(pictureId + '회원의 요청' + ' 승인완료!');
-        }
-    </script>
 </table>
 
 </body>

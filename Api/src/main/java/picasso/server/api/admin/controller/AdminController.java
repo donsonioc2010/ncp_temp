@@ -1,13 +1,12 @@
 package picasso.server.api.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import picasso.server.api.admin.service.AdminService;
 import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.items.PictureStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +23,14 @@ public class AdminController {
     }
 
     @PostMapping("/approve/{pictureId}")
-    public String approvePicture(@PathVariable Long pictureId) {
+    public String approvePicture(@PathVariable Long pictureId, Model model) {
         try {
             adminService.approvePicture(pictureId);
             return "redirect:/admin/list";
 
         } catch (Exception e) {
+            List<Picture> pictures = adminService.findAll();
+            model.addAttribute("pictures", pictures);
             return "redirect:/admin/list";
         }
     }
@@ -37,6 +38,8 @@ public class AdminController {
     @GetMapping("/list")
     public String list(Model model) {
         List<Picture> pictures = adminService.findAll();
+
+
         model.addAttribute("pictures", pictures);
         return "admin/list";
     }

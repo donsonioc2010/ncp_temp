@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="picture : ${pictures}">
+    <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
         <td>
             <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.picture_id}"></span></a>
         </td>
@@ -28,19 +28,12 @@
         <td th:text="${picture.dateTime}"></td>
         <td th:text="${picture.pictureStatus}"></td>
         <td>
-            <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" onsubmit="return approve(${picture.picture_id}, '${picture.pictureStatus}')">
+            <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" >
                 <button type="submit">Approve</button>
             </form>
         </td>
     </tr>
     </tbody>
 </table>
-
-<script th:inline="javascript">
-    function approve(pictureId) {
-        alert(pictureId + '회원의 요청' + ' 승인완료!');
-
-    }
-</script>
 </body>
 </html>

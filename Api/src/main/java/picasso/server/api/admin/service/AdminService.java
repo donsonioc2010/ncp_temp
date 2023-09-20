@@ -22,6 +22,7 @@ public class AdminService {
         return pictureRepository.findAll();
     }
 
+
     public Optional<Picture> findById(Long id) {
         return pictureRepository.findById(id);
     }
@@ -35,11 +36,10 @@ public class AdminService {
         if (picture != null) {
             PictureStatus currentStatus = picture.getPictureStatus();
             if (currentStatus == PictureStatus.BEFORE_APPROVE) {
-                // 이미지를 승인 상태로 변경
+                // 이전 상태를 승인 상태로 변경
                 picture.setPictureStatus(PictureStatus.AFTER_APPROVE);
                 pictureRepository.save(picture);
             } else {
-                // 이미 승인된 경우에는 승인할 수 없음을 처리하거나 예외를 던질 수 있음
                 throw new IllegalStateException("이미 승인된 요청입니다.");
             }
         } else {
@@ -47,4 +47,3 @@ public class AdminService {
         }
     }
 }
-
