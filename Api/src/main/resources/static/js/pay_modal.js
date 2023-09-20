@@ -1,14 +1,11 @@
-const inputP = document.querySelector('.inputPrice') //결제 개월 수 입력받는 inputhidden
-const amount = document.querySelector('.amount');
-const amountV = document.querySelector('.amountValue');
+const inputP = document.getElementById('inputPrice') //결제 개월 수 입력받는 inputhidden
+const priceAmount = document.getElementById('price_amount')
 
 //결제 가격
 function inputPrice(e){
     const paynum = (e.value);
     inputP.value = e.value;
-    amount.textContent = "결제 금액 : " + paynum + "원";
-    amountV.value = paynum;
+    priceAmount.textContent = "결제 금액 : " + paynum + "원";
 }
-
 var price = inputP.value;
 document.getElementById("price_amount").innerHTML = price;
