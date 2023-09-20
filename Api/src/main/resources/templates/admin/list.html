@@ -19,18 +19,18 @@
     <tbody>
     <tr th:each="picture : ${pictures}">
         <td>
-            <!-- Link to detail page -->
             <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.picture_id}"></span></a>
         </td>
         <td>
-            <!-- Link to detail page -->
             <a th:href="@{'/admin/detail/' + ${picture.pictureName}}"><span th:text="${picture.pictureName}"></span></a>
         </td>
         <td th:text="${picture.startingPrice}"></td>
         <td th:text="${picture.dateTime}"></td>
         <td th:text="${picture.pictureStatus}"></td>
         <td>
-            <button th:onclick="'approve(' + ${picture.picture_id} + ')'">Approve</button>
+            <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" onsubmit="return approve(${picture.picture_id}, '${picture.pictureStatus}')">
+                <button type="submit">Approve</button>
+            </form>
         </td>
     </tr>
     </tbody>
@@ -39,8 +39,8 @@
 <script th:inline="javascript">
     function approve(pictureId) {
         alert(pictureId + '회원의 요청' + ' 승인완료!');
-    }
 
+    }
 </script>
 </body>
 </html>

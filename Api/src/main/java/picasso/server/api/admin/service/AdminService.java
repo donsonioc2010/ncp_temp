@@ -1,8 +1,7 @@
 package picasso.server.api.admin.service;
 
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.items.PictureStatus;
 import picasso.server.domain.domains.repository.PictureRepository;
@@ -10,42 +9,42 @@ import picasso.server.domain.domains.repository.PictureRepository;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class AdminService {
     private final PictureRepository pictureRepository;
 
+    public AdminService(PictureRepository pictureRepository) {
+        this.pictureRepository = pictureRepository;
+    }
 
     public List<Picture> findAll() {
-
         return pictureRepository.findAll();
     }
 
-    public Optional<Picture> findById(Long id)
-    {
+    public Optional<Picture> findById(Long id) {
         return pictureRepository.findById(id);
     }
 
-    public Optional<Picture> findBypictureName(String pictureName) {
+    public Optional<Picture> findByPictureName(String pictureName) {
         return pictureRepository.findBypictureName(pictureName);
-
-
-    }
-
-    public Picture findByStatus(PictureStatus pictureStatus) {
-        return pictureRepository.findByPictureStatus(pictureStatus);
     }
 
     public void approvePicture(Long pictureId) {
-        Optional<Picture> pictureOptional = pictureRepository.findById(pictureId);
-        if (pictureOptional.isPresent()) {
-            Picture picture = pictureOptional.get();
-            picture.setPictureStatus(PictureStatus.AFTER_APPROVE);
-            pictureRepository.save(picture);
+        Picture picture = pictureRepository.findById(pictureId).orElse(null);
+        if (picture != null) {
+            PictureStatus currentStatus = picture.getPictureStatus();
+            if (currentStatus == PictureStatus.BEFORE_APPROVE) {
+                // 이미지를 승인 상태로 변경
+                picture.setPictureStatus(PictureStatus.AFTER_APPROVE);
+                pictureRepository.save(picture);
+            } else {
+                // 이미 승인된 경우에는 승인할 수 없음을 처리하거나 예외를 던질 수 있음
+                throw new IllegalStateException("이미 승인된 요청입니다.");
+            }
         } else {
-            throw new IllegalArgumentException(pictureId+ "회원의 요청은 승인대기상태가 아닙니다. ");
+            throw new IllegalArgumentException("유효하지 않은 요청입니다.");
         }
     }
 }
+
