@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>경매</title>
     <link rel="stylesheet" href="../static/css/image.css">
+    <link rel="stylesheet" href="">
     <link rel="icon" href="data:,">
 </head>
 <body class="img12">
@@ -19,13 +20,39 @@
                      alt="Image">
                 <div>
                     <span>그림명: <span th:text="${pictureDataMap['pictureNames'][idx.index]}"></span></span><br>
+                    <span>화가: <span th:text="${pictureDataMap['painterNames'][idx.index]}"></span></span><br>
                     <span>설명: <span th:text="${pictureDataMap['details'][idx.index]}"></span></span><br>
+                    <span>가격: <span th:text="${pictureDataMap['startPrices'][idx.index]}"></span></span><br>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<div>
+    <!-- 예: 다음 페이지로 넘어가는 링크 -->
+    <a th:href="@{/pictures/list(page=${nextPage}, pageSize=${pageSize})}">다음 페이지</a><br>
+    <a th:href="@{/pictures/list(page=${previousPage}, pageSize=${pageSize})}">이전 페이지</a>
+</div>
+
 </main>
+
+
 <script src="../static/js/imgURL.js"></script>
 </body>
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
 </html>

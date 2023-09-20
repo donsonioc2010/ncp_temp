@@ -36,7 +36,7 @@
     <input type="number" id="StartingPrice" name="StartingPrice" th:field="*{startingPrice}" required><br>
 
     <label for="auctionDuration">경매기간:</label>
-    <input type="datetime-local" id="auctionDuration" name="auctionDuration" th:field="*{dateTime}" required>
+    <input type="date" id="auctionDuration" name="auctionDuration" th:field="*{bidStartDate}" required>
 
     <label for="incrementAmount">Increment Amount:</label>
     <input type="number" id="incrementAmount" name="incrementAmount" th:field="*{incrementAmount}" required><br>
