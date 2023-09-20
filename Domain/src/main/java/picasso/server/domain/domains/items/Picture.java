@@ -3,16 +3,20 @@ package picasso.server.domain.domains.items;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -55,5 +59,9 @@ public class Picture {
 
     @NotNull
     private LocalDate bidEndDate; // 경매 종료일
+
+
+    @OneToMany(mappedBy = "picture", fetch = FetchType.LAZY)
+    private List<PictureBidHistory> bidHistory = new ArrayList<>();
 
 }
