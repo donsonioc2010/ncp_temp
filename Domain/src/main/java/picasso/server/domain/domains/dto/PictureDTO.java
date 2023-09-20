@@ -3,8 +3,7 @@ package picasso.server.domain.domains.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter @Setter
 public class PictureDTO {
@@ -15,7 +14,7 @@ public class PictureDTO {
     private int startingPrice; //시작가격
     private int incrementAmount; //최소입찰단위
     private String size; //그림 사이즈
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
     private String imgUrl; //그림 url
 }
 
