@@ -23,7 +23,6 @@ public class ExchangeController {
   @ResponseBody
   @PostMapping("/payment")
   public void sample(@RequestBody PostCreateExchangeRequest body) {
-//    log.info("{} {} {} {} {} {} {}", body.getPayResult(), body.getBuyerName(), body.getBuyerEmail(), body.getMerchantUid(), body.getProductName(), body.getPgProvider(), body.getPaidAmount());
-  
+    log.info("{} {} {} {} {} {}", body.getPayResult(), body.getUserId(), body.getMerchantUid(), body.getProductName(), body.getPgProvider(), body.getPaidAmount());
   }
 }

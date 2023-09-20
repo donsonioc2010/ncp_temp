@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostCreateExchangeRequest {
   private Boolean payResult;
-  private String buyerName;
-  private String buyerEmail;
+  private Long userId;
   private String merchantUid;
   private String productName;
   private String pgProvider;
-  private int paidAmount;
+  private Integer paidAmount;
 }
