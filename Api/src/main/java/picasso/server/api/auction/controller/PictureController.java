@@ -15,7 +15,9 @@ import picasso.server.domain.domains.dto.PictureDTO;
 import picasso.server.domain.domains.items.Picture;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -55,15 +57,42 @@ public class PictureController {
             model.addAttribute("imgURL", imageUrl);
         }
 
+
+
+
         pictureService.saveItem(picture); //- 이 부분은 필요에 따라 주석처리
         return "redirect:/";
     }
 
     @GetMapping("/list")
     public String imgUrls(Model model) {
+//        List<String> imageUrls = pictureService.extractImageUrlsSortedByDateTime();
+//        model.addAttribute("imageUrls", imageUrls);
+        Map<String, List<?>> pictureDataMap = new HashMap<>();
+
+
         List<String> imageUrls = pictureService.extractImageUrlsSortedByDateTime();
+        List<String> details = pictureService.extractDetail();
+        List<String> pictureNames = pictureService.extractPictureName();
+        List<String> painterNames = pictureService.extractPainterName();
+        List<Integer> startPrices = pictureService.extractStartPrice();
+        List<Integer> incrementAmounts = pictureService.extractIncrementAmount();
+
+        pictureDataMap.put("imageUrls", imageUrls);
+        pictureDataMap.put("details", details);
+        pictureDataMap.put("pictureNames", pictureNames);
+        pictureDataMap.put("painterNames", painterNames);
+        pictureDataMap.put("startPrices", startPrices);
+        pictureDataMap.put("incrementAmounts", incrementAmounts);
+
+
         model.addAttribute("imageUrls", imageUrls);
-            System.out.println(imageUrls.get(1));
+//        model.addAttribute("details", details);
+//        model.addAttribute("picturesNames", pictureNames);
+//        model.addAttribute("painterNames", painterNames);
+//        model.addAttribute("startPrices", startPrices);
+//        model.addAttribute("incrementAmounts", incrementAmounts);
+        model.addAttribute("pictureDataMap", pictureDataMap);
         return "imageList"; // Change to your Thymeleaf template name
     }
 

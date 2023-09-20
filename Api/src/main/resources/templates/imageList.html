@@ -11,19 +11,20 @@
 </head>
 <body class="img12">
 <header th:include="fragment/header2.html :: header"></header>
-    <section class="special-section">
-        <div>
-            <div th:each="imageUrl : ${imageUrls}">
-                <div class="img-box">
-                    <img th:src="'http://ixsvvzqnjzre19609214.cdn.ntruss.com/' + ${imageUrl} + '?type=f&w=300&h=400' "alt="Image">
-                    <span>이거 얼마야 </span><br>
-                    <span>이거 이름~~</span><br>
-                    <span>이거 설명~~</span><br>
-                    <span>이거 최소 ###만큼 가격올릴수있어~~</span>
+<section class="special-section">
+    <div>
+        <div th:each="imageUrl, idx : ${imageUrls}">
+            <div class="img-box">
+                <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${imageUrl} + '?type=f&w=300&h=400' "
+                     alt="Image">
+                <div>
+                    <span>그림명: <span th:text="${pictureDataMap['pictureNames'][idx.index]}"></span></span><br>
+                    <span>설명: <span th:text="${pictureDataMap['details'][idx.index]}"></span></span><br>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </main>
 <script src="../static/js/imgURL.js"></script>
 </body>
