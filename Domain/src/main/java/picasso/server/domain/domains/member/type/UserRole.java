@@ -1,5 +1,5 @@
 package picasso.server.domain.domains.member.type;
 
-public enum Role {
+public enum UserRole {
   USER, ADMIN;
 }

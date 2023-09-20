@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import picasso.server.domain.domains.member.type.LoginType;
-import picasso.server.domain.domains.member.type.Role;
+import picasso.server.domain.domains.member.type.UserRole;
 import picasso.server.domain.domains.member.type.UserStatus;
 
 import java.time.LocalDateTime;
@@ -41,18 +41,18 @@ public class User {
 
   @Enumerated(EnumType.STRING)
   @NotNull
-  private LoginType loginType;
+  private LoginType loginType = LoginType.DEFAULT;
 
   @Enumerated(EnumType.STRING)
   @NotNull
-  private UserStatus userStatus;
+  private UserStatus userStatus = UserStatus.NOT_ACTIVE;
 
   @Enumerated(EnumType.STRING)
   @NotNull
-  private Role role;
+  private UserRole userRole = UserRole.USER;
 
   @NotNull
-  private LocalDateTime createdAt;
+  private LocalDateTime createdAt = LocalDateTime.now();
 
   @NotNull
   private LocalDateTime updatedAt;

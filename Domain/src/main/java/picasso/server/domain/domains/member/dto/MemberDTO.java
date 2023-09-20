@@ -1,6 +1,6 @@
 package picasso.server.domain.domains.member.dto;
 import picasso.server.domain.domains.member.type.LoginType;
-import picasso.server.domain.domains.member.type.Role;
+import picasso.server.domain.domains.member.type.UserRole;
 import picasso.server.domain.domains.member.type.UserStatus;
 import java.time.LocalDateTime;
 
@@ -14,7 +14,7 @@ public class MemberDTO {
   private Long point;
   private LoginType loginType;
   private UserStatus userStatus;
-  private Role role;
+  private UserRole userRole;
   private LocalDateTime memberCreatedAt;
   private LocalDateTime memberUpdatedAt;
   private LocalDateTime loginAt;
