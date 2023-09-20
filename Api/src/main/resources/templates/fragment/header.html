@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <header class="main-header" th:fragment="headerFragment">
-        <div style="background-color: rgba(186,255,250,0.41)">
-            header.html
+        <div class="row text-center">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+                <div class="title">
+                    <img src="/static/asset/logo.png" alt="logo" height="100px"/>
+                </div>
+            </div>
+            <div class="col"></div>
+            <div class="col before-login-area" style="display: flex; align-items: center;">
+                <div class="row" >
+                    <div class="col">
+                        <button type="button" class="btn btn-primary before-login-btn" onclick="">LOGIN</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-primary before-login-btn" onclick="">JOIN</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 </html>

@@ -1,3 +1,28 @@
+body {
+    background: linear-gradient(180deg, #7B37EA 0%, rgba(42, 70, 50, 0.00) 100%);
+}
+
+.container {
+    max-width:936px !important;
+}
+
+button.before-login-btn {
+    border-radius: 100px;
+    background: #18ACDB;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    color: #FFF;
+    text-align: center;
+    font-family: Sigmar One;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+/* header */
+header .main-header > div .before-login-area {
+    display: flex;
+    align-items: center;
+}
+
 /* footer */
 footer {
     border-top: 1px solid #eee;
@@ -27,3 +52,4 @@ footer .copyright {
     margin-top: 10px;
     padding-left: 10px;
 }
+
