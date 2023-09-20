@@ -43,6 +43,16 @@
         <th>생성일:</th>
         <td th:text="${picture.dateTime}"></td>
     </tr>
+
+    <td>
+        <button th:onclick="'approve(' + ${picture.picture_id} + ')'">Approve</button>
+    </td>
+
+    <script th:inline="javascript">
+        function approve(pictureId) {
+            alert(pictureId + '회원의 요청' + ' 승인완료!');
+        }
+    </script>
 </table>
 
 </body>

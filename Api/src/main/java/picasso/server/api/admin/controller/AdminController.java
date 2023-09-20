@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.admin.service.AdminService;
 import picasso.server.common.util.NaverObjectStorageUtil;
 import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.items.PictureStatus;
 
 
 import java.util.List;
@@ -34,22 +35,27 @@ public class AdminController {
         model.addAttribute("pictures", pictures);
         return "admin/list";
 
+//        PictureStatus pictureStatus = adminService.findByStatus();
+//        if(pictureStatus.getStatus()==pictureStatus.BEFORE_APPROVE) {
+//            model.addAttribute()
+//        }
+
+     }
+
+    @GetMapping("/detail/{identifier}")
+    public String detail(@PathVariable String identifier, Model model) {
+        Optional<Picture> pictureOptional;
+        if (identifier.matches("\\d+")) {
+            Long picture_id = Long.parseLong(identifier);
+            pictureOptional = adminService.findById(picture_id);
+        } else {
+            pictureOptional = adminService.findBypictureName(identifier);
         }
 
-    @GetMapping("/detail/{picture_id}/{pictureName}")
-    public String detail(@PathVariable Long picture_id, @PathVariable String pictureName, Model model) {
-        Optional<Picture> IDOptional = adminService.findById(picture_id);
-
-        IDOptional.ifPresent(picture -> {
-            model.addAttribute("picture", picture);
-        });
-
-        Optional<Picture> NameOptional = adminService.findBypictureName(pictureName);
-
-        NameOptional.ifPresent(picture -> {
+        pictureOptional.ifPresent(picture -> {
             model.addAttribute("picture", picture);
         });
 
         return "admin/detail";
     }
-}
+    }

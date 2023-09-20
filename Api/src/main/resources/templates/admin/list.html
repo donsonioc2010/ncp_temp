@@ -13,6 +13,7 @@
         <th>시작가</th>
         <th>생성일</th>
         <th>승인 상태</th>
+        <th>승인 버튼</th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@
         </td>
         <td th:text="${picture.startingPrice}"></td>
         <td th:text="${picture.dateTime}"></td>
+        <td th:text="${picture.pictureStatus}"></td>
         <td>
             <button th:onclick="'approve(' + ${picture.picture_id} + ')'">Approve</button>
         </td>
@@ -36,8 +38,9 @@
 
 <script th:inline="javascript">
     function approve(pictureId) {
-        alert('Picture with ID ' + pictureId + ' approved!');
+        alert(pictureId + '회원의 요청' + ' 승인완료!');
     }
+
 </script>
 </body>
 </html>

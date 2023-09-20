@@ -17,4 +17,8 @@ public interface PictureRepository extends JpaRepository<Picture, Long>{
 
 
     Optional<Picture> findBypictureName(String pictureName);
+
+    Picture findByPictureStatus(PictureStatus pictureStatus);
+
+
 }
