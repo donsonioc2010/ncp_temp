@@ -8,7 +8,6 @@ insert into t_test(name, param1,param2,param3,param4)
 values ('dddd', 'a','b','c','d');
 insert into t_test(name, param1,param2,param3,param4)
 values ('ffff', 'a','b','c','d');
-
 -- 테스트용 데이터
 
 insert into picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
