@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import picasso.server.domain.domains.member.type.LoginType;
 import picasso.server.domain.domains.member.type.Role;
-import picasso.server.domain.domains.member.type.Status;
+import picasso.server.domain.domains.member.type.UserStatus;
 
 import java.time.LocalDateTime;
 
@@ -44,7 +44,7 @@ public class Member {
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private Status status;
+  private UserStatus userStatus;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)

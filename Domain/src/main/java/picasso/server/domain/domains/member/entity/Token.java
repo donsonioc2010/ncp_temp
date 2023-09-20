@@ -12,7 +12,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter
 @Setter
-@Table(name = "t_token")
+@Table(name = "m_token")
 @NoArgsConstructor
 public class Token {
 
@@ -20,12 +20,17 @@ public class Token {
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
-  private String access_token;
+  @OneToOne
+  private Member member;
 
   @Column(nullable = false)
-  private String refresh_token;
+  private String accessToken;
 
   @Column(nullable = false)
-  private LocalDateTime created_at;
+  private String refreshToken;
+
+  @Column(nullable = false)
+  private LocalDateTime createdAt;
+
+
 }
