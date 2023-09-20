@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/member")
-public class AuthController {
+public class MemberController {
 
   {
     System.out.println("LoginController 생성됨!");
