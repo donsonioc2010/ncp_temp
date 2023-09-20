@@ -14,24 +14,24 @@ import java.time.LocalDateTime;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "member")
+@Table(name = "tbl_member")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Member {
+public class User {
 
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  @Column(nullable = false, unique = true)
+  @NotNull
   private String email;
 
-  @Column(nullable = false, unique = true)
+  @NotNull
   private String password;
 
-  @Column(nullable = false, unique = true)
-  private String nickname;
+  @NotNull
+  private String nickName;
 
   @Column
   private String profile;
@@ -44,19 +44,19 @@ public class Member {
   private LoginType loginType;
 
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
+  @NotNull
   private UserStatus userStatus;
 
   @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
+  @NotNull
   private Role role;
 
-  @Column(nullable = false)
+  @NotNull
   private LocalDateTime createdAt;
 
-  @Column(nullable = false)
+  @NotNull
   private LocalDateTime updatedAt;
 
-  @Column(nullable = false)
+  @NotNull
   private LocalDateTime loginAt;
 }

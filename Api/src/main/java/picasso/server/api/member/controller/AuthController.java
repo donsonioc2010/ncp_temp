@@ -7,23 +7,24 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import picasso.server.api.member.service.MemberService;
-import picasso.server.domain.domains.member.entity.Member;
+import picasso.server.api.member.service.UserService;
+import picasso.server.domain.domains.member.entity.User;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/member")
-public class LoginController {
+public class AuthController {
 
   {
     System.out.println("LoginController 생성됨!");
   }
 
   @Autowired
-  MemberService memberService;
+  UserService userService;
 
   @GetMapping("form")
   public void form(@CookieValue(required = false) String email, Model model) {
@@ -48,8 +49,8 @@ public class LoginController {
       response.addCookie(cookie);
     }
 
-    Member loginUser = memberService.get(email, password);
-    if (loginUser == null) {
+    Optional<User> loginUser = userService.findUserByEmailAndPassword(email, password);
+    if (loginUser.isEmpty()) {
       model.addAttribute("refresh", "2;url=form");
       throw new Exception("회원 정보가 일치하지 않습니다.");
     }

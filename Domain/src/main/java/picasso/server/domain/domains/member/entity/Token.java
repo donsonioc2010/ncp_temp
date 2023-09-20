@@ -21,7 +21,7 @@ public class Token {
   private Long id;
 
   @OneToOne
-  private Member member;
+  private User user;
 
   @Column(nullable = false)
   private String accessToken;
