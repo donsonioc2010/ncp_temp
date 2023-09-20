@@ -4,28 +4,113 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
 >
-<head th:replace="~{fragment/config :: configFragment}"></head>
-<body>
-<div class="login-container">
-    <h2>로그인</h2>
-    <form th:action="@{/login}" method="post">
-        <div class="form-group">
-            <label for="username">사용자 이름:</label>
-            <input type="text" id="username" name="username" required/>
+<main layout:fragment="content">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
+    <div class="container body">
+        <div class="auction-container">
+            <div class="title-sector">
+                <h1 class="title">경매 예정작</h1>
+                <button type="button" class="btn btn-primary more" onclick="">more</button>
+            </div>
+            <swiper-container
+                    class="swiper"
+                    navigation="true"
+                    speed=500
+                    delay="500"
+                    autoplay="true"
+                    loop="true"
+            >
+                <swiper-slide data-swiper-autoplay="1000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
+                                alt="미쯔"
+                        />
+                    </div>
+                </swiper-slide>
+                <swiper-slide data-swiper-autoplay="1000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                                alt="아리"
+                        />
+                    </div>
+                </swiper-slide>
+                <swiper-slide data-swiper-autoplay="1000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
+                                alt="미쯔"
+                        />
+                    </div>
+                </swiper-slide>
+                <swiper-slide data-swiper-autoplay="1000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                                alt="아리"
+                        />
+                    </div>
+                </swiper-slide>
+            </swiper-container>
         </div>
-        <div class="form-group">
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" required/>
+
+        <div class="auction-container" style="margin-bottom: 100px;">
+            <div class="title-sector">
+                <h1 class="title">경매 진행중</h1>
+                <button type="button" class="btn btn-primary more" onclick="">more</button>
+            </div>
+            <swiper-container
+                    class="swiper"
+                    navigation="true"
+                    speed=500
+                    delay="3000"
+                    autoHeight="true"
+                    autoplay="true"
+                    loop="true"
+            >
+                <swiper-slide data-swiper-autoplay="3000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
+                                alt="미쯔"
+                        />
+                    </div>
+                </swiper-slide>
+                <swiper-slide data-swiper-autoplay="3000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                                alt="아리"
+                        />
+                    </div>
+                </swiper-slide>
+                <swiper-slide data-swiper-autoplay="3000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
+                                alt="미쯔"
+                        />
+                    </div>
+                </swiper-slide>
+                <swiper-slide data-swiper-autoplay="3000">
+                    <div class="box">
+                        <img
+                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
+                                alt="아리"
+                        />
+                    </div>
+                </swiper-slide>
+            </swiper-container>
         </div>
-        <div class="form-group">
-            <button type="submit">로그인</button>
-        </div>
-    </form>
-</div>
-<script>
-    // 필요한 경우 자바스크립트를 추가하실 수 있습니다.
-    console.log('로그인 페이지 로딩 완료');
-</script>
-</body>
+    </div>
+</main>
+<th:block layout:fragment="script">
+    <script type="application/javascript" th:inline="javascript">
+    </script>
+    <script type="text/javascript">
+    </script>
+</th:block>
 </html>
