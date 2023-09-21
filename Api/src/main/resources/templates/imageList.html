@@ -31,9 +31,6 @@
         <div th:each="pictureInfo : ${pictureInfoPage}">
             <div class="img-box">
                 <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${pictureInfo.imageUrl} + '?type=f&w=300&h=400' ">
-            </div>
-            <br>
-            <div>
                 <p>Details: <span th:text="${pictureInfo.details}"></span></p>
                 <p>Picture Name: <span th:text="${pictureInfo.pictureName}"></span></p>
                 <p>Painter Name: <span th:text="${pictureInfo.painterName}"></span></p>
@@ -47,41 +44,30 @@
 
         <!-- Pagination -->
 <!--        <div>-->
-<!--            <button th:disabled="${!imageUrlsPage.hasPrevious()}" th:href="@{'/list?page=' + ${previousPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Previous</button>-->
-<!--            <span th:text="${nextPage}"></span>-->
-<!--            <button th:disabled="${!imageUrlsPage.hasNext()}" th:href="@{'/list?page=' + ${nextPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Next</button>-->
+<!--        <button th:disabled="${!imageUrlsPage.hasPrevious()}" th:href="@{'/list?page=' + ${previousPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Previous</button>-->
+<!--        <span th:text="${nextPage}"></span>-->
+<!--        <button th:disabled="${!imageUrlsPage.hasNext()}" th:href="@{'/list?page=' + ${nextPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Next</button>-->
 <!--        </div>-->
 
 
     </div>
 </section>
-
-<div class="pagination-links">
-    <!-- 예: 다음 페이지로 넘어가는 링크 -->
-    <a th:href="@{'/pictures/list?page=' + ${nextPage} + '&pageSize=' + ${pageSize} + '&status=BIDDING'}">다음 페이지</a><br>
-    <a th:href="@{'/pictures/list?page=' + ${previousPage} + '&pageSize=' + ${pageSize} + '&status=BIDDING'}">이전 페이지</a><br>
-</div>
-
-</main>
-
-
-<script src="../static/js/imgURL.js"></script>
 </body>
-<!--<div class="pagination-links">-->
-<!--<nav aria-label="...">-->
-<!--    <ul class="pagination">-->
-<!--        <li class="page-item disabled">-->
-<!--            <a class="page-link">Previous</a>-->
-<!--        </li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--        <li class="page-item active" aria-current="page">-->
-<!--            <a class="page-link" href="#">2</a>-->
-<!--        </li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--        <li class="page-item">-->
-<!--            <a class="page-link" href="#">Next</a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</nav>-->
-<!--</div>-->
+<div class="pagination-links">
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="changePage('Previous')">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#" onclick="changePage(0)">1</a></li>
+            <li class="page-item"><a class="page-link" href="#" onclick="changePage(1)">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" onclick="changePage(2)">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="changePage('Next')">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="../static/js/imgURL.js"></script>
+<script src="../static/js/onClick.js"></script>
 </html>
