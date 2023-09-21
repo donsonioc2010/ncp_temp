@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.admin.exception.AlreadyChangePictureException;
 import picasso.server.common.exception.NotFoundException;
 import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.member.entity.User;
+import picasso.server.domain.domains.member.repository.UserRepository;
+import picasso.server.domain.domains.member.type.UserRole;
 import picasso.server.domain.domains.repository.PictureRepository;
 
 import java.util.List;
@@ -21,6 +24,7 @@ import static picasso.server.domain.domains.items.PictureStatus.BEFORE_APPROVE;
 @RequiredArgsConstructor
 public class AdminService {
     private final PictureRepository pictureRepository;
+    private final UserRepository userRepository;
 
     // TODO : 추후 Pagenation으로의 수정 필요함.
     @Transactional(readOnly = true)
@@ -61,4 +65,13 @@ public class AdminService {
         log.error("ApprovePicture Failure : Fail Reason Is {} Id is Empty", pictureId);
         throw NotFoundException.EXCEPTION;
     }
+
+
+    @Transactional(readOnly = true)
+    public List<User> findAllAdmin() {
+        return userRepository.findByUserRole(UserRole.ADMIN);
+    }
 }
+
+
+

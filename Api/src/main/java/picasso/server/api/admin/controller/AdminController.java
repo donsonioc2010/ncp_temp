@@ -68,4 +68,27 @@ public class AdminController {
             throw NotAdminUserException.EXCEPTION;
         }
     }
+
+//    @PostMapping ("/form")
+//    public String addAdmin(Model model) {
+//
+//
+//    }
+
+
+    /**
+     * 관리자 계정 조회
+     *
+     *
+     * @param model
+     * @param session
+     * @return
+     */
+
+    @GetMapping("/list_admin")
+    public String listAdmin(HttpSession session, Model model) {
+//        isSessionUserAdmin(session);
+        model.addAttribute("id", adminService.findAllAdmin());
+        return "admin/list_admin";
+    }
 }
