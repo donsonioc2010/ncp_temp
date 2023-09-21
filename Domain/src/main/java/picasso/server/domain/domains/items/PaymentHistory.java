@@ -30,13 +30,13 @@ public class PaymentHistory {
   private String merchantUid;
   
   @NotNull
-  private int amount;
+  private Long amount;
   
   @NotNull
   private Long userId;
   
   @Builder
-  public PaymentHistory(PGName pgName, String productName, String merchantUid, int amount, Long userId) {
+  public PaymentHistory(PGName pgName, String productName, String merchantUid, Long amount, Long userId) {
     this.pgName = pgName;
     this.productName = productName;
     this.merchantUid = merchantUid;
