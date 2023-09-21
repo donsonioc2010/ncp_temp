@@ -1,4 +1,4 @@
-package picasso.server.api.member.controller;
+package picasso.server.api.user.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import picasso.server.api.member.service.UserService;
+import picasso.server.api.user.service.UserService;
 import picasso.server.domain.domains.member.entity.User;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/user")
 public class AuthController {
 
   {

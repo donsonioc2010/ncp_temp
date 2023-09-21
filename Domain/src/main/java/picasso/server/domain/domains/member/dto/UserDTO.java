@@ -4,9 +4,9 @@ import picasso.server.domain.domains.member.type.UserRole;
 import picasso.server.domain.domains.member.type.UserStatus;
 import java.time.LocalDateTime;
 
-public class MemberDTO {
+public class UserDTO {
 
-  private Long memberId;
+  private Long userId;
   private String email;
   private String password;
   private String nickname;
@@ -15,8 +15,8 @@ public class MemberDTO {
   private LoginType loginType;
   private UserStatus userStatus;
   private UserRole userRole;
-  private LocalDateTime memberCreatedAt;
-  private LocalDateTime memberUpdatedAt;
+  private LocalDateTime userCreatedAt;
+  private LocalDateTime userUpdatedAt;
   private LocalDateTime loginAt;
 
   private Long tokenId;

@@ -1,5 +1,5 @@
 
-package picasso.server.api.member.service;
+package picasso.server.api.user.service;
 //
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
