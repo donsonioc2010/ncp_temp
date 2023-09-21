@@ -6,7 +6,7 @@ import picasso.server.domain.domains.member.entity.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-  Optional<User> findByNickname(String nickname);
+  Optional<User> findByNickName(String nickname);
 
   Optional<User> findByEmail(String email);
 

@@ -6,12 +6,15 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Table(name = "tbl_payment_history")
 @NoArgsConstructor
 public class PaymentHistory {
   
@@ -22,15 +25,24 @@ public class PaymentHistory {
   @Enumerated(EnumType.STRING)
   private PGName pgName;
   
-  @Enumerated(EnumType.STRING)
-  private PayMethod payMethod;
-  
   @NotNull
   private String productName;
   
   @NotNull
-  private int amount;
+  private String merchantUid;
+  
+  @NotNull
+  private Long amount;
   
   @NotNull
   private Long userId;
+  
+  @Builder
+  public PaymentHistory(PGName pgName, String productName, String merchantUid, Long amount, Long userId) {
+    this.pgName = pgName;
+    this.productName = productName;
+    this.merchantUid = merchantUid;
+    this.amount = amount;
+    this.userId = userId;
+  }
 }
