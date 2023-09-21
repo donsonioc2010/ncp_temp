@@ -1,9 +1,9 @@
-package picasso.server.domain.domains.member.dto;
+package picasso.server.domain.domains.dto;
 import lombok.Getter;
 import lombok.Setter;
-import picasso.server.domain.domains.member.type.LoginType;
-import picasso.server.domain.domains.member.type.UserRole;
-import picasso.server.domain.domains.member.type.UserStatus;
+import picasso.server.domain.domains.user.type.LoginType;
+import picasso.server.domain.domains.user.type.UserRole;
+import picasso.server.domain.domains.user.type.UserStatus;
 import java.time.LocalDateTime;
 
 @Getter

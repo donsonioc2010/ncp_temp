@@ -2,29 +2,35 @@ package picasso.server.api.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import picasso.server.api.user.service.UserService;
-import picasso.server.domain.domains.member.entity.User;
-import picasso.server.domain.domains.member.dto.UserDTO;
+import picasso.server.domain.domains.dto.UserDTO;
+import picasso.server.domain.domains.user.entity.User;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/users")
 public class LoginController {
 
-  @Autowired
-  private UserService userService;
+  private final UserService userService;
 
-  @PostMapping("/login")
+  @Autowired
+  public LoginController(UserService userService) {
+    this.userService = userService;
+  }
+
+  @GetMapping("form")
+  public void form(@CookieValue(required = false) String email, Model model) {
+    model.addAttribute("email", email);
+  }
+
+  @PostMapping("login")
   public ResponseEntity<?> login(@RequestBody UserDTO requestDto) {
     try {
-      User user = userService.login(requestDto);
-      return ResponseEntity.ok().body("로그인 성공!");
+      User authenticatedUser = userService.login(requestDto.getEmail(), requestDto.getPassword());
+      return ResponseEntity.ok(authenticatedUser);
     } catch (Exception e) {
-      return ResponseEntity.badRequest().body("로그인 실패: " + e.getMessage());
+      return ResponseEntity.badRequest().body(e.getMessage());
     }
   }
 }
-

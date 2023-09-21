@@ -1,13 +1,13 @@
-package picasso.server.domain.domains.member.entity;
+package picasso.server.domain.domains.user.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import picasso.server.domain.domains.member.type.LoginType;
-import picasso.server.domain.domains.member.type.UserRole;
-import picasso.server.domain.domains.member.type.UserStatus;
+import picasso.server.domain.domains.user.type.LoginType;
+import picasso.server.domain.domains.user.type.UserRole;
+import picasso.server.domain.domains.user.type.UserStatus;
 
 import java.time.LocalDateTime;
 
