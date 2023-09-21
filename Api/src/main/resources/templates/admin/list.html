@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Picasso - Picture List</title>
+    <title>Picasso - Approve List</title>
 </head>
 <body>
-<h1>Picture List</h1>
+<h1>Admin Approve List</h1>
 <table border="1">
     <thead>
     <tr>
@@ -22,10 +22,10 @@
             <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.picture_id}"></span></a>
         </td>
         <td>
-            <a th:href="@{'/admin/detail/' + ${picture.pictureName}}"><span th:text="${picture.pictureName}"></span></a>
+            <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.pictureName}"></span></a>
         </td>
         <td th:text="${picture.startingPrice}"></td>
-        <td th:text="${picture.dateTime}"></td>
+        <td th:text="${picture.bidStartDate}"></td>
         <td th:text="${picture.pictureStatus}"></td>
         <td>
             <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" >

@@ -27,9 +27,6 @@ public class AdminService {
         return pictureRepository.findById(id);
     }
 
-    public Optional<Picture> findByPictureName(String pictureName) {
-        return pictureRepository.findBypictureName(pictureName);
-    }
 
     public void approvePicture(Long pictureId) {
         Picture picture = pictureRepository.findById(pictureId).orElse(null);

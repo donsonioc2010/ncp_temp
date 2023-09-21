@@ -24,36 +24,22 @@ public class AdminController {
 
     @PostMapping("/approve/{pictureId}")
     public String approvePicture(@PathVariable Long pictureId, Model model) {
-        try {
             adminService.approvePicture(pictureId);
             return "redirect:/admin/list";
-
-        } catch (Exception e) {
-            List<Picture> pictures = adminService.findAll();
-            model.addAttribute("pictures", pictures);
-            return "redirect:/admin/list";
-        }
     }
 
     @GetMapping("/list")
     public String list(Model model) {
         List<Picture> pictures = adminService.findAll();
-
-
         model.addAttribute("pictures", pictures);
+
         return "admin/list";
     }
 
-    @GetMapping("/detail/{identifier}")
-    public String detail(@PathVariable String identifier, Model model) {
+    @GetMapping("/detail/{pictureId}")
+    public String detail(@PathVariable Long pictureId, Model model) {
         Optional<Picture> pictureOptional;
-        if (identifier.matches("\\d+")) {
-            Long pictureId = Long.parseLong(identifier);
-            pictureOptional = adminService.findById(pictureId);
-        } else {
-            pictureOptional = adminService.findByPictureName(identifier);
-        }
-
+        pictureOptional = adminService.findById(pictureId);
         pictureOptional.ifPresent(picture -> model.addAttribute("picture", picture));
 
         return "admin/detail";
