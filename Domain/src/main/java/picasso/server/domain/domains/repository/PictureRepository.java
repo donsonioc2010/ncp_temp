@@ -15,8 +15,5 @@ public interface PictureRepository extends JpaRepository<Picture, Long>{
 
     List<Picture> findAllByPictureStatusOrderByBidStartDateAsc(PictureStatus status);
 
-
-    Optional<Picture> findBypictureName(String pictureName);
-
-
+    Optional<Picture> findByPictureIdAndPictureStatus(Long id, PictureStatus status);
 }

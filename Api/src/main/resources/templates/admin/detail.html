@@ -9,7 +9,7 @@
 <table>
     <tr>
         <th>ID:</th>
-        <td th:text="${picture.picture_id}"></td>
+        <td th:text="${picture.pictureId}"></td>
     </tr>
     <tr>
         <th>그림 URL:</th>
@@ -45,7 +45,7 @@
     </tr>
 
     <td>
-        <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" >
+        <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post" >
             <button type="submit">Approve</button>
         </form>
     </td>

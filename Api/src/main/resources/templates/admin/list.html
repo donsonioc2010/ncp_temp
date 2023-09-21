@@ -19,16 +19,16 @@
     <tbody>
     <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
         <td>
-            <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.picture_id}"></span></a>
+            <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
         </td>
         <td>
-            <a th:href="@{'/admin/detail/' + ${picture.picture_id}}"><span th:text="${picture.pictureName}"></span></a>
+            <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
         </td>
         <td th:text="${picture.startingPrice}"></td>
         <td th:text="${picture.bidStartDate}"></td>
         <td th:text="${picture.pictureStatus}"></td>
         <td>
-            <form th:action="@{'/admin/approve/' + ${picture.picture_id}}" method="post" >
+            <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post" >
                 <button type="submit">Approve</button>
             </form>
         </td>
