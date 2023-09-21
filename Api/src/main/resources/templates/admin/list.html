@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Picasso - Approve List</title>
+</head>
+<body>
+<h1>Admin Approve List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>그림명</th>
+        <th>시작가</th>
+        <th>생성일</th>
+        <th>승인 상태</th>
+        <th>승인 버튼</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
+        <td>
+            <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
+        </td>
+        <td>
+            <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
+        </td>
+        <td th:text="${picture.startingPrice}"></td>
+        <td th:text="${picture.bidStartDate}"></td>
+        <td th:text="${picture.pictureStatus}"></td>
+        <td>
+            <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post" >
+                <button type="submit">Approve</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
