@@ -14,18 +14,45 @@
 <header th:include="fragment/header2.html :: header"></header>
 <section class="special-section">
     <div>
-        <div th:each="imageUrl, idx : ${imageUrls}">
+<!--        <div th:each="imageUrl, idx : ${imageUrls}">-->
+<!--            <div class="img-box">-->
+<!--                <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${imageUrl} + '?type=f&w=300&h=400' "-->
+<!--                     alt="Image">-->
+<!--                <div>-->
+<!--                    <span>그림명: <span th:text="${pictureDataMap['pictureNames'][idx.index]}"></span></span><br>-->
+<!--                    <span>화가: <span th:text="${pictureDataMap['painterNames'][idx.index]}"></span></span><br>-->
+<!--                    <span>설명: <span th:text="${pictureDataMap['details'][idx.index]}"></span></span><br>-->
+<!--                    <span>가격: <span th:text="${pictureDataMap['startPrices'][idx.index]}"></span></span><br>-->
+<!--                    <span>Remaining Days: <span th:text="${pictureDataMap['dateDifferences'][idx.index]}"></span></span><br><br>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div th:each="pictureInfo : ${pictureInfoPage}">
             <div class="img-box">
-                <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${imageUrl} + '?type=f&w=300&h=400' "
-                     alt="Image">
-                <div>
-                    <span>그림명: <span th:text="${pictureDataMap['pictureNames'][idx.index]}"></span></span><br>
-                    <span>화가: <span th:text="${pictureDataMap['painterNames'][idx.index]}"></span></span><br>
-                    <span>설명: <span th:text="${pictureDataMap['details'][idx.index]}"></span></span><br>
-                    <span>가격: <span th:text="${pictureDataMap['startPrices'][idx.index]}"></span></span><br>
-                </div>
+                <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${pictureInfo.imageUrl} + '?type=f&w=300&h=400' ">
+            </div>
+            <br>
+            <div>
+                <p>Details: <span th:text="${pictureInfo.details}"></span></p>
+                <p>Picture Name: <span th:text="${pictureInfo.pictureName}"></span></p>
+                <p>Painter Name: <span th:text="${pictureInfo.painterName}"></span></p>
+                <p>Starting Price: <span th:text="${pictureInfo.startPrice}"></span></p>
+                <p>Increment Amount: <span th:text="${pictureInfo.incrementAmount}"></span></p>
+                <p>Bid End Date: <span th:text="${pictureInfo.endDay}"></span></p>
             </div>
         </div>
+
+
+
+        <!-- Pagination -->
+<!--        <div>-->
+<!--            <button th:disabled="${!imageUrlsPage.hasPrevious()}" th:href="@{'/list?page=' + ${previousPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Previous</button>-->
+<!--            <span th:text="${nextPage}"></span>-->
+<!--            <button th:disabled="${!imageUrlsPage.hasNext()}" th:href="@{'/list?page=' + ${nextPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Next</button>-->
+<!--        </div>-->
+
+
     </div>
 </section>
 

@@ -15,6 +15,7 @@ import picasso.server.common.util.NaverObjectStorageUsageType;
 import picasso.server.common.util.NaverObjectStorageUtil;
 import picasso.server.domain.domains.dto.PictureDTO;
 import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.items.PictureInfo;
 import picasso.server.domain.domains.items.PictureStatus;
 
 import java.util.ArrayList;
@@ -96,29 +97,48 @@ public class PictureController {
 //        return "imageList"; // Change to your Thymeleaf template name
 //    }
 
+//    @GetMapping("/list")
+//    public String imgUrls(Model model,
+//                          @RequestParam(defaultValue = "0") int page,
+//                          @RequestParam(defaultValue = "7") int pageSize,
+//                          @RequestParam(defaultValue = "AFTER_APPROVE") PictureStatus status
+//    ) {
+//        Page<String> imageUrlsPage = pictureService.extractImageUrlsSortedByDateTime(page, pageSize, status);
+//
+//        Map<String, Object> pictureDataMap = new HashMap<>();
+//        pictureDataMap.put("imageUrls", imageUrlsPage.getContent());
+//        pictureDataMap.put("details", pictureService.extractDetail(status));
+//        pictureDataMap.put("pictureNames", pictureService.extractPictureName(status));
+//        pictureDataMap.put("painterNames", pictureService.extractPainterName(status));
+//        pictureDataMap.put("startPrices", pictureService.extractStartPrice(status));
+//        pictureDataMap.put("incrementAmounts", pictureService.extractIncrementAmount(status));
+//        pictureDataMap.put("dateDifferences", pictureService.extractEndDay(status));
+//
+//        model.addAttribute("imageUrls", imageUrlsPage);
+//        model.addAttribute("pictureDataMap", pictureDataMap);
+//        model.addAttribute("nextPage", page + 1);
+//        model.addAttribute("previousPage", page - 1);
+//        model.addAttribute("pageSize", imageUrlsPage.getSize());
+//        model.addAttribute("pageSize2", imageUrlsPage.getNumberOfElements());
+//
+//        return "imageList";
+//    }
+
     @GetMapping("/list")
     public String imgUrls(Model model,
                           @RequestParam(defaultValue = "0") int page,
                           @RequestParam(defaultValue = "7") int pageSize,
-                          @RequestParam(defaultValue = "AFTER_APPROVE") PictureStatus status
-    ) {
-        Page<String> imageUrlsPage = pictureService.extractImageUrlsSortedByDateTime(page, pageSize, status);
+                          @RequestParam(defaultValue = "AFTER_APPROVE") PictureStatus status) {
 
-        Map<String, Object> pictureDataMap = new HashMap<>();
-        pictureDataMap.put("imageUrls", imageUrlsPage.getContent());
-        pictureDataMap.put("details", pictureService.extractDetail(status));
-        pictureDataMap.put("pictureNames", pictureService.extractPictureName(status));
-        pictureDataMap.put("painterNames", pictureService.extractPainterName(status));
-        pictureDataMap.put("startPrices", pictureService.extractStartPrice(status));
-        pictureDataMap.put("incrementAmounts", pictureService.extractIncrementAmount(status));
+        Page<PictureInfo> pictureInfoPage = pictureService.preparePictureInfoPage(page, pageSize, status);
 
-        model.addAttribute("imageUrls", imageUrlsPage);
-        model.addAttribute("pictureDataMap", pictureDataMap);
+        model.addAttribute("pictureInfoPage", pictureInfoPage);
         model.addAttribute("nextPage", page + 1);
         model.addAttribute("previousPage", page - 1);
-        model.addAttribute("pageSize", imageUrlsPage.getSize());
-        model.addAttribute("pageSize2", imageUrlsPage.getNumberOfElements());
+        model.addAttribute("pageSize", pictureInfoPage.getSize());
+        model.addAttribute("pageSize2", pictureInfoPage.getNumberOfElements());
 
         return "imageList";
     }
+
 }

@@ -8,11 +8,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.items.PictureInfo;
 import picasso.server.domain.domains.items.PictureStatus;
 import picasso.server.domain.domains.repository.PictureRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +22,12 @@ import java.util.stream.Collectors;
 public class PictureService {
 
     private final PictureRepository pictureRepository;
+    private final Map<String, Picture> imageInfoMap = new HashMap<>();
+
+    public Picture getPictureInfo(String imageUrl) {
+        return imageInfoMap.get(imageUrl);
+    }
+
 
     //아이템등록
     public Picture saveItem(Picture picture) {
@@ -36,44 +43,10 @@ public class PictureService {
     }
 
 
-//    public List<String> extractImageUrlsSortedByDateTime() {
-//
-//        /*List<Picture> pictures = pictureRepository.findAllByOrderByDateTimeAsc();
-//        List<String> imageUrls = new ArrayList<>();
-//
-//
-//        for (Picture picture : pictures) {
-//            String imageUrl = picture.getImgUrl();
-//            Enum<PictureStatus> status = picture.getPictureStatus();
-//            if(status == BIDDING){
-//                imageUrls.add(imageUrl);
-//            }
-//        }
-//        return imageUrls;*/
-//
-//        return pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING)
-//                .stream()
-//                .map(Picture::getImgUrl)
-//                .toList();
-//    }
-//public Page<String> extractImageUrlsSortedByDateTime(int page, int pageSize) {
-//    Pageable pageable = PageRequest.of(page, pageSize);
-//
-//    Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(
-//            PictureStatus.BIDDING, pageable);
-//
-//    // 페이지에서 이미지 URL 추출
-//    List<String> imageUrls = picturePage.getContent().stream()
-//            .map(Picture::getImgUrl)
-//            .collect(Collectors.toList());
-//
-//    return new PageImpl<>(imageUrls, pageable, picturePage.getTotalElements());
-//}
-
     public Page<String> extractImageUrlsSortedByDateTime(int page, int pageSize, PictureStatus status) {
         Pageable pageable = PageRequest.of(page, pageSize);
 
-        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateDesc(
+        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(
                 status, pageable);
 
         // 페이지에서 이미지 URL 추출
@@ -81,138 +54,13 @@ public class PictureService {
                 .map(Picture::getImgUrl)
                 .collect(Collectors.toList());
 
+
         return new PageImpl<>(imageUrls, pageable, picturePage.getTotalElements());
     }
 
 
-
-//    public List<String> extractDetail() {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING);
-//        List<String> detailsList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//            Enum<PictureStatus> status = picture.getPictureStatus();
-//            if (status == BIDDING) {
-//                String detail = picture.getDetails();
-//                detailsList.add(detail);
-//            }
-//        }
-//        return detailsList;
-//    }
-
-//    public List<String> extractDetail(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> detailsList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//                String detail = picture.getDetails();
-//                detailsList.add(detail);
-//        }
-//        return detailsList;
-//    }
-
-//    public List<String> extractPictureName() {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING);
-//        List<String> pictureNameList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//            Enum<PictureStatus> status = picture.getPictureStatus();
-//            if (status == BIDDING) {
-//                String pictureName = picture.getPictureName();
-//                pictureNameList.add(pictureName);
-//            }
-//        }
-//        return pictureNameList;
-//    }
-//
-//    public List<String> extractPainterName() {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING);
-//        List<String> painterNameList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//            Enum<PictureStatus> status = picture.getPictureStatus();
-//            if (status == BIDDING) {
-//                String painterName = picture.getPainterName();
-//                painterNameList.add(painterName);
-//            }
-//        }
-//        return painterNameList;
-//    }
-//
-//    public List<Integer> extractStartPrice() {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING);
-//        List<Integer> startPriceList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//            Enum<PictureStatus> status = picture.getPictureStatus();
-//            if (status == BIDDING) {
-//                int startPrice = picture.getStartingPrice();
-//                startPriceList.add(startPrice);
-//            }
-//        }
-//        return startPriceList;
-//    }
-//
-//    public List<Integer> extractIncrementAmount() {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING);
-//        List<Integer> incrementAmountList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//            Enum<PictureStatus> status = picture.getPictureStatus();
-//            if (status == BIDDING) {
-//                int incrementAmount = picture.getIncrementAmount();
-//                incrementAmountList.add(incrementAmount);
-//            }
-//        }
-//        return incrementAmountList;
-//    }
-
-
-    /////test
-
-//
-//    public List<String> extractPictureName(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> pictureNameList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//                String pictureName = picture.getPictureName();
-//                pictureNameList.add(pictureName);
-//        }
-//        return pictureNameList;
-//    }
-//
-//
-//
-//    public List<String> extractPainterName(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> painterNameList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//                String painterName = picture.getPainterName();
-//                painterNameList.add(painterName);
-//        }
-//        return painterNameList;
-//    }
-//
-//    public List<Integer> extractStartPrice(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<Integer> startPriceList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//                int startPrice = picture.getStartingPrice();
-//                startPriceList.add(startPrice);
-//        }
-//        return startPriceList;
-//    }
-//
-//    public List<Integer> extractIncrementAmount(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<Integer> incrementAmountList = new ArrayList<>();
-//        for (Picture picture : pictures) {
-//                int incrementAmount = picture.getIncrementAmount();
-//                incrementAmountList.add(incrementAmount);
-//        }
-//        return incrementAmountList;
-//    }
-
-
-
-////////
-
     public List<String> extractDetail(PictureStatus status) {
-        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateDesc(status);
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
         List<String> detailsList = pictures.stream()
                 .map(Picture::getDetails)
                 .collect(Collectors.toList());
@@ -220,7 +68,7 @@ public class PictureService {
     }
 
     public List<String> extractPictureName(PictureStatus status) {
-        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateDesc(status);
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
         List<String> pictureNameList = pictures.stream()
                 .map(Picture::getPictureName)
                 .collect(Collectors.toList());
@@ -228,7 +76,7 @@ public class PictureService {
     }
 
     public List<String> extractPainterName(PictureStatus status) {
-        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateDesc(status);
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
         List<String> painterNameList = pictures.stream()
                 .map(Picture::getPainterName)
                 .collect(Collectors.toList());
@@ -236,7 +84,7 @@ public class PictureService {
     }
 
     public List<Integer> extractStartPrice(PictureStatus status) {
-        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateDesc(status);
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
         List<Integer> startPriceList = pictures.stream()
                 .map(Picture::getStartingPrice)
                 .collect(Collectors.toList());
@@ -244,7 +92,7 @@ public class PictureService {
     }
 
     public List<Integer> extractIncrementAmount(PictureStatus status) {
-        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateDesc(status);
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
         List<Integer> incrementAmountList = pictures.stream()
                 .map(Picture::getIncrementAmount)
                 .collect(Collectors.toList());
@@ -252,9 +100,59 @@ public class PictureService {
     }
 
 
+    public List<LocalDate> extractEndDay(PictureStatus status) {
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
+        List<LocalDate> endDayList = pictures.stream()
+                .map(Picture::getBidEndDate)
+                .collect(Collectors.toList());
+        return endDayList;
+    }
+
+
+    public Map<String, String> createUrlToPictureNameMap(PictureStatus status) {
+        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
+        List<String> urlList = pictures.stream()
+                .map(Picture::getImgUrl)
+                .collect(Collectors.toList());
+
+        List<String> pictureNameList = pictures.stream()
+                .map(Picture::getPictureName)
+                .collect(Collectors.toList());
+
+        // 각 URL을 키로 하고, 해당 URL에 대응하는 pictureName을 값으로 설정
+        Map<String, String> urlToPictureNameMap = new HashMap<>();
+        for (int i = 0; i < urlList.size(); i++) {
+                urlToPictureNameMap.put(urlList.get(i), pictureNameList.get(i));
+        }
+
+        return urlToPictureNameMap;
+    }
 
 
 
+    public Page<PictureInfo> preparePictureInfoPage(int page, int pageSize, PictureStatus status) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status, pageable);
+
+        List<PictureInfo> pictureInfoList = picturePage.getContent().stream()
+                .map(this::mapToPictureInfo)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(pictureInfoList, pageable, picturePage.getTotalElements());
+    }
+
+    private PictureInfo mapToPictureInfo(Picture picture) {
+        PictureInfo pictureInfo = new PictureInfo();
+        pictureInfo.setImageUrl(picture.getImgUrl());
+        pictureInfo.setDetails(picture.getDetails());
+        pictureInfo.setPictureName(picture.getPictureName());
+        pictureInfo.setPainterName(picture.getPainterName());
+        pictureInfo.setStartPrice(picture.getStartingPrice());
+        pictureInfo.setIncrementAmount(picture.getIncrementAmount());
+        pictureInfo.setEndDay(picture.getBidEndDate());
+        return pictureInfo;
+    }
 
 
 }

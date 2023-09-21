@@ -38,11 +38,7 @@ public class UserService {
   }
 
   public Optional<User> findUserByNickname(String nickname) {
-<<<<<<< HEAD:Api/src/main/java/picasso/server/api/member/service/UserService.java
     return userRepository.findBynickName(nickname);
-=======
-    return userRepository.findByNickName(nickname);
->>>>>>> dev:Api/src/main/java/picasso/server/api/user/service/UserService.java
   }
 
   public void deleteUserById(Long id) {
