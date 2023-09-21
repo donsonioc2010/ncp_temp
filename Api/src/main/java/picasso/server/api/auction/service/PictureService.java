@@ -59,19 +59,33 @@ public class PictureService {
 //                .map(Picture::getImgUrl)
 //                .toList();
 //    }
-public Page<String> extractImageUrlsSortedByDateTime(int page, int pageSize) {
-    Pageable pageable = PageRequest.of(page, pageSize);
+//public Page<String> extractImageUrlsSortedByDateTime(int page, int pageSize) {
+//    Pageable pageable = PageRequest.of(page, pageSize);
+//
+//    Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(
+//            PictureStatus.BIDDING, pageable);
+//
+//    // 페이지에서 이미지 URL 추출
+//    List<String> imageUrls = picturePage.getContent().stream()
+//            .map(Picture::getImgUrl)
+//            .collect(Collectors.toList());
+//
+//    return new PageImpl<>(imageUrls, pageable, picturePage.getTotalElements());
+//}
 
-    Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(
-            PictureStatus.BIDDING, pageable);
+    public Page<String> extractImageUrlsSortedByDateTime(int page, int pageSize, PictureStatus status) {
+        Pageable pageable = PageRequest.of(page, pageSize);
 
-    // 페이지에서 이미지 URL 추출
-    List<String> imageUrls = picturePage.getContent().stream()
-            .map(Picture::getImgUrl)
-            .collect(Collectors.toList());
+        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(
+                status, pageable);
 
-    return new PageImpl<>(imageUrls, pageable, picturePage.getTotalElements());
-}
+        // 페이지에서 이미지 URL 추출
+        List<String> imageUrls = picturePage.getContent().stream()
+                .map(Picture::getImgUrl)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(imageUrls, pageable, picturePage.getTotalElements());
+    }
 
 
 

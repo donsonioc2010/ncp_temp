@@ -9,3 +9,10 @@ section.special-section .img-box {
 section.special-section .img-box:last-child {
     margin-right: 50px; /* 마지막 이미지의 오른쪽 간격을 0으로 설정하여 더 이상 간격이 나타나지 않게 합니다 */
 }
+
+.pagination-links {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom as needed */
+    left: 50%; /* Position in the middle of the page */
+    transform: translateX(-50%);
+}

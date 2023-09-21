@@ -15,6 +15,7 @@ import picasso.server.common.util.NaverObjectStorageUsageType;
 import picasso.server.common.util.NaverObjectStorageUtil;
 import picasso.server.domain.domains.dto.PictureDTO;
 import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.items.PictureStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,9 +99,10 @@ public class PictureController {
     @GetMapping("/list")
     public String imgUrls(Model model,
                           @RequestParam(defaultValue = "0") int page,
-                          @RequestParam(defaultValue = "7") int pageSize) {
-
-        Page<String> imageUrlsPage = pictureService.extractImageUrlsSortedByDateTime(page, pageSize);
+                          @RequestParam(defaultValue = "7") int pageSize,
+                          @RequestParam(defaultValue = "AFTER_APPROVE") PictureStatus status
+    ) {
+        Page<String> imageUrlsPage = pictureService.extractImageUrlsSortedByDateTime(page, pageSize, status);
 
         Map<String, Object> pictureDataMap = new HashMap<>();
         pictureDataMap.put("imageUrls", imageUrlsPage.getContent());

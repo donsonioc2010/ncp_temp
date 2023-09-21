@@ -38,7 +38,7 @@ public class UserService {
   }
 
   public Optional<User> findUserByNickname(String nickname) {
-    return userRepository.findByNickname(nickname);
+    return userRepository.findBynickName(nickname);
   }
 
   public void deleteUserById(Long id) {
