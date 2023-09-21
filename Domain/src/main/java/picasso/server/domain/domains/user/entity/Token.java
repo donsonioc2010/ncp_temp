@@ -1,4 +1,4 @@
-package picasso.server.domain.domains.member.entity;
+package picasso.server.domain.domains.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

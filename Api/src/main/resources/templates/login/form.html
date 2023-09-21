@@ -1,0 +1,71 @@
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset='UTF-8'>-->
+<!--    <title>로그인</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash;<div data-th-replace="header :: header"></div>&ndash;&gt;-->
+
+<!--<h1>로그인</h1>-->
+
+<!--<form action='login' method='post'>-->
+<!--    <table style="border: 1px;">-->
+<!--        <tr>-->
+<!--            <th>이메일</th> <td><input type='email' name='email' data-th-value='${email}'></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>암호</th> <td><input type='password' name='password'></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--    <button>로그인</button>-->
+<!--    <input type='checkbox' name='saveEmail' data-th-checked="${email}"> 이메일 저장-->
+<!--</form>-->
+
+<!--&lt;!&ndash;<div data-th-replace="footer :: footer"></div>&ndash;&gt;-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+</head>
+<body>
+<div class="login-container">
+    <h2>로그인</h2>
+    <form th:action="@{/user/form}" method="post">
+        <div class="form-group">
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" th:value="${email}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label for="rememberMe">이메일 주소 저장</label>
+        </div>
+        <button type="submit">로그인</button>
+    </form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
