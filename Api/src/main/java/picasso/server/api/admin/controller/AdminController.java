@@ -24,7 +24,7 @@ public class AdminController {
 
     @PostMapping("/approve/{pictureId}")
     public String approvePicture(@PathVariable Long pictureId, HttpSession session) {
-        //isSessionUserAdmin(session);
+//        isSessionUserAdmin(session);
         adminService.approvePicture(pictureId);
         return "redirect:/admin/list";
     }
@@ -38,7 +38,7 @@ public class AdminController {
      */
     @GetMapping("/list")
     public String list(Model model, HttpSession session) {
-        //isSessionUserAdmin(session);
+//        isSessionUserAdmin(session);
         model.addAttribute("pictures", adminService.findAll());
         return "admin/list";
     }
@@ -53,7 +53,7 @@ public class AdminController {
      */
     @GetMapping("/detail/{pictureId}")
     public String detail(@PathVariable Long pictureId, Model model, HttpSession session) {
-        //isSessionUserAdmin(session);
+//        isSessionUserAdmin(session);
         model.addAttribute(
                 "picture",
                 adminService.getBeforeApproveStatusPictureDetailById(pictureId)
