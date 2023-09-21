@@ -1,5 +1,8 @@
 package picasso.server.api.member.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,12 +10,12 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import picasso.server.api.member.service.UserService;
 import picasso.server.domain.domains.member.entity.User;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -63,5 +66,16 @@ public class AuthController {
   public String logout(HttpSession session) throws Exception {
     session.invalidate();
     return "redirect:/";
+  }
+  
+  
+  // TODO: 테스트용 Controller 입니다. 추후 삭제 혹은 변경이 필요합니다.
+  @ResponseBody
+  @PostMapping("/session-info")
+  public Map<String, Long> paymentSessionInfoRtn(HttpSession session) {
+    User temp = (User)session.getAttribute("loginUser");
+    return new HashMap<String, Long>(){{
+      put("userId", 1L);
+    }};
   }
 }

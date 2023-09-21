@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum PGName {
-  KAKAO("kakaopay.TC0ONETIME"),
-  TOSS("tosspay.tosstest");
+  KAKAO("kakaopay"),
+  TOSS("tosspay");
   
   private final String value;
 }
