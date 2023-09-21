@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,12 +18,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Table(name = "tbl_picture")
 @NoArgsConstructor
 public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long picture_id;
+    private Long pictureId;
 
     @NotNull
     private String imgUrl; //그림 url

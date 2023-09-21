@@ -1,4 +1,5 @@
 package picasso.server.domain.domains.dto;
+
 import lombok.Getter;
 import lombok.Setter;
 import picasso.server.domain.domains.user.type.LoginType;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 public class UserDTO {
 
-  private Long memberId;
+  private Long userId;
   private String email;
   private String password;
   private String nickName;
@@ -19,8 +20,8 @@ public class UserDTO {
   private LoginType loginType;
   private UserStatus userStatus;
   private UserRole userRole;
-  private LocalDateTime memberCreatedAt;
-  private LocalDateTime memberUpdatedAt;
+  private LocalDateTime userCreatedAt;
+  private LocalDateTime userUpdatedAt;
   private LocalDateTime loginAt;
 
   private Long tokenId;

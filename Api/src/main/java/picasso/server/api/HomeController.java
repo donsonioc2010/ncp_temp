@@ -19,15 +19,5 @@ public class HomeController {
     public String index() {
         return "index";
     }
-    
-    @GetMapping("/payment-test")
-    public String payment() {
-        return "exchange";
-    }
-    
-    @ResponseBody
-    @PostMapping("/payment-test")
-    public void sample(@RequestBody Map<String, String> map) throws Exception {
-        map.forEach((key, value) -> log.info("key >>> {}, value >>> {}", key, value));
-    }
+
 }

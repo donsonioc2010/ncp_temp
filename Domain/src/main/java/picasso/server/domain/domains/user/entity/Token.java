@@ -12,7 +12,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter
 @Setter
-@Table(name = "m_token")
+@Table(name = "tbl_token")
 @NoArgsConstructor
 public class Token {
 
