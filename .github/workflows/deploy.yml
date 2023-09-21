@@ -71,4 +71,10 @@ jobs:
               kill -9 $CURRENT_PID
               sleep 5
             fi
-            nohup java -jar -Dspring.profiles.active=dev -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }} /var/app/app.jar > nohup.log 2> nohup.err < /dev/null &
+            nohup java -jar\ 
+              -Dspring.profiles.active=dev\
+              -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }}\ 
+              -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }}\
+              -Dspring.mail.username=${{ secrets.MAIL_USERNAME }}\
+              -Dspring.mail.password=${{ secrets.MAIL_PASSWORD }}\
+              /var/app/app.jar > nohup.log 2> nohup.err < /dev/null &

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "tbl_member")
+@Table(name = "tbl_user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -59,4 +59,8 @@ public class User {
 
   @NotNull
   private LocalDateTime loginAt;
+  
+  public void updatePoint(Long point) {
+    this.point += point;
+  }
 }
