@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Member Registration</title>
+</head>
+<body>
+<form th:action="@{/members}" method="post">
+  Email: <input type="text" id="email" name="email" /><br/>
+  Nickname: <input type="text"  id="nickname" name="nickname" /><br/>
+  <!-- 다른 필드들도 여기에 추가 -->
+  <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
