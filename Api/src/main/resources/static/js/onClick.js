@@ -13,7 +13,7 @@ function changePage(page) {
 }
 
 function changePage(action) {
-    const pageSize = 2;
+    const pageSize = 8;
     const currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 0;
     const currentStatus = new URLSearchParams(window.location.search).get('status') || 'BIDDING';
     let nextPage = currentPage;

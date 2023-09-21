@@ -127,7 +127,7 @@ public class PictureController {
     @GetMapping("/list")
     public String imgUrls(Model model,
                           @RequestParam(defaultValue = "0") int page,
-                          @RequestParam(defaultValue = "7") int pageSize,
+                          @RequestParam(defaultValue = "8") int pageSize,
                           @RequestParam(defaultValue = "AFTER_APPROVE") PictureStatus status) {
 
         Page<PictureInfo> pictureInfoPage = pictureService.preparePictureInfoPage(page, pageSize, status);
