@@ -2,7 +2,6 @@ package picasso.server.api.exchange.validator;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import picasso.server.api.exchange.model.request.PostCreatePaymentRequest;
 import picasso.server.common.annotation.Validator;
 import picasso.server.common.exception.PaymentAlreadyExistsException;
 import picasso.server.common.exception.PaymentFailedException;
