@@ -40,7 +40,8 @@ public class Picture {
     //기본 값을 BEFORE_APPROVE로 사용
     @NotNull
     @Enumerated(EnumType.STRING)
-    private PictureStatus pictureStatus = PictureStatus.BEFORE_APPROVE;
+//    private PictureStatus pictureStatus = PictureStatus.BEFORE_APPROVE;
+    private PictureStatus pictureStatus = PictureStatus.BIDDING;
 
     //시작 가격, 기본 최소 가격 0원
     private int startingPrice = 0;

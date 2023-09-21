@@ -61,7 +61,7 @@ public class PictureController {
         }
 
         pictureService.saveItem(picture); //- 이 부분은 필요에 따라 주석처리
-        return "redirect:/pictures/list";
+        return "redirect:/pictures/list?page=0&pageSize=10&status=BIDDING";
     }
 
 //    @GetMapping("/list")
@@ -106,11 +106,11 @@ public class PictureController {
 
         Map<String, Object> pictureDataMap = new HashMap<>();
         pictureDataMap.put("imageUrls", imageUrlsPage.getContent());
-        pictureDataMap.put("details", pictureService.extractDetail());
-        pictureDataMap.put("pictureNames", pictureService.extractPictureName());
-        pictureDataMap.put("painterNames", pictureService.extractPainterName());
-        pictureDataMap.put("startPrices", pictureService.extractStartPrice());
-        pictureDataMap.put("incrementAmounts", pictureService.extractIncrementAmount());
+        pictureDataMap.put("details", pictureService.extractDetail(status));
+        pictureDataMap.put("pictureNames", pictureService.extractPictureName(status));
+        pictureDataMap.put("painterNames", pictureService.extractPainterName(status));
+        pictureDataMap.put("startPrices", pictureService.extractStartPrice(status));
+        pictureDataMap.put("incrementAmounts", pictureService.extractIncrementAmount(status));
 
         model.addAttribute("imageUrls", imageUrlsPage);
         model.addAttribute("pictureDataMap", pictureDataMap);

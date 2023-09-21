@@ -14,8 +14,10 @@ public interface PictureRepository extends JpaRepository<Picture, Long>{
 
     List<Picture> findAllByOrderByBidStartDateAsc();
 
-    List<Picture> findAllByPictureStatus(PictureStatus status);
+    List<Picture> findAllByPictureStatusOrderByBidStartDateDesc(PictureStatus status);
 
-    Page<Picture> findAllByPictureStatusOrderByBidStartDateAsc(PictureStatus status, Pageable pageable);
+
+    Page<Picture> findAllByPictureStatusOrderByBidStartDateDesc(PictureStatus status, Pageable pageable);
+//    Page<Picture> findAllByPictureStatusOrderByBidEndDateAsc(PictureStatus status, Pageable pageable);
 
 }
