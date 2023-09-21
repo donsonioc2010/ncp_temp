@@ -34,7 +34,7 @@ public class UserDto {
             .point(requestUserDto.getPoint())
             .loginType(requestUserDto.getLoginType())
             .userStatus(requestUserDto.getUserstatus())
-            .role(requestUserDto.getRole())
+            .userRole(requestUserDto.getRole())
             .createdAt(requestUserDto.getCreatedAt())
             .updatedAt(requestUserDto.getUpdatedAt())
             .loginAt(requestUserDto.getLoginAt())

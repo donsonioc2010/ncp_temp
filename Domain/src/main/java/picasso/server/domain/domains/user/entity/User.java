@@ -27,13 +27,15 @@ import static picasso.server.domain.domains.user.type.UserRole.USER;
 import static picasso.server.domain.domains.user.type.UserStatus.NOT_ACTIVE;
 
 @Entity
-@Table(name = "t_user")
+@Table(name = "tbl_member")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
+
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
@@ -57,7 +59,6 @@ public class User {
   @Column
   private String profile;
 
-  @NotNull
   @Column
   private Long point;
 
@@ -74,7 +75,7 @@ public class User {
   @Enumerated(EnumType.STRING)
   @Builder.Default
   @Column
-  private UserRole role = USER;
+  private UserRole userRole = USER;
 
   @NotNull
   @Column
@@ -84,6 +85,6 @@ public class User {
   @Column
   private LocalDateTime updatedAt;
 
-  @Column
+  @NotNull
   private LocalDateTime loginAt;
 }
