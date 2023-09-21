@@ -1,5 +1,5 @@
 
-package picasso.server.api.member.service;
+package picasso.server.api.user.service;
 //
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -38,11 +38,10 @@ public class UserService {
   }
 
   public Optional<User> findUserByNickname(String nickname) {
-    return userRepository.findByNickname(nickname);
+    return userRepository.findByNickName(nickname);
   }
 
   public void deleteUserById(Long id) {
     userRepository.deleteById(id);
   }
-
 }
