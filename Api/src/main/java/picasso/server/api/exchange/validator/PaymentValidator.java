@@ -1,21 +1,30 @@
 package picasso.server.api.exchange.validator;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import picasso.server.api.exchange.model.request.PostCreatePaymentRequest;
 import picasso.server.common.annotation.Validator;
-import picasso.server.common.exception.BaseException;
-import picasso.server.common.exception.PaymentException;
-import picasso.server.domain.domains.items.PaymentHistory;
+import picasso.server.common.exception.PaymentAlreadyExistsException;
+import picasso.server.common.exception.PaymentFailedException;
 import picasso.server.domain.domains.repository.PaymentHistoryRepository;
 
-import java.util.Optional;
-
+@Slf4j
 @Validator
 @RequiredArgsConstructor
 public class PaymentValidator {
   
   private final PaymentHistoryRepository paymentHistoryRepository;
 
-  public void isPaymentExists(String merchantUid) throws PaymentException {
-    paymentHistoryRepository.findPaymentHistoryByMerchantUid(merchantUid).orElseThrow();
+  public void isPaymentExists(String merchantUid) {
+    paymentHistoryRepository.findPaymentHistoryByMerchantUid(merchantUid).ifPresent(
+      paymentHistory -> {
+        throw PaymentAlreadyExistsException.EXCEPTION;}
+    );
+  }
+  
+  public void isFailedPayment(Boolean payResult) {
+    if (!payResult) {
+      throw PaymentFailedException.EXCEPTION;
+    }
   }
 }

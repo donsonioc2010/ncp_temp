@@ -29,6 +29,7 @@ var paymentResult = obj => {
             + new Date().getMonth()
             + new Date().getDate()
             + new Date().getHours()
+            + new Date().getMinutes()
             + new Date().getMilliseconds(),
         name : '피카소 포인트 환전',
         amount : amount.value

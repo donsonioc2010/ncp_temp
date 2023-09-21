@@ -16,15 +16,17 @@ public class PaymentService {
   private final PaymentValidator paymentValidator;
   
   public void savePaymentHistory(PostCreatePaymentRequest request) {
+    paymentValidator.isFailedPayment(request.getPayResult());
+    paymentValidator.isPaymentExists(request.getMerchantUid());
+    
     PaymentHistory payment = PaymentHistory.builder()
-            .pgName(PGName.valueOf(request.getPgProvider()))
+            .pgName(request.getPgProvider().equals("kakaopay") ? PGName.KAKAO : PGName.TOSS)
             .productName(request.getProductName())
             .merchantUid(request.getMerchantUid())
             .amount(request.getPaidAmount())
             .userId(request.getUserId())
             .build();
     
-    paymentValidator.isPaymentExists(request.getMerchantUid());
     paymentHistoryRepository.save(payment);
   }
 }

@@ -20,7 +20,9 @@ public enum GlobalException implements BaseErrorCode {
     FILE_IO_ERROR(INTERNAL_SERVER_ERROR.value(), "파일 변환 중 오류가 발생하였습니다"),
     ILLEGAL_ARGUMENT_ERROR(BAD_REQUEST.value(), "인자 값 문제로 인한 오류가 발생하였습니다"),
     MAIL_SEND_ERROR(INTERNAL_SERVER_ERROR.value(), "메일 발송중 오류가 발생하였습니다"),
-    ALREADY_EXISTS_PAYMENT_HISTORY_ERROR(INTERNAL_SERVER_ERROR.value(), "이미 존재하는 결제 내역입니다");
+    ALREADY_EXISTS_PAYMENT_HISTORY_ERROR(INTERNAL_SERVER_ERROR.value(), "이미 존재하는 결제 내역입니다"),
+    PAYMENT_FAILED_ERROR(INTERNAL_SERVER_ERROR.value(), "결제 실패 오류입니다."),
+    ;
 
     private final Integer statusCode;
     private final String reason;
