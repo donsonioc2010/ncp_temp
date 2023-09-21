@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Member Login</title>
+</head>
+<body>
+<!-- 로그인 폼 -->
+<h2 th:text="${header}">로그인</h2>
+<form th:action="@{/api/auth/login}" method="post">
+    이메일 : <input type="email" name="email" required><br><br>
+    비밀번호 : <input type="password" name="password" required><br><br>
+    <!-- 추가적인 필드들을 여기에 추가할 수 있습니다. -->
+    <input type="submit" value="로그인">
+</form>
+</body>
+</html>
