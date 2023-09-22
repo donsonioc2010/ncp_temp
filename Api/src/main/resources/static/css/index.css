@@ -16,7 +16,6 @@ swiper-slide {
 swiper-slide div.box {
     width: 100%;
     height: 100%;
-    border-radius: 30%;
     overflow: hidden;
 }
 
