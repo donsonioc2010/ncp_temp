@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Member List</title>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Nickname</th>
+    <!-- 다른 컬럼들도 여기에 추가 -->
+  </tr>
+  <tr th:each="user : ${user}">
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.nickname}"></td>
+    <!-- 다른 컬럼들도 여기에 추가 -->
+  </tr>
+</table>
+</body>
+</html>
