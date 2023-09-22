@@ -1,47 +1,23 @@
 package picasso.server.api.user.service;
 
-import jakarta.transaction.Transactional;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import picasso.server.domain.domains.dto.UserDTO;
-import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
-
-import java.util.List;
-import java.util.Optional;
+import picasso.server.domain.domains.user.entity.User;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class UserService {
 
   private final UserRepository userRepository;
-
-  public void saveUser(User user) {
-    userRepository.save(user);
-  }
-
-  public List<User> findAllUsers() {
-    return userRepository.findAll();
-  }
-
-
-  public Optional<User> findUserById(Long id) {
-    return userRepository.findById(id);
-  }
-
-  public Optional<User> findUserByNickname(String nickname) {
-    return userRepository.findByNickName(nickname);
-  }
-
-
-  public List<User> findAllMembers() {
-    return userRepository.findAll();
-  }
-
-//  public User findByEmail(String email) {
-//    return userRepository.findByEmail();
-//  }
+  private final ObjectMapper objectMapper;
+  private HttpServletResponse response;
 
   public User signUp(UserDTO userDto) {
 
@@ -53,29 +29,39 @@ public class UserService {
     return userRepository.save(user);
   }
 
-//  public User login(UserDTO userDto) {
-//
-//    User user = new User();
-//    user.setEmail(userDto.getEmail());
-//    user.setPassword(userDto.getPassword());
-//
-//    return userRepository.save(user);
-//  }
+  public HttpServletResponse login(UserDTO userDto) throws JsonProcessingException {
 
-  public User save(User user) {
-    return userRepository.save(user);
+    User user = new User();
+    user.setEmail(userDto.getEmail());
+    user.setPassword(userDto.getPassword());
+
+    String userJson = objectMapper.writeValueAsString(user);
+
+    Cookie userCookie = new Cookie("user", userJson);
+    response.addCookie(userCookie);
+
+//    if (response.equals(user.get))
+
+      return response;
+
   }
 
+  public boolean isUserValid(UserDTO userDto, HttpServletRequest request) throws JsonProcessingException {
+    // 1. 쿠키에서 "user" 데이터를 가져옵니다.
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+        if ("user".equals(cookie.getName())) {
+          // 2. 가져온 데이터를 User 객체로 변환합니다.
+          User userFromCookie = objectMapper.readValue(cookie.getValue(), User.class);
 
-  public Optional<User> findUserByEmail(String email) {
-    return userRepository.findByEmail(email);
-  }
-
-  public Optional<User> findUserByEmailAndPassword(String email, String password) {
-    return userRepository.findByEmailAndPassword(email, password);
-  }
-
-  public void deleteUserById(Long id) {
-    userRepository.deleteById(id);
+          // 3. 변환된 User 객체와 입력받은 UserDTO 데이터를 비교합니다.
+          if (userDto.getEmail().equals(userFromCookie.getEmail()) && userDto.getPassword().equals(userFromCookie.getPassword())) {
+            return true; // 쿠키의 데이터와 입력된 데이터가 일치합니다.
+          }
+        }
+      }
+    }
+    return false; // 일치하는 쿠키 데이터가 없거나, 데이터가 입력과 일치하지 않습니다.
   }
 }
