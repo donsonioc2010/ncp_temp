@@ -63,12 +63,5 @@ jobs:
           key: ${{ secrets.NCP_PEM }}
           port: 22
           script: |
-            CURRENT_PID=$(pgrep -fl app | grep java | awk '{print $1}' )
-            if [ -z "$CURRENT_PID" ]; then
-              echo "> no applcation named java is running"
-            else
-              echo "> kill -9 java"
-              kill -9 $CURRENT_PID
-              sleep 5
-            fi
-            nohup java -jar -Dspring.profiles.active=dev -Dnaver.storage.access-key=${{ secrets.ACCESS_KEY }} -Dnaver.storage.secret-key=${{ secrets.SECRET_KEY }} /var/app/app.jar > nohup.log 2> nohup.err < /dev/null &
+            cd /var/app
+            ./app_run.sh
