@@ -56,4 +56,8 @@ public class UserService {
         }
         return false; // 일치하는 쿠키 데이터가 없거나, 데이터가 입력과 일치하지 않습니다.
     }
+
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+    }
 }
