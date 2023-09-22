@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,13 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "tbl_picture")
 @NoArgsConstructor
 public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long picture_id;
+    private Long pictureId;
 
     @NotNull
     private String imgUrl; //그림 url
@@ -60,7 +62,7 @@ public class Picture {
     @NotNull
     private LocalDate bidEndDate; // 경매 종료일
 
-
+    //경매 내역 History
     @OneToMany(mappedBy = "picture", fetch = FetchType.LAZY)
     private List<PictureBidHistory> bidHistory = new ArrayList<>();
 

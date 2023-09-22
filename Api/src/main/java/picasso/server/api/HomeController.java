@@ -3,6 +3,13 @@ package picasso.server.api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
+import java.util.Set;
 
 
 @Slf4j
@@ -12,9 +19,5 @@ public class HomeController {
     public String index() {
         return "index";
     }
-    
-    @GetMapping("/payment-test")
-    public String payment() {
-        return "payment";
-    }
+
 }
