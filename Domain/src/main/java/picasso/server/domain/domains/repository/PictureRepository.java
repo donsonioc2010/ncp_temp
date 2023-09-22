@@ -6,6 +6,7 @@ import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.items.PictureStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, Long>{
@@ -14,4 +15,5 @@ public interface PictureRepository extends JpaRepository<Picture, Long>{
 
     List<Picture> findAllByPictureStatusOrderByBidStartDateAsc(PictureStatus status);
 
+    Optional<Picture> findByPictureIdAndPictureStatus(Long id, PictureStatus status);
 }
