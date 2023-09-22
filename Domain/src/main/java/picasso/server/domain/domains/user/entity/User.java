@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -40,7 +39,8 @@ public class User {
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+
+  @OneToOne(mappedBy = "user")
   private SocialToken tokens;
 
   @NotNull
@@ -60,7 +60,7 @@ public class User {
   private String profile;
 
   @Column
-  private Long point;
+  private Long point = 0L;
 
   @Enumerated(EnumType.STRING)
   @Builder.Default
@@ -79,14 +79,16 @@ public class User {
 
   @NotNull
   @Column
-  private LocalDateTime createdAt;
+
+  private LocalDateTime createdAt = LocalDateTime.now();
 
   @NotNull
   @Column
-  private LocalDateTime updatedAt;
+  private LocalDateTime updatedAt = LocalDateTime.now();
 
   @NotNull
-  private LocalDateTime loginAt;
+  private LocalDateTime loginAt = LocalDateTime.now();
+
   
   public void updatePoint(Long point) {
     this.point += point;

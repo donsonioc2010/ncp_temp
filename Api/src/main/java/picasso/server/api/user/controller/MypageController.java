@@ -1,4 +1,4 @@
-package picasso.server.api.mypage.controller;
+package picasso.server.api.user.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import picasso.server.api.mypage.service.MypageService;
+import picasso.server.api.user.service.MypageService;
+import picasso.server.api.user.service.UserService;
 import picasso.server.domain.domains.user.entity.User;
 
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MypageController {
 
+  private final UserService userService;
   private final MypageService mypageService;
 
   // 마이페이지 수정 전
@@ -32,7 +34,7 @@ public class MypageController {
       // TODO : 사용자 정보 없는 경우 Exception 처리 필요 (로그인을 하지 않은 상태이기 떄문)
     }
 
-    Optional<User> optionalUser = mypageService.findUserById(loginUser.getId());
+    Optional<User> optionalUser = userService.findUserById(loginUser.getId());
     if (optionalUser.isEmpty()) {
       // TODO : 로그인 사용자(세션)는 존재하더라도, DB에서 현재 사용자 정보가 존재하지 않는 경우이기 떄문에 Exception처리가 필요
     }
@@ -49,30 +51,4 @@ public class MypageController {
       put("userId", 1L);
     }};
   }
-
-
-//  @GetMapping("/login-form")
-//  public String loginForm(@CookieValue(value = "user", required = false) String userJson, Model model) {
-//    if (userJson != null && !userJson.isEmpty()) {
-//      // 이미 로그인된 경우의 처리 로직
-//      // 예: return "redirect:/dashboard";
-//    }
-//    model.addAttribute("UserDTO", new UserDTO());
-//    return "user/login-form"; // Thymeleaf 템플릿 경로
-//  }
-//
-//  @PostMapping("/login")
-//  public ResponseEntity<String> login(@RequestBody UserDTO userDto, HttpServletResponse response) {
-//    Cookie loginCookie = null;
-//    try {
-//      loginCookie = muserService.login(userDto);
-//    } catch (JsonProcessingException e) {
-//      throw new RuntimeException(e);
-//    }
-//    if (loginCookie != null) {
-//      response.addCookie(loginCookie);
-//      return ResponseEntity.ok("로그인 성공");
-//    }
-//    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
-//  }
 }
