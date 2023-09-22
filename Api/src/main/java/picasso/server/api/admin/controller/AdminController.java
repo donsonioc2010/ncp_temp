@@ -11,8 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.admin.exception.NotAdminUserException;
 import picasso.server.api.admin.service.AdminService;
+import picasso.server.domain.domains.member.dto.UserDTO;
 import picasso.server.domain.domains.member.entity.User;
+import picasso.server.domain.domains.member.repository.UserRepository;
 import picasso.server.domain.domains.member.type.UserRole;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static picasso.server.domain.domains.member.type.UserRole.ADMIN;
 
 @Controller
 @Slf4j
@@ -21,6 +28,7 @@ import picasso.server.domain.domains.member.type.UserRole;
 public class AdminController {
 
     private final AdminService adminService;
+    private final UserRepository userRepository;
 
     @PostMapping("/approve/{pictureId}")
     public String approvePicture(@PathVariable Long pictureId, HttpSession session) {
@@ -36,6 +44,7 @@ public class AdminController {
      * @param session
      * @return
      */
+
     @GetMapping("/list")
     public String list(Model model, HttpSession session) {
 //        isSessionUserAdmin(session);
@@ -61,24 +70,47 @@ public class AdminController {
         return "admin/detail";
     }
 
+
     private void isSessionUserAdmin(HttpSession session) {
         User user = (User) session.getAttribute("loginUser");
-        if (user == null || !user.getUserRole().equals(UserRole.ADMIN)) {
+        if (user == null || !user.getUserRole().equals(ADMIN)) {
             log.error("ADMIN Auth Not Enough");
             throw NotAdminUserException.EXCEPTION;
         }
     }
 
-//    @PostMapping ("/form")
-//    public String addAdmin(Model model) {
-//
-//
-//    }
 
+    @GetMapping("/form")
+    public String createForm(HttpSession session, Model model) {
+//        isSessionUserAdmin(session);
+        model.addAttribute("UserDTO", new UserDTO());
+        return "admin/form";
+    }
+
+    /**
+     * 관리자 계정 생성
+     *
+     * @param dto
+     * @param session
+     * @return
+     */
+    @PostMapping("/form")
+    public String addAdmin(UserDTO dto, HttpSession session) {
+        User user = new User();
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setLoginAt(LocalDateTime.now());
+        user.setNickName(dto.getNickname());
+        user.setUpdatedAt(LocalDateTime.now());
+
+        user.setUserRole(UserRole.ADMIN);
+        userRepository.save(user);
+
+        return "redirect:/";
+    }
 
     /**
      * 관리자 계정 조회
-     *
      *
      * @param model
      * @param session
@@ -88,7 +120,9 @@ public class AdminController {
     @GetMapping("/list_admin")
     public String listAdmin(HttpSession session, Model model) {
 //        isSessionUserAdmin(session);
-        model.addAttribute("id", adminService.findAllAdmin());
+        List<User> adminUsers = adminService.findAllAdmin();
+        model.addAttribute("users", adminUsers);
         return "admin/list_admin";
     }
 }
+

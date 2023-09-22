@@ -44,7 +44,7 @@ public class AdminService {
 
 
     /**
-     * 관리자 승인전의 게시물을 관리자 승인 상태로 변경하는 기능
+     * 관리자 승인전의 게시물을 관리자 승인 상태로 변경  하는 기능
      * @param pictureId
      */
     public void approvePicture(Long pictureId) {
