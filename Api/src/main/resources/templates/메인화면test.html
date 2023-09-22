@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경매</title>
+    <link rel="stylesheet" href="../static/css/slide.css">
+    <link rel="icon" href="data:,">
+</head>
+<body class="img12">
+<header th:include="fragment/header2.html :: header"></header>
+
+<main id="main">
+    <section id="sliderType01">
+        <div class="slider__wrap">
+            <div class="slider__img">
+                <div class="slider__inner">
+                    <div class="slider s2" role="group" aria-label="2/3">
+                        <span>낙찰</span><img src="../static/asset/한소희.jpeg" alt="이미지2" />
+                    </div>
+                    <div class="slider s2" role="group" aria-label="2/3">
+                        <span>낙찰</span>
+                        <div id="imageContainer"></div>
+                    </div>
+                    <div class="slider s3" role="group" aria-label="3/6">
+                        <span>낙찰</span>
+                        <img th:src="${dynamicImageUrl}" alt="이미지3" />
+                    </div>
+                    <div class="slider s3" role="group" aria-label="3/6">
+                        <span>낙찰</span><img src="../static/asset/설윤.jpg" alt="이미지3" />
+                    </div>
+                    <div class="slider s4" role="group" aria-label="4/6">
+                        <span>낙찰</span><img src="../static/asset/스파.jpg" alt="이미지4" />
+                    </div>
+                    <div class="slider s5" role="group" aria-label="5/6">
+                        <span>낙찰</span><img src="../static/asset/윈터.jpeg" alt="이미지5" />
+                    </div>
+                    <div class="slider s6" role="group" aria-label="6/6">
+                        <span>낙찰</span><img src="../static/asset/카리나.jpeg" alt="이미지6" />
+                    </div>
+                </div>
+            </div>
+            <div class="slider__btn">
+                <button href="#" class="prev" role="button" aria-label="왼쪽 이미지">prev</button>
+                <button href="#" class="next" role="button" aria-label="오른쪽 이미지">next</button>
+            </div>
+            <div class="slider__dot">
+            </div>
+        </div>
+    </section>
+    <section>
+
+        개씨발 줫같네요
+    </section>
+</main>
+
+
+<!-- //main -->
+
+<!--<script src="../static/js/slide.js"></script>-->
+<script src="../static/js/slide.js"></script>
+<script src="../static/js/imgURL.js"></script>
+</body>
+</html>

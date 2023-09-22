@@ -1,8 +1,26 @@
+naver:
+  storage:
+    end-point: https://kr.object.ncloudstorage.com
+    region-name: kr-standard
+    bucket-name: picasso-bucket
+
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+---
 spring:
   config:
     activate:
       on-profile: common-local
-
 ---
 spring:
   config:
