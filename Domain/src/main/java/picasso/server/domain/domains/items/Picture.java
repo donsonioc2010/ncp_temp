@@ -66,4 +66,8 @@ public class Picture {
     @OneToMany(mappedBy = "picture", fetch = FetchType.LAZY)
     private List<PictureBidHistory> bidHistory = new ArrayList<>();
 
+    public void addBidHistory(PictureBidHistory pictureBidHistory) {
+        bidHistory.add(pictureBidHistory);
+    }
+
 }

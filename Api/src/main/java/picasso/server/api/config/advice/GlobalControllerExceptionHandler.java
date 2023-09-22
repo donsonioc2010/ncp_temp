@@ -21,7 +21,6 @@ public class GlobalControllerExceptionHandler {
         ErrorDetail errorDetail = e.getErrorCode().getErrorDetail();
         log.warn("ExceptionName >>> {}, ErrorCode >>> {}, ExceptionReason >>> {}",
                 e.getClass(), errorDetail.getStatusCode(), errorDetail.getReason());
-
         //return ResponseEntity.status(errorDetail.getStatusCode()).body(errorDetail);
         return "redirect:/error";
     }
