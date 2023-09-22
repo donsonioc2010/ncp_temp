@@ -1,15 +1,20 @@
-package picasso.server.domain.domains.member.dto;
-import picasso.server.domain.domains.member.type.LoginType;
-import picasso.server.domain.domains.member.type.UserRole;
-import picasso.server.domain.domains.member.type.UserStatus;
+package picasso.server.domain.domains.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+import picasso.server.domain.domains.user.type.LoginType;
+import picasso.server.domain.domains.user.type.UserRole;
+import picasso.server.domain.domains.user.type.UserStatus;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class UserDTO {
 
   private Long userId;
   private String email;
   private String password;
-  private String nickname;
+  private String nickName;
   private String profile;
   private Long point;
   private LoginType loginType;
