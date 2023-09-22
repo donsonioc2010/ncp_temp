@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.admin.exception.NotAdminUserException;
 import picasso.server.api.admin.service.AdminService;
+import picasso.server.api.user.vo.request.SignUpAdminRequestDto;
 import picasso.server.domain.domains.dto.UserDTO;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
@@ -18,6 +19,8 @@ import picasso.server.domain.domains.user.type.UserRole;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static java.time.LocalDateTime.now;
 
 
 @Controller
@@ -80,9 +83,8 @@ public class AdminController {
 
 
     @GetMapping("/form")
-    public String createForm(HttpSession session, Model model) {
+    public String AdminForm(HttpSession session) {
 //        isSessionUserAdmin(session);
-        model.addAttribute("UserDTO", new UserDTO());
         return "admin/form";
     }
 
@@ -94,21 +96,23 @@ public class AdminController {
      * @return
      */
     @PostMapping("/form")
-    public String addAdmin(UserDTO dto, HttpSession session) {
-        User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setLoginAt(LocalDateTime.now());
-        user.setNickName(dto.getNickName());
-        user.setUpdatedAt(LocalDateTime.now());
-        user.setProfile(dto.getProfile());
+    public String addAdmin(SignUpAdminRequestDto dto, HttpSession session) {
+//        isSessionUserAdmin(session);
+        User user = User.builder()
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .nickName(dto.getNickName())
+                .userRole(UserRole.ADMIN)
+                .updatedAt(now())
+                .createdAt(now())
+                .loginAt(now())
+                .profile("https://www.example.com/default-profile-image.jpg")
+                .build();
 
-        user.setUserRole(UserRole.ADMIN);
         userRepository.save(user);
 
-        return "redirect:/";
+        return "auth/login";
     }
-
     /**
      * 관리자 계정 조회
      *
@@ -117,12 +121,12 @@ public class AdminController {
      * @return
      */
 
-    @GetMapping("/list_admin")
-    public String listAdmin(HttpSession session, Model model) {
+    @GetMapping("/user/list")
+    public String AdminList(HttpSession session, Model model) {
         isSessionUserAdmin(session);
         List<User> adminUsers = adminService.findAllAdmin();
         model.addAttribute("users", adminUsers);
-        return "admin/list_admin";
+        return "admin/memberList";
     }
 }
 
