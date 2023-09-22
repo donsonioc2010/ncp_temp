@@ -23,27 +23,43 @@ public class PictureBidHistoryService {
     private final PictureRepository pictureRepository;
     private final PictureBidHistoryRepository pictureBidHistoryRepository;
 
-
     /**
-     * 로그인한 사용자가 입찰 가능 여부를 확인하는 로직
+     * 입찰 프로세스
      * @param user
      * @param pictureId
      * @param amount
      * @return
      */
-    public boolean isAbleBiddingPictureByUser(User user, Long pictureId, Long amount) {
-        User findUser = userRepository.findById(user.getId()).orElseThrow(()->NotLoginUserRestException.EXCEPTION);
+    public boolean biddingProcess(User user, Long pictureId, Long amount) {
+        User findUser = userRepository.findById(user.getId()).orElseThrow(() -> NotLoginUserRestException.EXCEPTION);
         Picture findPicture = pictureRepository.findById(pictureId).orElseThrow(() -> NotFoundRestException.EXCEPTION);
-
         Optional<PictureBidHistory> optionalTopHistory = pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture);
 
-        if(optionalTopHistory.isEmpty()) {
+        //아무도 입찰 신청을 하지 않은 경우 또는 요청한 사용자가 입찰 신청한경우 , DB에 저장
+        if (optionalTopHistory.isEmpty() || isAbleBiddingPictureByUser(user, findPicture, optionalTopHistory.get(), amount)) {
+            PictureBidHistory newBidHistory = PictureBidHistory.builder()
+                    .picture((findPicture))
+                    .user(findUser)
+                    .bidAmount(amount)
+                    .build();
+            findPicture.addBidHistory(newBidHistory);
+            pictureRepository.save(findPicture);
             return true;
         }
-        PictureBidHistory topHistory = optionalTopHistory.get();
-        // 사용자가 최종 입찰자가 아니거나,
-        return !topHistory.getUser().equals(user) && amount <= topHistory.getBidAmount() + findPicture.getIncrementAmount();
+        return false;
     }
 
+    /**
+     * 로그인한 사용자가 입찰 가능 여부를 확인하는 로직
+     * @param user
+     * @param picture
+     * @param topHistory
+     * @param amount
+     * @return
+     */
+    private boolean isAbleBiddingPictureByUser(User user, Picture picture, PictureBidHistory topHistory, Long amount) {
 
+        // 사용자가 최종 입찰자가 아니거나 또는
+        return !topHistory.getUser().equals(user) && amount <= topHistory.getBidAmount() + picture.getIncrementAmount();
+    }
 }

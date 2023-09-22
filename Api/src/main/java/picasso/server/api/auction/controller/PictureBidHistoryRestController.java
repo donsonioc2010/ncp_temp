@@ -35,12 +35,8 @@ public class PictureBidHistoryRestController {
         if (user == null) {
             throw NotLoginUserRestException.EXCEPTION;
         }
-
-
         return ResponseEntity.ok(
-                pictureBidHistoryService.isAbleBiddingPictureByUser(user, requestDto.getPictureId(), requestDto.getAmount())
+                pictureBidHistoryService.biddingProcess(user, requestDto.getPictureId(), requestDto.getAmount())
         );
     }
-
-
 }
