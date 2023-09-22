@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.items.PictureBidHistory;
-import picasso.server.domain.domains.member.entity.User;
+import picasso.server.domain.domains.user.entity.User;
 
 import java.util.List;
 import java.util.Optional;

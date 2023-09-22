@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>My Page</title>
+</head>
+<body>
+<form th:action="@{/user}" method="post">
+  <label for="nickname">Nickname:</label>
+  <input type="text" id="nickname" name="nickname" /><br/>
+
+  <label for="point">Point:</label>
+  <input type="text" id="point" name="point" /><br/>
+
+  <label for="profile">Profile:</label>
+  <input type="file" id="profile" name="profile" /><br/>>
+  <button type="submit">등록</button>
+
+</form>
+</body>
+</html>

@@ -7,8 +7,8 @@ import picasso.server.common.exception.NotFoundRestException;
 import picasso.server.common.exception.NotLoginUserRestException;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.items.PictureBidHistory;
-import picasso.server.domain.domains.member.entity.User;
-import picasso.server.domain.domains.member.repository.UserRepository;
+import picasso.server.domain.domains.user.entity.User;
+import picasso.server.domain.domains.user.repository.UserRepository;
 import picasso.server.domain.domains.repository.PictureBidHistoryRepository;
 import picasso.server.domain.domains.repository.PictureRepository;
 

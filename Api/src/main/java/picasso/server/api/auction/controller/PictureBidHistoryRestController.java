@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import picasso.server.api.auction.dto.request.PictureBiddingValidRequestDto;
 import picasso.server.api.auction.service.PictureBidHistoryService;
 import picasso.server.common.exception.NotLoginUserRestException;
-import picasso.server.domain.domains.member.entity.User;
+import picasso.server.domain.domains.user.entity.User;
 
 @Slf4j
 @RequiredArgsConstructor

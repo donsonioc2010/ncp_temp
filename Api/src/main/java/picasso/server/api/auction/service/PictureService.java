@@ -96,4 +96,5 @@ public class PictureService {
     public List<Picture> saveAllPictureList(List<Picture> saveList) {
         return pictureRepository.saveAll(saveList);
     }
+
 }

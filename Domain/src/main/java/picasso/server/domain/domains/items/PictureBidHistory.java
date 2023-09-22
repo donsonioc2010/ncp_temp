@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import picasso.server.domain.domains.member.entity.User;
+import picasso.server.domain.domains.user.entity.User;
 
 import java.time.LocalDateTime;
 
