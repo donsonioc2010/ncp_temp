@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.admin.exception.NotAdminUserException;
 import picasso.server.api.admin.service.AdminService;
-import picasso.server.domain.domains.member.dto.UserDTO;
-import picasso.server.domain.domains.member.entity.User;
-import picasso.server.domain.domains.member.repository.UserRepository;
-import picasso.server.domain.domains.member.type.UserRole;
+import picasso.server.domain.domains.dto.UserDTO;
+import picasso.server.domain.domains.user.entity.User;
+import picasso.server.domain.domains.user.repository.UserRepository;
+import picasso.server.domain.domains.user.type.UserRole;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static picasso.server.domain.domains.member.type.UserRole.ADMIN;
 
 @Controller
 @Slf4j
@@ -32,7 +31,7 @@ public class AdminController {
 
     @PostMapping("/approve/{pictureId}")
     public String approvePicture(@PathVariable Long pictureId, HttpSession session) {
-//        isSessionUserAdmin(session);
+        isSessionUserAdmin(session);
         adminService.approvePicture(pictureId);
         return "redirect:/admin/list";
     }
@@ -47,7 +46,7 @@ public class AdminController {
 
     @GetMapping("/list")
     public String list(Model model, HttpSession session) {
-//        isSessionUserAdmin(session);
+        isSessionUserAdmin(session);
         model.addAttribute("pictures", adminService.findAll());
         return "admin/list";
     }
@@ -62,7 +61,7 @@ public class AdminController {
      */
     @GetMapping("/detail/{pictureId}")
     public String detail(@PathVariable Long pictureId, Model model, HttpSession session) {
-//        isSessionUserAdmin(session);
+        isSessionUserAdmin(session);
         model.addAttribute(
                 "picture",
                 adminService.getBeforeApproveStatusPictureDetailById(pictureId)
@@ -73,7 +72,7 @@ public class AdminController {
 
     private void isSessionUserAdmin(HttpSession session) {
         User user = (User) session.getAttribute("loginUser");
-        if (user == null || !user.getUserRole().equals(ADMIN)) {
+        if (user == null || !user.getUserRole().equals(UserRole.ADMIN)) {
             log.error("ADMIN Auth Not Enough");
             throw NotAdminUserException.EXCEPTION;
         }
@@ -100,8 +99,9 @@ public class AdminController {
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
         user.setLoginAt(LocalDateTime.now());
-        user.setNickName(dto.getNickname());
+        user.setNickName(dto.getNickName());
         user.setUpdatedAt(LocalDateTime.now());
+        user.setProfile(dto.getProfile());
 
         user.setUserRole(UserRole.ADMIN);
         userRepository.save(user);
@@ -119,7 +119,7 @@ public class AdminController {
 
     @GetMapping("/list_admin")
     public String listAdmin(HttpSession session, Model model) {
-//        isSessionUserAdmin(session);
+        isSessionUserAdmin(session);
         List<User> adminUsers = adminService.findAllAdmin();
         model.addAttribute("users", adminUsers);
         return "admin/list_admin";

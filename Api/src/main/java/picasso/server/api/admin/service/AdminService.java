@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.admin.exception.AlreadyChangePictureException;
 import picasso.server.common.exception.NotFoundException;
 import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.member.entity.User;
-import picasso.server.domain.domains.member.repository.UserRepository;
-import picasso.server.domain.domains.member.type.UserRole;
 import picasso.server.domain.domains.repository.PictureRepository;
+import picasso.server.domain.domains.user.entity.User;
+import picasso.server.domain.domains.user.repository.UserRepository;
+import picasso.server.domain.domains.user.type.UserRole;
 
 import java.util.List;
 import java.util.Optional;

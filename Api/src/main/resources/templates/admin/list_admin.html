@@ -17,6 +17,7 @@
         <th>최근 로그인 시간</th>
         <th>최근 수정 시간</th>
         <th>별명</th>
+        <th>프로필 링크</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td th:text="${user.loginAt}"></td>
         <td th:text="${user.updatedAt}"></td>
         <td th:text="${user.nickName}"></td>
+        <td th:text="${user.profile}"></td>
     </tr>
     </tbody>
 </table>
