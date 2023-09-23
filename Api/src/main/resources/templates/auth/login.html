@@ -4,25 +4,30 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+        layout:decorate="~{layout/layout}">
+
 <main layout:fragment="content">
-    <h2>로그인</h2>
-    <form th:action="@{/auth/login}" th:object="${requestDto}" method="post">
-        <div class="form-group">
-            <label for="email">이메일:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <input type="checkbox" id="rememberMe" name="rememberMe">
-            <label for="rememberMe">이메일 주소 저장</label>
-        </div>
-        <button type="submit">로그인</button>
-    </form>
+
+    <div style="margin:80px; background-color:white; display: flex; flex-direction: column; border-radius : 70px; justify-content: center; align-items: center; height:50vh; margin-left: 37%; border: 10px solid #18ACDB; width: 380px;">
+        <form th:action="@{/auth/login}" th:object="${requestDto}" method="post">
+            <h2 style="text-align: center; font-family : Sigmar One; font-style: normal; color: #18ACDB;">LOGIN</h2>
+            <br>
+                <div>
+                    <input type="email" id="email" name="email" placeholder="email" style="text-align: center;" required>
+                </div>
+                <div>
+                    <input type="password" id="password" name="password" placeholder="password" style="text-align: center;" required>
+                </div>
+            <br>
+            <div style="text-align: center;">
+                <input type="checkbox" id="rememberMe" name="rememberMe">
+                <label for="rememberMe">&nbsp 자동 로그인</label>
+            </div>
+            <br>
+            <button style="text-align: center; margin-left: 28%;" class="btn btn-primary before-login-btn" type="submit">LOGIN</button>
+        </form>
+    </div>
+
 </main>
 <th:block layout:fragment="script">
     <script type="application/javascript" th:inline="javascript">

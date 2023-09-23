@@ -4,28 +4,33 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}"
->
+        layout:decorate="~{layout/layout}">
+
 <main layout:fragment="content">
 
-<h1>회원가입</h1>
-<form th:action="@{/auth/signup}" method="post">
+  <div style="margin:80px; background-color:white; display: flex; flex-direction: column; border-radius : 70px; justify-content: center; align-items: center; height:50vh; margin-left: 37%; border: 10px solid #18ACDB; width: 380px;">
+  <form th:action="@{/auth/signup}" method="post">
+    <h2 style="text-align:center; font-family : Sigmar One; font-style: normal; color: #18ACDB;">JOIN</h2><br>
   <table>
     <tr>
-      <td><input type="nickname" name="nickName" placeholder="별명"></td>
+      <td><input type="nickname" name="nickName" placeholder="별명" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
     <tr>
-      <td><input type="email" name="email" placeholder="이메일"></td>
+      <td><input type="email" name="email" placeholder="이메일" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
     <tr>
-      <td><input type="password" name="password" placeholder="Password"></td>
+      <td><input type="password" name="password" placeholder="Password" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
     <tr>
-      <td><input type="password" name="password" placeholder="Password Confirm"></td>
+      <td><input type="password" name="password" placeholder="Password Confirm" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
-  </table>
-  <button type="submit">등록</button>
+  </table><br>
+
+  <button type="submit" style="text-align: center; margin-left: 35%;" class="btn btn-primary before-login-btn">등록</button>
+
 </form>
+  </div>
+</main>
   <th:block layout:fragment="script">
     <script type="application/javascript" th:inline="javascript">
     </script>
