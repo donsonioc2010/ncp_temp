@@ -19,9 +19,7 @@ import picasso.server.domain.domains.items.PictureInfo;
 import picasso.server.domain.domains.items.PictureStatus;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Slf4j

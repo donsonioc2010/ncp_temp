@@ -18,10 +18,23 @@ form {
     border: 1px solid #ccc;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .image-container img {
     width: 100%;
     height: auto;
     display: block;
+}
+.fixed-textarea {
+    width: 200px; /* 원하는 너비로 조정 */
+    height: 150px; /* 원하는 높이로 조정 */
+    resize: none;
+}
+
+.section {
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
