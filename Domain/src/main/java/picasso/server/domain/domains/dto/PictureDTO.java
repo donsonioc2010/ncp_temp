@@ -14,7 +14,7 @@ public class PictureDTO {
     private int startingPrice; //시작가격
     private int incrementAmount; //최소입찰단위
     private String size; //그림 사이즈
-    private LocalDate dateTime;
+    private LocalDate bidStartDate;
     private String imgUrl; //그림 url
 }
 

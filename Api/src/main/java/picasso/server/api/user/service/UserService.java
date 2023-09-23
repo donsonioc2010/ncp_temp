@@ -57,6 +57,18 @@ public class UserService {
         return false; // 일치하는 쿠키 데이터가 없거나, 데이터가 입력과 일치하지 않습니다.
     }
 
+
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
+
+    public Optional<User> findUserByNickname(String nickname) {
+        return userRepository.findByNickName(nickname);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
     }
