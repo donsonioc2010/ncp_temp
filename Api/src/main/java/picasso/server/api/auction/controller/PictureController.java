@@ -39,7 +39,7 @@ public class PictureController {
     @PostMapping
     public String add(PictureDTO dto, MultipartFile imageFile, Model model) {
         Picture picture = new Picture();
-        picture.setPicture_id(dto.getPicture_id());
+        picture.setPictureId(dto.getPictureId());
         picture.setPictureName(dto.getPictureName());
         picture.setPainterName(dto.getPainterName());
         picture.setSize(dto.getSize());
