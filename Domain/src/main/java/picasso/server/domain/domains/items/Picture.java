@@ -24,7 +24,7 @@ public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long picture_id;
+    private Long pictureId;
 
     @NotNull
     private String imgUrl; //그림 url
