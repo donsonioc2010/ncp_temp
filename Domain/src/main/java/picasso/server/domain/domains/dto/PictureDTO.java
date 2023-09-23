@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Getter @Setter
 public class PictureDTO {
-    private Long picture_id; //그림 ID
+    private Long pictureId; //그림 ID
     private String pictureName; //그림 이름
     private String painterName; //화가 이름
     private String details; //그림 설명
@@ -17,3 +17,9 @@ public class PictureDTO {
     private LocalDate bidStartDate;
     private String imgUrl; //그림 url
 }
+
+
+
+
+
+
