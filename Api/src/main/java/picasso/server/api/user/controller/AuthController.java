@@ -1,6 +1,9 @@
 package picasso.server.api.user.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +31,29 @@ public class AuthController {
      *
      * @return
      */
+//    @GetMapping("/login")
+//    public String showLoginForm(HttpSession session) {
+//        // TODO :  페이지 들어올때 자동로그인 설정 된 경우 Cookie 받아서 처리하는 로직 추가하기
+//        return "auth/login";
+//    }
+
     @GetMapping("/login")
-    public String showLoginForm(HttpSession session) {
-        // TODO :  페이지 들어올때 자동로그인 설정 된 경우 Cookie 받아서 처리하는 로직 추가하기
+    public String showLoginForm(HttpSession session, HttpServletRequest request) {
+        // 브라우저의 쿠키를 확인하여 자동 로그인 처리
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userId")) {
+                    String userId = cookie.getValue();
+                    Optional<User> findResult = userService.findUserById(Long.parseLong(userId));
+                    findResult.ifPresent(user -> setSessionLoginUser(session, user));
+                    // 자동 로그인 후 메인 페이지로 리다이렉트 또는 다른 처리
+                    return "redirect:/";
+                }
+            }
+        }
+
+        // 자동 로그인이 실패한 경우 로그인 폼 페이지를 보여줍니다.
         return "auth/login";
     }
 
@@ -42,13 +65,60 @@ public class AuthController {
      * @return
      * @throws JsonProcessingException
      */
+//    @PostMapping("/login")
+//    public String handleLogin(LoginRequestDto requestDto, HttpSession session) throws JsonProcessingException {
+//        session.removeAttribute("loginUser");
+//        Optional<User> findResult = userService.login(requestDto);
+//        findResult.ifPresent(user -> setSessionLoginUser(session, user));
+//        if (findResult.isEmpty())
+//            return "redirect:/auth/login";
+//        return "redirect:/";
+//    }
+
     @PostMapping("/login")
-    public String handleLogin(LoginRequestDto requestDto, HttpSession session) throws JsonProcessingException {
+    public String handleLogin(LoginRequestDto requestDto, HttpSession session, HttpServletResponse response) {
         session.removeAttribute("loginUser");
         Optional<User> findResult = userService.login(requestDto);
-        findResult.ifPresent(user -> setSessionLoginUser(session, user));
+        findResult.ifPresent(user -> {
+            setSessionLoginUser(session, user);
+            // 자동 로그인 쿠키 생성
+            if (requestDto.isRememberMe()) {
+                Cookie cookie = new Cookie("userId", user.getId().toString());
+                cookie.setMaxAge(10); // 10초 유지
+                response.addCookie(cookie);
+            }
+        });
         if (findResult.isEmpty())
             return "redirect:/auth/login";
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String showLogoutForm(HttpSession session) {
+        // 로그아웃 폼 페이지를 보여줍니다.
+        return "auth/logout";
+    }
+
+    @PostMapping("/logout")
+    public String handleLogout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+        // 세션 삭제
+        session.removeAttribute("loginUser");
+
+        // 쿠키 삭제
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userId")) {
+                    cookie.setValue("");
+                    cookie.setPath("/");
+                    cookie.setMaxAge(0); // 쿠키 삭제
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
+
+        // 로그아웃 후 로그인 페이지로 리다이렉트
         return "redirect:/";
     }
 
@@ -74,6 +144,9 @@ public class AuthController {
         setSessionLoginUser(session, userService.signUp(requestDto));
         return "redirect:/";
     }
+
+
+
     private void setSessionLoginUser(HttpSession session, User user) {
         session.setAttribute("loginUser", user);
     }
