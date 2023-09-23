@@ -46,14 +46,13 @@ public class User {
   private String email;
 
   @NotNull
-  @Column(unique = true)
+  @Column
   private String password;
 
   @NotNull
   @Column(unique = true)
   private String nickName;
 
-  @NotNull
   @Column
   private String profile;
 
@@ -77,13 +76,16 @@ public class User {
 
   @NotNull
   @Column
+  @Builder.Default
   private LocalDateTime createdAt = LocalDateTime.now();
 
   @NotNull
   @Column
+  @Builder.Default
   private LocalDateTime updatedAt = LocalDateTime.now();
 
   @NotNull
+  @Builder.Default
   private LocalDateTime loginAt = LocalDateTime.now();
   
   public void updatePoint(Long point) {
