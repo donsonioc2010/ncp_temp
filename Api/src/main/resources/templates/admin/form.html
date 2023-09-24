@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 계정 생성</title>
+    <link rel="stylesheet" href="../static/css/adminform.css">
+    <style>
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<h1>관리자 계정 생성</h1>
+<form th:action="@{/admin/form}" method="post">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <label for="nickName">Nickname:</label>
+    <input type="text" id="nickName" name="nickName" required>
+    <button type="submit">계정 생성</button>
+</form>
+</body>
+</html>
