@@ -19,10 +19,10 @@
       <td><input type="email" name="email" placeholder="이메일" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
     <tr>
-      <td><input type="password" name="password" placeholder="Password" style="background-color:#E8F0FE; text-align: center;"></td>
+      <td><input type="password" name="password" id="password" placeholder="Password" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
     <tr>
-      <td><input type="password" name="password" placeholder="Password Confirm" style="background-color:#E8F0FE; text-align: center;"></td>
+      <td><input type="password" name="password" id="repeat-password" placeholder="Password Confirm" style="background-color:#E8F0FE; text-align: center;"></td>
     </tr>
   </table><br>
 
@@ -38,3 +38,44 @@
     </script>
   </th:block>
 </html>
+
+
+
+
+<!--
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<main layout:fragment="content">
+
+  <h1>회원가입</h1>
+  <form th:action="@{/auth/signup}" method="post">
+    <table>
+      <tr>
+        <td><input type="nickname" name="nickName" placeholder="별명"></td>
+      </tr>
+      <tr>
+        <td><input type="email" name="email" placeholder="이메일"></td>
+      </tr>
+      <tr>
+        <td><input type="password" name="password" placeholder="Password"></td>
+      </tr>
+      <tr>
+        <td><input type="password" name="password" placeholder="Password Confirm"></td>
+      </tr>
+    </table>
+    <button type="submit">등록</button>
+  </form>
+  <th:block layout:fragment="script">
+    <script type="application/javascript" th:inline="javascript">
+    </script>
+    <script type="text/javascript">
+    </script>
+  </th:block>
+</html>
+-->
