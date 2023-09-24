@@ -6,7 +6,9 @@
         <div class="col"></div>
         <div class="col">
             <div class="title">
-                <img src="/static/asset/logo.png" alt="logo" height="100px"/>
+                <a href="/">
+                    <img src="/static/asset/logo.png" alt="logo" height="100px"/>
+                </a>
             </div>
         </div>
         <div class="col"></div>
@@ -46,11 +48,11 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user/mypage">마이 페이지</a></li>
                                     <li><a class="dropdown-item" href="#">결제하기</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider" th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
-                                    </li>
-                                    <li><a class="dropdown-item" href="/admin/list"
-                                           th:if="${session.loginUser.userRole.name() == 'ADMIN'}">관리자 페이지</a></li>
+                                    <th:block  th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/admin/list">경매품 인가 대시보드</a></li>
+                                        <li><a class="dropdown-item" href="/admin/user/list">관리자 계정 관리</a></li>
+                                    </th:block>
                                 </ul>
                             </li>
                         </ul>
