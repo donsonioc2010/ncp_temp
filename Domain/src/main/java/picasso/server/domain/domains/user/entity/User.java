@@ -46,7 +46,7 @@ public class User {
   private String email;
 
   @NotNull
-  @Column(unique = true)
+  @Column
   private String password;
 
   @NotNull
@@ -57,6 +57,7 @@ public class User {
   private String profile;
 
   @Column
+  @Builder.Default
   private Long point = 0L;
 
   @Enumerated(EnumType.STRING)
@@ -84,6 +85,7 @@ public class User {
   @Column
   private LocalDateTime updatedAt = LocalDateTime.now();
 
+  @Builder.Default
   @NotNull
   @Builder.Default
   @Column

@@ -13,8 +13,8 @@ function handleImageUpload(event) {
             img.onload = function () {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                const maxWidth = 500;
-                const maxHeight = 500;
+                const maxWidth = 200;
+                const maxHeight = 300;
 
                 let width = img.width;
                 let height = img.height;

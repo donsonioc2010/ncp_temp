@@ -139,12 +139,17 @@ public class AuthController {
      * @param requestDto
      * @return
      */
+//    @PostMapping("/signup")
+//    public String signUp(SignUpRequestDto requestDto, HttpSession session) {
+//        setSessionLoginUser(session, userService.signUp(requestDto));
+//        return "redirect:/";
+//    }
+
     @PostMapping("/signup")
     public String signUp(SignUpRequestDto requestDto, HttpSession session) {
         setSessionLoginUser(session, userService.signUp(requestDto));
         return "redirect:/";
     }
-
 
 
     private void setSessionLoginUser(HttpSession session, User user) {
