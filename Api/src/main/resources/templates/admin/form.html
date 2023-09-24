@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
-    <meta charset="UTF-8">
     <title>관리자 계정 생성</title>
     <link rel="stylesheet" href="../static/css/adminform.css">
-    <style>
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 18px;
-        }
-    </style>
 </head>
+
 <body>
-<h1>관리자 계정 생성</h1>
-<form th:action="@{/admin/form}" method="post">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <label for="nickName">Nickname:</label>
-    <input type="text" id="nickName" name="nickName" required>
-    <button type="submit">계정 생성</button>
-</form>
+<div layout:fragment="content">
+    <h1>관리자 계정 생성</h1>
+
+    <form th:action="@{/admin/form}" method="post">
+        <div>
+            <label for="email">이메일:</label>
+            <div><input type="email" id="email" name="email" required></div>
+        </div>
+        <div>
+            <label for="password">비밀번호:</label>
+            <div><input type="password" id="password" name="password" required></div>
+        </div>
+        <div>
+            <label for="nickName">별명:</label>
+            <div><input type="text" id="nickName" name="nickName" required></div>
+        </div>
+        <button type="submit">계정 생성</button>
+    </form>
+</div>
 </body>
 </html>

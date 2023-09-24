@@ -103,9 +103,6 @@ public class AdminController {
                 .password(dto.getPassword())
                 .nickName(dto.getNickName())
                 .userRole(UserRole.ADMIN)
-                .updatedAt(now())
-                .createdAt(now())
-                .loginAt(now())
                 .profile("https://www.example.com/default-profile-image.jpg")
                 .build();
 
@@ -124,8 +121,7 @@ public class AdminController {
     @GetMapping("/user/list")
     public String AdminList(HttpSession session, Model model) {
         isSessionUserAdmin(session);
-        List<User> adminUsers = adminService.findAllAdmin();
-        model.addAttribute("users", adminUsers);
+        model.addAttribute("users", adminService.findAllAdmin());
         return "admin/memberList";
     }
 }
