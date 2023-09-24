@@ -6,7 +6,7 @@
 /*    justify-content: center;*/
 /*    min-height: 20px;*/
 /*}*/
-
+/*
 h1 {
     font-size: 40px;
     margin-bottom: 20px;
@@ -53,11 +53,11 @@ button:hover {
     display: flex;
     justify-content: center;
 }
-
-.image-container img {
-    display: block; /* 이미지를 블록 요소로 설정하여 가운데 정렬 적용 */
-    margin: 0 auto; /* 가운데 정렬을 위한 마진 설정 */
-}
+*/
+/*.image-container img {*/
+/*    display: block; !* 이미지를 블록 요소로 설정하여 가운데 정렬 적용 *!*/
+/*    margin: 0 auto; !* 가운데 정렬을 위한 마진 설정 *!*/
+/*}*/
 
 div.admin-title-row{
     display: flex;

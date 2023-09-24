@@ -9,14 +9,18 @@
 <main layout:fragment="content">
     <div class="container">
         <link rel="stylesheet" type="text/css" href="/static/css/adminlist.css">
-        <div class="admin-title-row">
-            <h1>관리자 계정 대쉬보드</h1>
-            <input type="button" value="계정 생성" class="btn btn-primary" style="height: 50%;"
-                   onClick="moveForm();"
-                   th:if="${session.loginUser.userRole.name().equals('ADMIN')}" />
+        <div class="row">
+            <div class="col">
+                <div class="admin-title-row">
+                    <h1>관리자 계정 대쉬보드</h1>
+                    <input type="button" value="계정 생성" class="btn btn-primary" style="height: 50%;"
+                           onClick="moveForm();"
+                           th:if="${session.loginUser.userRole.name().equals('ADMIN')}"/>
+                </div>
+            </div>
         </div>
 
-        <table border="1">
+        <table  class="table">
             <thead>
             <tr>
                 <th>ID 번호</th>
@@ -27,7 +31,7 @@
                 <th>프로필 링크</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
             <tr th:each="user : ${users}">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.email}"></td>
@@ -42,8 +46,8 @@
 </main>
 <th:block layout:fragment="script">
     <script type="application/javascript" th:inline="javascript">
-        function moveForm(){
-            location.href=window.location.origin+"/admin/form"
+        function moveForm() {
+            location.href = window.location.origin + "/admin/form"
         }
     </script>
     <script type="text/javascript">

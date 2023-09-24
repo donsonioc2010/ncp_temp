@@ -36,6 +36,10 @@ div.title-sector {
     justify-content: space-between;
 }
 
+div.title-sector>div>h1.title {
+    color: #90debe;
+}
+
 div.title-sector>button.more {
     border-radius: 100px;
     background: #18ACDB;
