@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.auction.service.PictureService;
+import picasso.server.domain.domains.items.PictureStatus;
 
 
 @Slf4j
@@ -19,11 +20,17 @@ public class HomeController {
 
     @GetMapping
     public String index(Model model) {
-
         // 관리자 승인된 경매전 게시물
-        model.addAttribute("afterApprove", null);
+        model.addAttribute("afterApprove",
+                pictureService
+                        .preparePictureInfoPage(0, 10, PictureStatus.AFTER_APPROVE)
+                        .getContent()
+        );
         // 현재 경매중인 게시물
-        model.addAttribute("bidding", null);
+        model.addAttribute("bidding",
+                pictureService.preparePictureInfoPage(0, 10, PictureStatus.BIDDING)
+                        .getContent()
+        );
         return "index";
     }
 
