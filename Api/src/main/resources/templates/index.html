@@ -11,8 +11,11 @@
     <div class="container body">
         <div class="auction-container">
             <div class="title-sector">
-                <h1 class="title">경매 예정작</h1>
-                <button type="button" class="btn btn-primary more" onclick="">more</button>
+                <div style="display: flex; align-items: center;">
+                    <h1 class="title" style="margin-right: 10px;">경매 예정작</h1>
+                    <h3><span class="badge rounded-pill text-bg-primary">NEW</span></h3>
+                </div>
+                <button type="button" class="btn btn-primary more" onclick="movePictureListPage('AFTER_APPROVE')">more</button>
             </div>
             <swiper-container
                     class="swiper"
@@ -22,93 +25,58 @@
                     autoplay="true"
                     loop="true"
             >
-                <swiper-slide data-swiper-autoplay="1000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
-                                alt="미쯔"
-                        />
-                    </div>
-                </swiper-slide>
-                <swiper-slide data-swiper-autoplay="1000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
-                                alt="아리"
-                        />
-                    </div>
-                </swiper-slide>
-                <swiper-slide data-swiper-autoplay="1000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
-                                alt="미쯔"
-                        />
-                    </div>
-                </swiper-slide>
-                <swiper-slide data-swiper-autoplay="1000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
-                                alt="아리"
-                        />
-                    </div>
-                </swiper-slide>
+                <th:block th:if="${afterApprove.size() == 0}" >
+                    <swiper-slide class="no-pictures">현재 등록된 상품이 존재하지 않습니다.</swiper-slide>
+                </th:block>
+                <th:block th:if="${afterApprove.size() != 0}" >
+                    <swiper-slide data-swiper-autoplay="2000" th:each=" picture : ${afterApprove}">
+                        <div class="box">
+                            <!--TODO : 그림 상세 페이지 완료시 링크 연결 필요-->
+                            <a href="#">
+                                <img
+                                        th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/'+${picture.imageUrl}+'?type=f&w=936&h=600'"
+                                        th:alt="${picture.pictureName}"
+                                />
+                            </a>
+                        </div>
+                    </swiper-slide>
+                </th:block>
             </swiper-container>
         </div>
 
         <div class="auction-container" style="margin-bottom: 100px;">
             <div class="title-sector">
-                <h1 class="title">경매 진행중</h1>
-                <button type="button" class="btn btn-primary more" onclick="">more</button>
+                <div style="display: flex; align-items: center;">
+                    <h1 class="title" style="margin-right: 10px;">경매 진행중</h1>
+                    <h3><span class="badge rounded-pill text-bg-info">ING</span></h3>
+                </div>
+                <button type="button" class="btn btn-info more" onclick="movePictureListPage('BIDDING')">more</button>
             </div>
-            <swiper-container
-                    class="swiper"
-                    navigation="true"
-                    speed=500
-                    delay="3000"
-                    autoHeight="true"
-                    autoplay="true"
-                    loop="true"
-            >
-                <swiper-slide data-swiper-autoplay="3000">
+            <th:block th:if="${bidding.size() == 0}" >
+                <swiper-slide class="no-pictures">현재 등록된 상품이 존재하지 않습니다.</swiper-slide>
+            </th:block>
+            <th:block th:if="${bidding.size() != 0}" >
+                <swiper-slide data-swiper-autoplay="2000" th:each=" picture : ${bidding}">
                     <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
-                                alt="미쯔"
-                        />
+                        <!--TODO : 그림 상세 페이지 완료시 링크 연결 필요-->
+                        <a href="#">
+                            <img
+                                    th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/'+${picture.imageUrl}+'?type=f&w=936&h=600'"
+                                    th:alt="${picture.pictureName}"
+                            />
+                        </a>
                     </div>
                 </swiper-slide>
-                <swiper-slide data-swiper-autoplay="3000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
-                                alt="아리"
-                        />
-                    </div>
-                </swiper-slide>
-                <swiper-slide data-swiper-autoplay="3000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/profile/0813a94b-90ef-4f10-9172-0a954035b585.JPG?type=f&w=936&h=600"
-                                alt="미쯔"
-                        />
-                    </div>
-                </swiper-slide>
-                <swiper-slide data-swiper-autoplay="3000">
-                    <div class="box">
-                        <img
-                                src="http://xgrnsxldyejc19608959.cdn.ntruss.com/local/paint/cute.jpg?type=f&w=936&h=600"
-                                alt="아리"
-                        />
-                    </div>
-                </swiper-slide>
+            </th:block>
             </swiper-container>
         </div>
     </div>
 </main>
 <th:block layout:fragment="script">
     <script type="application/javascript" th:inline="javascript">
+        function movePictureListPage(status) {
+            location.href=window.location.origin+"/pictures/list?status="+status;
+        }
     </script>
     <script type="text/javascript">
     </script>

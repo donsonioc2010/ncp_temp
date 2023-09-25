@@ -58,7 +58,6 @@ public class User {
   @Column(unique = true)
   private String nickName;
 
-  @NotNull
   @Column
   private String profile;
 
@@ -82,17 +81,17 @@ public class User {
   private UserRole userRole = USER;
 
   @NotNull
-  @Builder.Default
   @Column
+  @Builder.Default
   private LocalDateTime createdAt = LocalDateTime.now();
 
   @NotNull
-  @Builder.Default
   @Column
+  @Builder.Default
   private LocalDateTime updatedAt = LocalDateTime.now();
 
-  @Builder.Default
   @NotNull
+  @Builder.Default
   private LocalDateTime loginAt = LocalDateTime.now();
   
   public void updatePoint(Long point) {
