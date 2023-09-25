@@ -38,9 +38,11 @@ var paymentResult = obj => {
         if (response.success) {
             alert("결제가 완료되었습니다.");
             postPayInfo(response.success, response);
+            window.location.href = window.location.origin + '/exchange/success';
         } else {
             alert("결제 실패입니다.");
             postPayInfo(response.success, response);
+            window.location.href = window.location.origin + '/exchange/failed';
         }
     });
 }
