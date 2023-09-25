@@ -4,8 +4,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -14,11 +16,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.user.type.LoginType;
 import picasso.server.domain.domains.user.type.UserRole;
 import picasso.server.domain.domains.user.type.UserStatus;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static picasso.server.domain.domains.user.type.LoginType.DEFAULT;
@@ -88,8 +93,12 @@ public class User {
   @NotNull
   @Builder.Default
   private LocalDateTime loginAt = LocalDateTime.now();
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Picture> pictures = new ArrayList<>();
   
   public void updatePoint(Long point) {
     this.point += point;
   }
+
 }

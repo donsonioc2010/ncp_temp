@@ -144,6 +144,7 @@ public class PictureService {
 
     private PictureInfo mapToPictureInfo(Picture picture) {
         PictureInfo pictureInfo = new PictureInfo();
+        pictureInfo.setId((picture.getPictureId()));
         pictureInfo.setImageUrl(picture.getImgUrl());
         pictureInfo.setDetails(picture.getDetails());
         pictureInfo.setPictureName(picture.getPictureName());
@@ -152,6 +153,10 @@ public class PictureService {
         pictureInfo.setIncrementAmount(picture.getIncrementAmount());
         pictureInfo.setEndDay(picture.getBidEndDate());
         return pictureInfo;
+    }
+
+    public Optional<Picture> getPictureById(Long id) {
+        return pictureRepository.findById(id);
     }
 
 }

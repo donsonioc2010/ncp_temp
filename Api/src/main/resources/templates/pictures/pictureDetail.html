@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<main layout:fragment="content">
+    <link rel="stylesheet" type="text/css" href="/static/css/detail.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kranky&display=swap">
+    <link rel="stylesheet" href="https://fonts.google.com/noto/specimen/Noto+Sans+KR">
+
+
+    <div class="container body">
+        <div th:if="${picture}" class="picture-details">
+            <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${picture.imgUrl} + '?type=f&w=600&h=800&ttype=jpg
+' " alt="Picture" class="picture-img">
+<!--          <img class = "frame" src="/static/asset/기린.png">-->
+<!--          <img class = "kuro" src="/static/asset/쿠로미.png">-->
+<!--          <img class = "sina" src="/static/asset/시나모.png">-->
+<!--          <img class = "kuro2" src="/static/asset/쿠로미2.png">-->
+<!--          <img class = "emphasis" src="/static/asset/강조.png">-->
+            <div class="details-box">
+                <div class="details-info">
+                    <p th:text="'Picture Name '"></p>
+                    <p class="text" style="font-size: 27px" th:text=" ${picture.pictureName}"></p>
+                    <p th:text="'Painter Name '"></p>
+                    <p class="text" style="font-size: 27px" th:text="${picture.painterName}"></p>
+                    <p th:text="'Details '"></p>
+<!--                    <p style="font-size: 22px" th:text="'이 편지는 영국에서 시작도ㅓ어 어쩌구 저ㄱ쩌구 졸려서 죽어버릴거 같고 진짜 너무너피곤하곶버ㅐㄷ배ㅑ랮부래뱌줇재ㅜ래줍'"></p>-->
+                    <p style="font-size: 27px" th:text="${picture.getDetails()}"></p>
+                    <p th:text="'Picture Size '"></p>
+                    <p class="text" style="font-size: 27px" th:text="${picture.getSize()}"></p>
+                    <p th:text="'Start Price '"></p>
+                    <p class="text" style="font-size: 27px" th:text="${picture.getStartingPrice()}"></p>
+                    <p th:text="'Minimum Amount'"></p>
+                    <p class="text" style="font-size: 27px" th:text="${picture.getIncrementAmount()}"></p>
+                    <button class="btn">Bid</button>
+                </div>
+            </div>
+            <div th:unless="${picture}">
+                <p>Picture not found.</p>
+            </div>
+        </div>
+    </div>
+  <br><br><br>
+</main>
+<th:block layout:fragment="script">
+</th:block>
+</html>

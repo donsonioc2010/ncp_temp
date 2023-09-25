@@ -1,17 +1,11 @@
 package picasso.server.domain.domains.items;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import picasso.server.domain.domains.user.entity.User;
 
 import java.time.LocalDate;
 
@@ -59,4 +53,7 @@ public class Picture {
     @NotNull
     private LocalDate bidEndDate; // 경매 종료일
 
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private User user;
 }
