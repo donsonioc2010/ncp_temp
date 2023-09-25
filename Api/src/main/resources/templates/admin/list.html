@@ -1,45 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div class="image-container">
-        <img src="/static/asset/logo.png" alt="logo" height="100px"/>
-        <title>Picasso - Approve List</title>
-        <link rel="stylesheet" href="../static/css/adminlist.css">
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<main layout:fragment="content">
+    <div class="container">
+        <link rel="stylesheet" type="text/css" href="/static/css/adminlist.css">
+        <div class="row">
+            <div class="col">
+                <div class="admin-title-row">
+                    <h1>관리자 대쉬보드</h1>
+                    <input type="button" value="계정 생성" class="btn btn-primary" style="height: 50%;" th:if="${session.loginUser.userRole.name().equals('ADMIN')}" />
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>그림명</th>
+                <th>시작가</th>
+                <th>생성일</th>
+                <th>승인 상태</th>
+                <th>승인 버튼</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
+                <td>
+                    <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
+                </td>
+                <td>
+                    <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
+                </td>
+                <td th:text="${picture.startingPrice}"></td>
+                <td th:text="${picture.bidStartDate}"></td>
+                <td th:text="${picture.pictureStatus}"></td>
+                <td>
+                    <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
+                        <button type="submit">Approve</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</head>
-<body>
-<div class="container">
-    <h1>관리자 대쉬보드</h1>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>그림명</th>
-            <th>시작가</th>
-            <th>생성일</th>
-            <th>승인 상태</th>
-            <th>승인 버튼</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
-            <td>
-                <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
-            </td>
-            <td>
-                <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
-            </td>
-            <td th:text="${picture.startingPrice}"></td>
-            <td th:text="${picture.bidStartDate}"></td>
-            <td th:text="${picture.pictureStatus}"></td>
-            <td>
-                <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
-                    <button type="submit">Approve</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-</body>
+</main>
+<th:block layout:fragment="script">
+    <script type="application/javascript" th:inline="javascript">
+    </script>
+    <script type="text/javascript">
+    </script>
+</th:block>
 </html>

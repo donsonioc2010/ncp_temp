@@ -12,12 +12,12 @@ var userId;
 var paymentResult = obj => {
     $.ajax({
         type : 'post',
-        url : '/member/session-info',
+        url : '/user/session-info',
         success : function(data, status, xhr) {
             userId = data.userId
         },
         error : function(xhr, status, error) {
-            alert('결제중 오류가 발생했습니다.')
+            alert('결제 불가')
         },
     })
 
@@ -57,8 +57,7 @@ function postPayInfo(tof, response) {
             "merchantUid" : response.merchant_uid,
             "productName" : response.name,
             "pgProvider" : response.pg_provider,
-            "paidAmount" : response.paid_amount,
-            "payMethod" : response.pay_method
+            "paidAmount" : response.paid_amount
         })
     })
 }
