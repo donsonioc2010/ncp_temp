@@ -5,20 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.auction.service.PictureService;
-import picasso.server.api.mail.MailTitleConstant;
-import picasso.server.common.mail.SendMailUtil;
+import picasso.server.api.mail.service.SendMailService;
 import picasso.server.common.util.DateStaticConstants;
 import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.items.PictureStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 
-import static picasso.server.api.mail.MailPathConstants.PICTURE_REJECT_MAIL;
-import static picasso.server.api.mail.MailPathConstants.PICTURE_SUCCESSBID_MAIL;
+import static picasso.server.domain.domains.items.PictureStatus.BIDDING;
+import static picasso.server.domain.domains.items.PictureStatus.REJECT;
 import static picasso.server.domain.domains.items.PictureStatus.SUCCESS_BID;
 
 /**
@@ -31,25 +29,26 @@ import static picasso.server.domain.domains.items.PictureStatus.SUCCESS_BID;
 @RequiredArgsConstructor
 public class EndAuctionScheduler {
     private final PictureService pictureService;
-    private final SendMailUtil sendMailUtil;
+    private final SendMailService sendMailService;
 
+    @Transactional
     @Scheduled(cron = "0 0 18 * * *", zone = DateStaticConstants.ZONE_SEOUL)
     public void startAuction() {
         log.info("Today End Auctions Schedule Start Time  >>> {}", LocalDateTime.now());
-        List<Picture> todayEndPictursList =  pictureService.findPictureStatusByStatusAndBidEndDate(PictureStatus.BIDDING, LocalDate.now());
-        todayEndPictursList.forEach(this::sendFinishBidMail);
+        List<Picture> todayEndPictursList = pictureService.findPictureStatusByStatusAndBidEndDate(BIDDING, LocalDate.now());
+        todayEndPictursList.forEach(
+                picture -> {
+                    if (picture.getBidHistory().isEmpty()) {
+                        picture.setPictureStatus(REJECT);
+                        sendMailService.pictureRejectMailWithFinishDate(picture);
+                    } else {
+                        picture.setPictureStatus(SUCCESS_BID);
+                        sendMailService.pictureSuccessBidMail(picture);
+                    }
+                }
+        );
         pictureService.saveAllPictureList(todayEndPictursList);
         log.info("Today End Auctions Schedule End Time  >>> {}", LocalDateTime.now());
-    }
-    private void sendFinishBidMail(Picture picture) {
-        // TODO :  메일 내용에 들어갈 Content, 사용자 ToUser 추가 필요
-        if(picture.getBidHistory().isEmpty()) {
-            sendMailUtil.sendMail("", MailTitleConstant.REJECT.getMailTitle(), PICTURE_REJECT_MAIL, new HashMap<>());
-            picture.setPictureStatus(PictureStatus.REJECT);
-            return;
-        }
-        sendMailUtil.sendMail("", MailTitleConstant.SUCCESS_BID.getMailTitle(), PICTURE_SUCCESSBID_MAIL, new HashMap<>());
-        picture.setPictureStatus(SUCCESS_BID);
     }
 
 }

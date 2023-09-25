@@ -5,20 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.auction.service.PictureService;
-import picasso.server.common.mail.SendMailUtil;
+import picasso.server.api.mail.service.SendMailService;
 import picasso.server.common.util.DateStaticConstants;
-import picasso.server.domain.domains.items.Picture;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
-import static picasso.server.api.mail.MailPathConstants.PICTURE_BIDDING_MAIL;
-import static picasso.server.api.mail.MailPathConstants.PICTURE_REJECT_MAIL;
-import static picasso.server.api.mail.MailTitleConstant.REJECT;
-import static picasso.server.api.mail.MailTitleConstant.SUCCESS_BID;
 import static picasso.server.domain.domains.items.PictureStatus.AFTER_APPROVE;
 import static picasso.server.domain.domains.items.PictureStatus.BIDDING;
 
@@ -32,44 +26,26 @@ import static picasso.server.domain.domains.items.PictureStatus.BIDDING;
 @RequiredArgsConstructor
 public class StartAuctionScheduler {
     private final PictureService pictureService;
-    private final SendMailUtil sendMailUtil;
+    private final SendMailService sendMailService;
 
+    @Transactional
     @Scheduled(cron = "0 0 9 * * *", zone = DateStaticConstants.ZONE_SEOUL)
     public void startApprovePictureToBiddingAuction() {
         log.info("Start Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
         pictureService
                 .changePictureStatusByPictureStatusAndBidEndDate(AFTER_APPROVE, BIDDING, LocalDate.now())
-                .forEach(this::sendBiddingMail);
-
+                .forEach(sendMailService::startBiddingMail);
         log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }
 
 
+    @Transactional
     @Scheduled(cron = "0 0 9 * * *", zone = DateStaticConstants.ZONE_SEOUL)
     public void startNotApprovePictureToRejectAuction() {
         log.info("Start Reject Picture Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
         pictureService
                 .changePictureStatusByPictureStatusAndBidEndDate(AFTER_APPROVE, BIDDING, LocalDate.now())
-                .forEach(this::sendRejectMail);
+                .forEach(sendMailService::pictureRejectMailWithNotApproveAdmin);
         log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }
-
-    private void sendBiddingMail(Picture picture) {
-        // TODO :  메일 내용에 들어갈 Content, 사용자 ToUser 추가 필요
-
-        Map<String, Object> content = new HashMap<>();
-        sendMailUtil.sendMail(
-                "", SUCCESS_BID.getMailTitle(), PICTURE_BIDDING_MAIL, content
-        );
-    }
-
-    private void sendRejectMail(Picture picture) {
-        // TODO :  메일 내용에 들어갈 Content, 사용자 ToUser 추가 필요]
-
-        Map<String, Object> content = new HashMap<>();
-        sendMailUtil.sendMail(
-                "", REJECT.getMailTitle(), PICTURE_REJECT_MAIL, content
-        );
-    }
-
 }
