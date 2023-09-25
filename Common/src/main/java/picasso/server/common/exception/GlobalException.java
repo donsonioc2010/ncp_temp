@@ -25,7 +25,8 @@ public enum GlobalException implements BaseErrorCode {
     PAYMENT_FAILED_ERROR(INTERNAL_SERVER_ERROR.value(), "결제 실패 오류입니다."),
     NOT_ADMIN(UNAUTHORIZED.value(), "관리자만 사용가능한 페이지입니다."),
     NOT_FOUND_ERROR(NOT_FOUND.value(), "검색 결과가 존재하지 않습니다"),
-    PICTURE_STATUS_AFTER_APPROVE(INTERNAL_SERVER_ERROR.value(), "이미 관리자가 승인한 게시물 입니다.")
+    PICTURE_STATUS_AFTER_APPROVE(INTERNAL_SERVER_ERROR.value(), "이미 관리자가 승인한 게시물 입니다."),
+    LOGIN_ERROR(NOT_FOUND.value(), "자동로그인 실패")
     ;
 
     private final Integer statusCode;
