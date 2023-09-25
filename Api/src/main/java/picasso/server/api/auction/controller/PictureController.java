@@ -44,7 +44,7 @@ public class PictureController {
      */
     @GetMapping("/new")
     public String createForm(HttpSession session, Model model) {
-        if(session.getAttribute("loginUser") == null){
+        if (session.getAttribute("loginUser") == null) {
             throw NotFoundException.EXCEPTION;
         }
         model.addAttribute("PictureDTO", new PictureDTO());
@@ -53,6 +53,7 @@ public class PictureController {
 
     /**
      * 경매품 등록
+     *
      * @param requestDto
      * @param model
      * @param session
@@ -60,7 +61,6 @@ public class PictureController {
      */
     @PostMapping
     public String add(PictureDTO requestDto, Model model, HttpSession session) {
-
         User sessionUser = (User) session.getAttribute("loginUser");
         if (sessionUser == null) {
             return "redirect:/auth/login"; //로그인 페이지로
@@ -98,10 +98,11 @@ public class PictureController {
 
     /**
      * 게시물 리스트 조회
+     *
      * @param model
-     * @param page 조회할 페이지 Number
+     * @param page     조회할 페이지 Number
      * @param pageSize 한번에 조회할 Size
-     * @param status 조회를 희망하는 경매품의 Status
+     * @param status   조회를 희망하는 경매품의 Status
      * @return
      */
     @GetMapping("/list")
@@ -123,13 +124,14 @@ public class PictureController {
 
     /**
      * 게시물의 상세페이지 조회
+     *
      * @param id
      * @param model
      * @return
      */
     @GetMapping("/{id}")
     public String viewPictureDetail(@PathVariable Long id, Model model) {
-        model.addAttribute("picture", pictureService.getPictureById(id).orElseThrow(()->NotFoundException.EXCEPTION));
+        model.addAttribute("picture", pictureService.getPictureById(id).orElseThrow(() -> NotFoundException.EXCEPTION));
         return "pictures/pictureDetail";
     }
 }
