@@ -1,0 +1,33 @@
+        #login-box {
+            margin: 80px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 70px;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            margin-left: 37%;
+            border: 10px solid #18ACDB;
+            width: 380px;
+        }
+
+        #login-title {
+            text-align: center;
+            font-family: Sigmar One;
+            font-style: normal;
+            color: #18ACDB;
+        }
+
+        #email, #password {
+            text-align: center;
+        }
+
+        #rememberMe-container {
+            text-align: center;
+        }
+
+        .btn-primary.before-login-btn {
+            text-align: center;
+            margin-left: 28%;
+        }

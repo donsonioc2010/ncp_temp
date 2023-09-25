@@ -8,29 +8,28 @@
 
 <main layout:fragment="content">
   <div style="margin:80px; background-color:white; display: flex; flex-direction: column; border-radius : 70px; justify-content: center; align-items: center; height:50vh; margin-left: 37%; border: 10px solid #18ACDB; width: 380px;">
-  <form th:action="@{/auth/signup}" method="post" onsubmit="return validatePassword();">
-    <h2 style="text-align:center; font-family : Sigmar One; font-style: normal; color: #18ACDB;">JOIN</h2><br>
-  <table>
-    <tr>
-      <td><input type="text" name="nickName" placeholder="Nickname" style="background-color:#E8F0FE; text-align: center;"></td>
-    </tr>
-    <tr>
-      <td><input type="email" name="email" placeholder="Email" style="background-color:#E8F0FE; text-align: center;"></td>
-    </tr>
-    <tr>
-      <td><input type="password" name="password" id="password" placeholder="Password" style="background-color:#E8F0FE; text-align: center;"></td>
-    </tr>
-    <tr>
-      <td><input type="password" name="repeat-password" id="repeatPassword" placeholder="Password Confirm" style="background-color:#E8F0FE; text-align: center;"></td>
-    </tr>
-  </table><br>
+    <form th:action="@{/auth/signup}" method="post" onsubmit="return validatePassword();">
+      <h2 style="text-align:center; font-family : Sigmar One; font-style: normal; color: #18ACDB;">JOIN</h2><br>
+      <table>
+        <tr>
+          <td><input type="text" name="nickName" placeholder="Nickname" style="background-color:#E8F0FE; text-align: center;"></td>
+        </tr>
+        <tr>
+          <td><input type="email" name="email" placeholder="Email" style="background-color:#E8F0FE; text-align: center;"></td>
+        </tr>
+        <tr>
+          <td><input type="password" name="password" id="password" placeholder="Password" style="background-color:#E8F0FE; text-align: center;"></td>
+        </tr>
+        <tr>
+          <td><input type="password" name="repeat-password" id="repeatPassword" placeholder="Password Confirm" style="background-color:#E8F0FE; text-align: center;"></td>
+        </tr>
+      </table><br>
 
-  <button type="submit" style="text-align: center; margin-left: 20%;" class="btn btn-primary before-login-btn">register</button>
+      <button type="submit" style="text-align: center; margin-left: 20%;" class="btn btn-primary before-login-btn">register</button>
 
-</form>
+    </form>
   </div>
 </main>
-
 
 <th:block layout:fragment="script">
   <script type="application/javascript" th:inline="javascript">
@@ -48,6 +47,5 @@
   </script>
 </th:block>
 </html>
-
 
 
