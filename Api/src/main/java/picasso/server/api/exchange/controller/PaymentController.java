@@ -29,6 +29,16 @@ public class PaymentController {
     return "payment/payment";
   }
   
+  @GetMapping("/success")
+  public String paymentSuccess() {
+    return "exchange/success";
+  }
+  
+  @GetMapping("/failed")
+  public String paymentFailed() {
+    return "exchange/failed";
+  }
+  
   @ResponseBody
   @PostMapping("/payment")
   public void createPayment(@RequestBody PostCreatePaymentRequest body) {
