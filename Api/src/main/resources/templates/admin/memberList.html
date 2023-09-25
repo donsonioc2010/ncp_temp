@@ -1,49 +1,56 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">>
-<head>
-    <title>Picasso - 관리자 목록</title>
-    <link rel="stylesheet" href="../static/css/adminlist.css">
-</head>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<main layout:fragment="content">
+    <div class="container">
+        <link rel="stylesheet" type="text/css" href="/static/css/adminlist.css">
+        <div class="row">
+            <div class="col">
+                <div class="admin-title-row">
+                    <h1>관리자 계정 대쉬보드</h1>
+                    <input type="button" value="계정 생성" class="btn btn-primary" style="height: 50%;"
+                           onClick="moveForm();"
+                           th:if="${session.loginUser.userRole.name().equals('ADMIN')}"/>
+                </div>
+            </div>
+        </div>
 
-<body>
-<div layout:fragment="content">
-<h1>관리자 목록</h1>
-
-    <div>
-        <ul th:each="user : ${users}">
-            <li>
-                <strong>ID: </strong> <span th:text="${user.id}"></span>
-            </li>
-
-            <li>
-                <strong>이메일: </strong> <span th:text="${user.email}"></span>
-            </li>
-
-            <li>
-                <strong>최근 로그인 시간: </strong> <span th:text="${user.loginAt}"></span>
-            </li>
-
-            <li>
-                <strong>최근 수정 시간: </strong> <span th:text="${user.updatedAt}"></span>
-            </li>
-
-            <li>
-                <strong>별명: </strong> <span th:text="${user.nickName}"></span>
-            </li>
-
-            <li>
-                <strong>프로필 링크: </strong> <span th:text="${user.profile}"></span>
-            </li>
-
-
-
-        </ul>
+        <table  class="table">
+            <thead>
+            <tr>
+                <th>ID 번호</th>
+                <th>이메일</th>
+                <th>최근 로그인 시간</th>
+                <th>최근 수정 시간</th>
+                <th>별명</th>
+                <th>프로필 링크</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.loginAt}"></td>
+                <td th:text="${user.updatedAt}"></td>
+                <td th:text="${user.nickName}"></td>
+                <td th:text="${user.profile}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-
-</div>
-</body>
+</main>
+<th:block layout:fragment="script">
+    <script type="application/javascript" th:inline="javascript">
+        function moveForm() {
+            location.href = window.location.origin + "/admin/form"
+        }
+    </script>
+    <script type="text/javascript">
+    </script>
+</th:block>
 </html>

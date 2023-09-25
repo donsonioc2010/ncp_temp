@@ -21,11 +21,12 @@ insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
 values (5, 50, 5000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/bf50117d-e28a-4393-8bc4-2fefa7220718.jpeg', '한소희', '한소희','BEFORE_APPROVE' ,'800x600');
 
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('admin@test.com', '1111', '꽌리자', 300, 'DEFAULT', 'SUSPENSION', 'ADMIN', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
 
-
-insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test1@test.com', '1111', '안뇽', 'profile1', 100, 'KAKAO', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
-insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test2@test.com', '2222', '화요일', 'profile1', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
-insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test3@test.com', '3333', '3번', 'profile3', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test1@test.com', '1111', '안뇽', 100, 'KAKAO', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test2@test.com', '2222', '화요일', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test3@test.com', '3333', '3번', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
