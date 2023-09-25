@@ -2,8 +2,8 @@ package picasso.server.api.exchange.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-import picasso.server.domain.domains.items.PaymentHistory;
-import picasso.server.domain.domains.repository.PaymentHistoryRepository;
+import picasso.server.domain.domains.payments.entity.PaymentHistory;
+import picasso.server.domain.domains.payments.repository.PaymentHistoryRepository;
 
 @RequiredArgsConstructor
 public class ExchangeUtils {
@@ -14,6 +14,4 @@ public class ExchangeUtils {
   public void save(PaymentHistory paymentHistory) {
     paymentHistoryRepository.save(paymentHistory);
   }
-  
-  
 }

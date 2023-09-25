@@ -11,7 +11,6 @@ import picasso.server.common.dto.ErrorDetail;
 import picasso.server.common.exception.BaseException;
 import picasso.server.common.exception.GlobalException;
 
-//TODO : 현재 `GlobalControllerExceptionHandler`와 동일한 코드, 추후 수정 필요
 @Slf4j
 @RequiredArgsConstructor
 @RestControllerAdvice

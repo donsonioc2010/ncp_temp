@@ -1,4 +1,4 @@
-package picasso.server.domain.domains.items;
+package picasso.server.domain.domains.picture.items;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

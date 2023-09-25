@@ -15,17 +15,7 @@ swiper-slide {
 
 swiper-slide.no-pictures{
     width:936px;
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-swiper-slide.no-pictures{
-    width:936px;
-    height:600px;
+    height:400px;
     text-align: center;
     font-size: 18px;
     background: #fff;
