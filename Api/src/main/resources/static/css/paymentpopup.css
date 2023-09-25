@@ -1,6 +1,6 @@
 #popup-menu {
     display: flex;
-    height: 500px;
+    height: 700px;
     flex-direction: column;
     justify-content: space-evenly;
     background: #000000;
