@@ -1,6 +1,5 @@
 package picasso.server.api.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,27 +41,29 @@ public class AuthController {
         //쿠키를 확인하여 자동 로그인 처리
         Cookie[] cookies = request.getCookies();
 
-        String userId =  null;
+        String userId = null;
         String email = null;
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("userId") || cookie.getName().equals("email")) {
+                if (cookie.getName().equals("userId")) {
                     userId = cookie.getValue();
+                } else if (cookie.getName().equals("email")) {
                     email = cookie.getValue();
                 }
             }
-            if(userId != null && email != null) {
-                throw new RuntimeException("이메일 입력하세요");
-                }
+        }
+            if (userId != null && email != null) {
                 return "redirect:/";
-
+            } else {
+                return "auth/login";
+                // 자동 로그인이 실패한 경우 로그인 폼 페이지를 보여줍니다.
             }
-        // 자동 로그인이 실패한 경우 로그인 폼 페이지를 보여줍니다.
-        return "auth/login";
-    }
 
-    /**
+        }
+
+
+    /*
      * 로그인 기능 구현
      *
      * @param requestDto
