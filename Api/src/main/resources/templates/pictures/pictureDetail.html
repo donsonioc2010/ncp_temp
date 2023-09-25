@@ -8,14 +8,13 @@
 >
 <main layout:fragment="content">
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kranky&display=swap">
-    <link rel="stylesheet" href="https://fonts.google.com/noto/specimen/Noto+Sans+KR">
-
+<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kranky&display=swap">-->
+<!--    <link rel="stylesheet" href="https://fonts.google.com/noto/specimen/Noto+Sans+KR">-->
 
     <div class="container body">
         <div th:if="${picture}" class="picture-details">
-            <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${picture.imgUrl} + '?type=f&w=600&h=800&ttype=jpg
-' " alt="Picture" class="picture-img">
+<!--            <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${picture.imgUrl} + '?type=f&w=600&h=800&ttype=jpg-->
+<!--' " alt="Picture" class="picture-img">-->
 <!--          <img class = "frame" src="/static/asset/기린.png">-->
 <!--          <img class = "kuro" src="/static/asset/쿠로미.png">-->
 <!--          <img class = "sina" src="/static/asset/시나모.png">-->
@@ -36,7 +35,27 @@
                     <p class="text" style="font-size: 27px" th:text="${picture.getStartingPrice()}"></p>
                     <p th:text="'Minimum Amount'"></p>
                     <p class="text" style="font-size: 27px" th:text="${picture.getIncrementAmount()}"></p>
-                    <button class="btn">Bid</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        입찰하기
+                    </button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 id="price_amount"></h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input id="inputPrice" onchange="inputPrice(this)" placeholder="입찰 금액 입력"/>
+                                    <button id="bidButton" onclick="bidResult(this)" type="button">입찰하기</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div th:unless="${picture}">
@@ -47,5 +66,11 @@
   <br><br><br>
 </main>
 <th:block layout:fragment="script">
+    <script type="application/javascript" th:inline="javascript">
+    </script>
+    <script type="text/javascript">
+    </script>
+    <script src="/static/js/detailModal.js"></script>
+    <script src="/static/js/bidModal.js"></script>
 </th:block>
 </html>
