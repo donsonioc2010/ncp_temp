@@ -39,6 +39,8 @@
 });
 }
 
+// TODO: 그림의 사이즈는 912 * 600으로 리사이징한다
+
     // 리사이즈된 이미지를 표시하는 함수
     async function displayResizedImage() {
     const originalImageUrl = '../static/asset/한소희.jpeg';
