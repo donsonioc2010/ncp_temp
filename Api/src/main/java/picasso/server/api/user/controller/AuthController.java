@@ -39,14 +39,19 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLoginForm(HttpSession session, HttpServletRequest request) {
-        // 브라우저의 쿠키를 확인하여 자동 로그인 처리
+        //쿠키를 확인하여 자동 로그인 처리
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("userId")) {
-                    String userId = cookie.getValue();
-                    Optional<User> findResult = userService.findUserById(Long.parseLong(userId));
+                if (cookie.getName().equals("userDetails")) {
+                    String userDetails = cookie.getValue();
+                    String[] details = userDetails.split("-"); // 쿠키 값을 분리
+                    Long userId = Long.parseLong(details[0]);
+                    String email = details[1];
+
+                    Optional<User> findResult = userService.findUserByIdAndEmail(userId, email);
                     findResult.ifPresent(user -> setSessionLoginUser(session, user));
+
                     // 자동 로그인 후 메인 페이지로 리다이렉트 또는 다른 처리
                     return "redirect:/";
                 }
@@ -75,6 +80,7 @@ public class AuthController {
 //        return "redirect:/";
 //    }
 
+
     @PostMapping("/login")
     public String handleLogin(LoginRequestDto requestDto, HttpSession session, HttpServletResponse response) {
         session.removeAttribute("loginUser");
@@ -84,7 +90,7 @@ public class AuthController {
             // 자동 로그인 쿠키 생성
             if (requestDto.isRememberMe()) {
                 Cookie cookie = new Cookie("userId", user.getId().toString());
-                cookie.setMaxAge(10); // 10초 유지
+                cookie.setMaxAge(1000); // 1000초 유지 -> 유지후 사라지는거 아닌가? 그러면 삭제할 필요가 없는건가?
                 response.addCookie(cookie);
             }
         });
@@ -92,6 +98,7 @@ public class AuthController {
             return "redirect:/auth/login";
         return "redirect:/";
     }
+
 
     @GetMapping("/logout")
     public String showLogoutForm(HttpSession session) {
@@ -104,7 +111,7 @@ public class AuthController {
         // 세션 삭제
         session.removeAttribute("loginUser");
 
-        // 쿠키 삭제
+       /* // 쿠키 삭제
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -116,7 +123,7 @@ public class AuthController {
                     break;
                 }
             }
-        }
+        }*/
 
         // 로그아웃 후 로그인 페이지로 리다이렉트
         return "redirect:/";
@@ -139,11 +146,6 @@ public class AuthController {
      * @param requestDto
      * @return
      */
-//    @PostMapping("/signup")
-//    public String signUp(SignUpRequestDto requestDto, HttpSession session) {
-//        setSessionLoginUser(session, userService.signUp(requestDto));
-//        return "redirect:/";
-//    }
 
     @PostMapping("/signup")
     public String signUp(SignUpRequestDto requestDto, HttpSession session) {
