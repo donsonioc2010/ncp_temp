@@ -53,15 +53,11 @@ public class AuthController {
                 }
             }
             if(userId != null && email != null) {
-                    Optional<User> findResult = userService.findUserByIdAndEmail(Long.valueOf(userId), email);
-                    findResult.ifPresent(user -> setSessionLoginUser(session, user));
-
-                    // 자동 로그인 후 메인 페이지로 리다이렉트 또는 다른 처리
-                    return "redirect:/";
+                throw new RuntimeException("이메일 입력하세요");
                 }
+                return "redirect:/";
+
             }
-
-
         // 자동 로그인이 실패한 경우 로그인 폼 페이지를 보여줍니다.
         return "auth/login";
     }
@@ -74,16 +70,6 @@ public class AuthController {
      * @return
      * @throws JsonProcessingException
      */
-//    @PostMapping("/login")
-//    public String handleLogin(LoginRequestDto requestDto, HttpSession session) throws JsonProcessingException {
-//        session.removeAttribute("loginUser");
-//        Optional<User> findResult = userService.login(requestDto);
-//        findResult.ifPresent(user -> setSessionLoginUser(session, user));
-//        if (findResult.isEmpty())
-//            return "redirect:/auth/login";
-//        return "redirect:/";
-//    }
-
 
     @PostMapping("/login")
     public String handleLogin(LoginRequestDto requestDto, HttpSession session, HttpServletResponse response) {
@@ -94,7 +80,7 @@ public class AuthController {
             // 자동 로그인 쿠키 생성
             if (requestDto.isRememberMe()) {
                 Cookie cookie = new Cookie("userId", user.getId().toString());
-                cookie.setMaxAge(60 * 60 * 24 * 365); // 1000초 유지 -> 유지후 사라지는거 아닌가? 그러면 삭제할 필요가 없는건가?
+                cookie.setMaxAge(60 * 60 * 24 * 365);
                 response.addCookie(cookie);
             }
         });
@@ -114,21 +100,6 @@ public class AuthController {
     public String handleLogout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         // 세션 삭제
         session.removeAttribute("loginUser");
-
-       /* // 쿠키 삭제
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("userId")) {
-                    cookie.setValue("");
-                    cookie.setPath("/");
-                    cookie.setMaxAge(0); // 쿠키 삭제
-                    response.addCookie(cookie);
-                    break;
-                }
-            }
-        }*/
-
         // 로그아웃 후 로그인 페이지로 리다이렉트
         return "redirect:/";
     }
