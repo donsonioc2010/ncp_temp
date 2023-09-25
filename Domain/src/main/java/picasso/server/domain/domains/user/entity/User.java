@@ -81,26 +81,24 @@ public class User {
   private UserRole userRole = USER;
 
   @NotNull
-  @Builder.Default
   @Column
   @Builder.Default
   private LocalDateTime createdAt = LocalDateTime.now();
 
   @NotNull
-  @Builder.Default
   @Column
   @Builder.Default
   private LocalDateTime updatedAt = LocalDateTime.now();
 
-  @Builder.Default
   @NotNull
   @Builder.Default
   private LocalDateTime loginAt = LocalDateTime.now();
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Picture> pictures = new ArrayList<>();
   
   public void updatePoint(Long point) {
     this.point += point;
   }
 
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-  private List<Picture> pictures = new ArrayList<>();
 }
