@@ -26,10 +26,9 @@ values (6, 60, 6000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/a459f188-
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
  values ('admin@test.com', '1111', '꽌리자', 300, 'DEFAULT', 'SUSPENSION', 'ADMIN', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
 
-
-insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test1@test.com', '1111', '안뇽', 'profile1', 100, 'KAKAO', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
-insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test2@test.com', '2222', '화요일', 'profile1', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
-insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test3@test.com', '3333', '3번', 'profile3', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test1@test.com', '1111', '안뇽', 100, 'KAKAO', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test2@test.com', '2222', '화요일', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test3@test.com', '3333', '3번', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');

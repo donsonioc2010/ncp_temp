@@ -44,7 +44,7 @@
             </swiper-container>
         </div>
 
-        <div class="auction-container" style="margin-bottom: 100px;">
+        <div class="auction-container">
             <div class="title-sector">
                 <div style="display: flex; align-items: center;">
                     <h1 class="title" style="margin-right: 10px;">경매 진행중</h1>
@@ -52,6 +52,14 @@
                 </div>
                 <button type="button" class="btn btn-info more" onclick="movePictureListPage('BIDDING')">more</button>
             </div>
+            <swiper-container
+                    class="swiper"
+                    navigation="true"
+                    speed=500
+                    delay="500"
+                    autoplay="true"
+                    loop="true"
+            >
             <th:block th:if="${bidding.size() == 0}" >
                 <swiper-slide class="no-pictures">현재 등록된 상품이 존재하지 않습니다.</swiper-slide>
             </th:block>
