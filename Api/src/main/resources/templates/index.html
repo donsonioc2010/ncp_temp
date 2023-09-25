@@ -52,6 +52,14 @@
                 </div>
                 <button type="button" class="btn btn-info more" onclick="movePictureListPage('BIDDING')">more</button>
             </div>
+            <swiper-container
+                    class="swiper"
+                    navigation="true"
+                    speed=500
+                    delay="500"
+                    autoplay="true"
+                    loop="true"
+            >
             <th:block th:if="${bidding.size() == 0}" >
                 <swiper-slide class="no-pictures">현재 등록된 상품이 존재하지 않습니다.</swiper-slide>
             </th:block>
