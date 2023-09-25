@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.user.type.LoginType;
 import picasso.server.domain.domains.user.type.UserRole;
 import picasso.server.domain.domains.user.type.UserStatus;
