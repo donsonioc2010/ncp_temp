@@ -1,43 +1,50 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="~{fragment/config :: configFragment}"></head>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">>
+<head>
+    <title>Picasso - 승인 요청 리스트</title>
+    <link rel="stylesheet" href="../static/css/adminlist.css">
+</head>
+
 <body>
-<header th:replace="~{fragment/header :: headerFragment}"></header>
 <div layout:fragment="content">
-        <title>Picasso - 승인 요구 리스트</title>
-        <link rel="stylesheet" href="../static/css/adminlist.css">
-    </div>
-    <h1>관리자 대쉬보드</h1>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>그림명</th>
-            <th>시작가</th>
-            <th>생성일</th>
-            <th>승인 상태</th>
-            <th>승인 버튼</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
-            <td>
-                <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
-            </td>
-            <td>
-                <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
-            </td>
-            <td th:text="${picture.startingPrice}"></td>
-            <td th:text="${picture.bidStartDate}"></td>
-            <td th:text="${picture.pictureStatus}"></td>
-            <td>
+    <h1>승인 요청 리스트</h1>
+
+
+    <div>
+        <ul th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
+            <li>
+                <strong>ID:</strong>  <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
+            </li>
+
+            <li>
+                <strong>그림 이름:</strong> <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
+            </li>
+
+            <li>
+                <strong>시작 가격:</strong> <span th:text="${picture.startingPrice}"></span>
+            </li>
+
+            <li>
+                <strong>생성일:</strong> <span th:text="${picture.bidStartDate}"></span>
+            </li>
+
+            <li>
+                <strong>승인 상태:</strong> <span th:text="${picture.pictureStatus}"></span>
+            </li>
+
+            <li>
+                <strong>승인 버튼:</strong>
                 <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
-                    <button type="submit">Approve</button>
+                    <button type="submit">승인</button>
                 </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </li>
+        </ul>
+    </div>
+
 </div>
 </body>
 </html>
