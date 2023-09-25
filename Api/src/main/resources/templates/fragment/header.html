@@ -55,7 +55,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user/mypage">마이 페이지</a></li>
-                                    <li><a class="dropdown-item" href="#">결제하기</a></li>
+                                    <li><a class="dropdown-item" onclick="requestPayment(event)">결제하기</a></li>
                                     <th:block  th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="/admin/list">경매품 인가 대시보드</a></li>
@@ -64,6 +64,12 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">로그아웃</a></li>
                                 </ul>
+                                <script>
+                                    function requestPayment(e) {
+                                        e.preventDefault();
+                                        window.open(window.location.origin + '/exchange/payment', 'paymentPage', "scrollbars=no, menubar=no, width=500px, height=500px");
+                                    }
+                                </script>
                             </li>
                         </ul>
                     </div>

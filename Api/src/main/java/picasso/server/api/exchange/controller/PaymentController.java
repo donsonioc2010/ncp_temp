@@ -26,7 +26,7 @@ public class PaymentController {
   
   @GetMapping("/payment")
   public String paymentForm() {
-    return "modal";
+    return "payment/payment";
   }
   
   @ResponseBody

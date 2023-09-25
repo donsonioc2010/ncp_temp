@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="../../static/css/paymentpopup.css"/>
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<div id="popup-menu">
+    <div id="popup-header">
+        <h1 id="popup-title">피카소 포인트 환전하기</h1>
+    </div>
+    <div id="popup-body">
+        <div id="payment-body">
+            <h3 id="price_amount">결제 금액 입력</h3>
+            <input id="inputPrice" onchange="inputPrice(this)" placeholder="inputPrice"/>
+        </div>
+        <h3 id="payment-method">결제 수단 선택</h3>
+        <div id="payment-button">
+            <button id="kakaopay" onclick="paymentResult(this)" th:value="${T(picasso.server.domain.domains.items.PGName).KAKAO.getValue()}" type="button"><img id="kakaopayimg" src="../static/asset/payment_icon_yellow_large.png" /></button>
+            <button id="tosspay" onclick="paymentResult(this)" th:value="${T(picasso.server.domain.domains.items.PGName).TOSS.getValue()}" type="button"><img id="tosspayimg" src="../static/asset/logo-toss-symbol-alpha.png" /></button>
+        </div>
+    </div>
+    <div id="popup-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+</div>
+</body>
+<script src="/static/js/pay_modal.js"></script>
+<script src="/static/js/exchange.js"></script>
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+</html>
