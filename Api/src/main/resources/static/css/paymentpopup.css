@@ -3,6 +3,7 @@
     height: 500px;
     flex-direction: column;
     justify-content: space-evenly;
+    background: #000000;
 }
 
 #popup-header {

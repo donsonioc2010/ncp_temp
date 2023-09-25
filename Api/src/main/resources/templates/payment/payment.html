@@ -14,21 +14,21 @@
 <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <div id="popup-menu">
     <div id="popup-header">
-        <h1 id="popup-title">피카소 포인트 환전하기</h1>
+        <h1 id="popup-title" style="color: #FFFFFF">피카소 포인트 환전하기</h1>
     </div>
     <div id="popup-body">
         <div id="payment-body">
-            <h3 id="price_amount">결제 금액 입력</h3>
+            <h3 id="price_amount" style="color: #FFFFFF">결제 금액 입력</h3>
             <input id="inputPrice" onchange="inputPrice(this)" placeholder="inputPrice"/>
         </div>
-        <h3 id="payment-method">결제 수단 선택</h3>
+        <h3 id="payment-method" style="color: #FFFFFF">결제 수단 선택</h3>
         <div id="payment-button">
             <button id="kakaopay" onclick="paymentResult(this)" th:value="${T(picasso.server.domain.domains.items.PGName).KAKAO.getValue()}" type="button"><img id="kakaopayimg" src="../static/asset/payment_icon_yellow_large.png" /></button>
             <button id="tosspay" onclick="paymentResult(this)" th:value="${T(picasso.server.domain.domains.items.PGName).TOSS.getValue()}" type="button"><img id="tosspayimg" src="../static/asset/logo-toss-symbol-alpha.png" /></button>
         </div>
     </div>
     <div id="popup-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="popup-closer" type="button" class="btn btn-secondary" onclick="self.close()">Close</button>
     </div>
 </div>
 </body>
