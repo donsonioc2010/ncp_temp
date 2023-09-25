@@ -9,6 +9,10 @@ values ('dddd', 'a','b','c','d');
 insert into t_test(name, param1,param2,param3,param4)
 values ('ffff', 'a','b','c','d');
 
+<<<<<<< HEAD
+=======
+-- 테스트용 데이터
+>>>>>>> auction-registration
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
  values (1, 10, 1000, '2023-09-22', '2023-09-29', 'test1', 'local/paint/d5fdd501-8251-4082-9cc6-f1a65e5ad0a9.jpg', '안유진', '안유진', 'BIDDING' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
@@ -25,9 +29,19 @@ values (6, 60, 6000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/a459f188-
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
  values ('admin@test.com', '1111', '꽌리자', 300, 'DEFAULT', 'SUSPENSION', 'ADMIN', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
 
+<<<<<<< HEAD
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
  values ('test1@test.com', '1111', '안뇽', 100, 'KAKAO', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
  values ('test2@test.com', '2222', '화요일', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
  values ('test3@test.com', '3333', '3번', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
+=======
+
+insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test1@test.com', '1111', '안뇽', 'profile1', 100, 'KAKAO', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test2@test.com', '2222', '화요일', 'profile1', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+insert into tbl_user  (email, password, nick_name, profile, point, login_type, user_status, user_role, created_at, updated_at, login_at)
+ values ('test3@test.com', '3333', '3번', 'profile3', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
+>>>>>>> auction-registration

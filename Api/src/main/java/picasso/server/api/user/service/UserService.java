@@ -66,10 +66,13 @@ public class UserService {
         return userRepository.findByNickName(nickname);
     }
 
+<<<<<<< HEAD
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
 
+=======
+>>>>>>> auction-registration
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }

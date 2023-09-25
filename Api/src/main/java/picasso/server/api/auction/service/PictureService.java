@@ -155,8 +155,11 @@ public class PictureService {
         return pictureInfo;
     }
 
+<<<<<<< HEAD
     public Optional<Picture> getPictureById(Long id) {
         return pictureRepository.findById(id);
     }
 
+=======
+>>>>>>> auction-registration
 }
