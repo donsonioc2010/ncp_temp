@@ -32,14 +32,14 @@
 
                     <tr>
                         <td style="overflow: hidden;padding: 32px 0 32px 0;font-size: 26px;font-weight: 500;line-height: 1.31;letter-spacing: -0.3px;color: #1b1c1d;word-break: break-all;">
-                            경매 물품 경매 시작 안내 메일
+                            경매 시작 안내 메일.
                         </td>
                     </tr>
 
                     <tr>
                         <td style="font-size: 15px;line-height: 1.47;letter-spacing: -0.3px;color: #1b1c1d;">
-                            등록하신 <b th:text="${pictureName}" style="color: #7b37ea">작품명</b> 물품의 경매가 시작되었습니다.<br/>
-                            해당 경매는 <span th:text="${endBidDate}"></span> 18:00시에 경매가 종료될 예정입니다.
+                            등록하신 <b th:text="${pictureName}" style="color: #7b37ea">작품명</b>의 경매가 시작되었습니다. <br/>
+                            <span th:text="${bidEndDate}" style="color: #7b37ea"></span> 18:00시에 경매가 완료될 예정입니다..
                         </td>
                     </tr>
                     <tr>
@@ -47,8 +47,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: center">
-                            <!-- TODO :  이동할 링크 추후 추가-->
-                            <a href="#" target="_blank"
+                            <a th:href="${link}" target="_blank"
                                style="font-size: 15px;letter-spacing: -0.3px;font-weight: bold;background-color: #7b37ea;color: #fff;display: inline-block;box-sizing: border-box;padding: 15px 20px;width: 180px;height: auto;line-height: normal;text-align: center;text-decoration: none;border-radius: 4px;">
                                 게시물 바로가기
                             </a>
@@ -70,7 +69,8 @@
                                 </tr>
                                 <tr>
                                     <td style="font-size: 13px;line-height: 1.38;letter-spacing: -0.3px;color: #abb0b5;">
-                                        ©<span class="il">Picasso</span> | 서울 강남구 강남대로94길 20, 삼오빌딩 5층
+                                        ©<span class="il">Picasso</span> | 서울 강남구
+                                        강남대로94길 20, 삼오빌딩 5층
                                     </td>
                                 </tr>
                                 <tr>

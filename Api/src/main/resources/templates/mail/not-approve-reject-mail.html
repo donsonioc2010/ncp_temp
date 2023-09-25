@@ -6,11 +6,94 @@
 >
 <body>
 <div>
-    <h1> 테스트 SampleMail 입니다.</h1>
-    <h1 th:text="${a}"></h1>
-    <br>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0"
+           style="padding: 32px 0 32px 0; background-color: #f1f3f5"
+    >
+        <tbody>
+        <tr>
+            <td>
+                <table align="center" width="600" border="0" cellpadding="0" cellspacing="0"
+                       style="margin: auto;padding: 0 20px 0 20px;background-color: #fff;">
+                    <tbody>
+                    <tr>
+                        <td style="padding: 20px 0 21px 0">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td width="100"><h1>Picasso</h1></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 1px solid #f1f3f5"></td>
+                    </tr>
 
-    <div th:text="${b}"></div>
+                    <tr>
+                        <td style="overflow: hidden;padding: 32px 0 32px 0;font-size: 26px;font-weight: 500;line-height: 1.31;letter-spacing: -0.3px;color: #1b1c1d;word-break: break-all;">
+                            경매 물품 유찰 안내.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="font-size: 15px;line-height: 1.47;letter-spacing: -0.3px;color: #1b1c1d;">
+                            등록하신 <b th:text="${pictureName}" style="color: #7b37ea">작품명</b>이 경매가 이뤄지지 않아 안내 메일 드립니다.. <br/>
+                            해당 물품은 관리자의 승인이 이뤄지지 않아 <span style="color: #7b37ea">유찰</span>되었습니다.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 32px 0 0 0"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center">
+                            <!-- TODO :  이동할 링크 추후 추가-->
+                            <a th:href="${link}" target="_blank"
+                               style="font-size: 15px;letter-spacing: -0.3px;font-weight: bold;background-color: #7b37ea;color: #fff;display: inline-block;box-sizing: border-box;padding: 15px 20px;width: 180px;height: auto;line-height: normal;text-align: center;text-decoration: none;border-radius: 4px;">
+                                게시물 바로가기
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 32px 0 0 0"></td>
+                    </tr>
+
+                    <tr>
+                        <td style="border-top: 1px solid #f1f3f5"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 21px 0 20px 0">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td style="padding: 17px 0 0 0"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 13px;line-height: 1.38;letter-spacing: -0.3px;color: #abb0b5;">
+                                        ©<span class="il">Picasso</span> | 서울 강남구
+                                        강남대로94길 20, 삼오빌딩 5층
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 13px;line-height: 1.38;letter-spacing: -0.3px;color: #abb0b5;">
+                                        ©NaverCloud. All rights reserved.
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <img alt=""
+         src="https://ci5.googleusercontent.com/proxy/bCTi4_kP03O-eGhgtAUbcw6Ikwg2sDoCU2z3EovSebBKwi0vV-7D8Fifs5hWIndzHNmaE80nkxWeFR-VQNUiMCCU6PNfW_MdcRUoFR3mO-uJ5Gjcssp5uibjSxcrqVcUUwBl2PsGZaJxE4fUL5JP2CVD5U_K5q-HzjtuLu0v9ilE_ije5cmX2783_3CeVAvphH7oxLdNutSMrbu-=s0-d-e1-ft#https://vkzm6z39.r.us-west-2.awstrack.me/I0/0101018a602c8596-886e1828-824d-4008-9e66-d8d13d0916a4-000000/juwXLA5ozjERo9rqHfwaQwRkzjE=338"
+         style="display: none; width: 1px; height: 1px" class="CToWUd" data-bit="iit"/>
+    <div class="yj6qo"></div>
+    <div class="adL"></div>
 </div>
 </body>
 </html>
