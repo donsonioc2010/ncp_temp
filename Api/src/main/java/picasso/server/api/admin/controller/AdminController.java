@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import picasso.server.api.admin.exception.NotAdminUserException;
 import picasso.server.api.admin.service.AdminService;
-import picasso.server.api.user.vo.request.SignUpAdminRequestDto;
+import picasso.server.domain.domains.admin.vo.request.SignUpAdminRequestDto;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 import picasso.server.domain.domains.user.type.UserRole;
