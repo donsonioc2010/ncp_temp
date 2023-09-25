@@ -20,21 +20,21 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Controller
 public class PaymentController {
-
-    private final PaymentService paymentService;
-    private final UserService userService;
-
-    @GetMapping("/payment")
-    public String paymentForm() {
-        return "modal";
-    }
-
-    @ResponseBody
-    @PostMapping("/payment")
-    public void createPayment(@RequestBody PostCreatePaymentRequest body) {
-        log.error("결제 status : {}", body.toString());
-        paymentService.savePaymentHistory(body);
-        Optional<User> user = userService.findUserById(body.getUserId());
-        user.ifPresent(u -> u.updatePoint(body.getPaidAmount()));
-    }
+  
+  private final PaymentService paymentService;
+  private final UserService userService;
+  
+  @GetMapping("/payment")
+  public String paymentForm() {
+    return "modal";
+  }
+  
+  @ResponseBody
+  @PostMapping("/payment")
+  public void createPayment(@RequestBody PostCreatePaymentRequest body) {
+//    log.error("결제 status : {}", body.toString());
+    paymentService.savePaymentHistory(body);
+    Optional<User> user = userService.findUserById(body.getUserId());
+    user.ifPresent(u -> u.updatePoint(body.getPaidAmount()));
+  }
 }
