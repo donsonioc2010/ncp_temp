@@ -26,7 +26,8 @@ public enum GlobalException implements BaseErrorCode {
     NOT_ADMIN(UNAUTHORIZED.value(), "관리자만 사용가능한 페이지입니다."),
     NOT_FOUND_ERROR(NOT_FOUND.value(), "검색 결과가 존재하지 않습니다"),
     PICTURE_STATUS_AFTER_APPROVE(INTERNAL_SERVER_ERROR.value(), "이미 관리자가 승인한 게시물 입니다."),
-    NOT_LOGIN_EXCEPTION(UNAUTHORIZED.value(),  "로그인이 필요합니다.")
+    NOT_LOGIN_EXCEPTION(UNAUTHORIZED.value(),  "로그인이 필요합니다."),
+    NEED_LOGIN_ERROR(UNAUTHORIZED.value(), "로그인이 필요한 기능입니다."),
     ;
 
     private final Integer statusCode;

@@ -26,13 +26,22 @@ public class PaymentController {
 
     @GetMapping("/payment")
     public String paymentForm() {
-        return "exchange";
+        return "payment/payment";
+    }
+
+    @GetMapping("/success")
+    public String paymentSuccess() {
+        return "exchange/success";
+    }
+
+    @GetMapping("/failed")
+    public String paymentFailed() {
+        return "exchange/failed";
     }
 
     @ResponseBody
     @PostMapping("/payment")
     public void createPayment(@RequestBody PostCreatePaymentRequest body) {
-        log.info("{} {} {} {} {} {}", body.getPayResult(), body.getUserId(), body.getMerchantUid(), body.getProductName(), body.getPgProvider(), body.getPaidAmount());
         paymentService.savePaymentHistory(body);
         Optional<User> user = userService.findUserById(body.getUserId());
         user.ifPresent(u -> u.updatePoint(body.getPaidAmount()));

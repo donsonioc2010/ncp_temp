@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import picasso.server.common.mail.SendMailUtil;
 import picasso.server.common.properties.PicassoProperties;
-import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.picture.items.Picture;
 
 import java.util.HashMap;
 

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import picasso.server.api.user.vo.request.LoginRequestDto;
 import picasso.server.api.user.vo.request.SignUpRequestDto;
-import picasso.server.domain.domains.dto.UserDTO;
+import picasso.server.domain.domains.user.dto.UserDTO;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 
@@ -57,7 +57,23 @@ public class UserService {
         return false; // 일치하는 쿠키 데이터가 없거나, 데이터가 입력과 일치하지 않습니다.
     }
 
+
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
+
+    public Optional<User> findUserByNickname(String nickname) {
+        return userRepository.findByNickName(nickname);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
     }
 }

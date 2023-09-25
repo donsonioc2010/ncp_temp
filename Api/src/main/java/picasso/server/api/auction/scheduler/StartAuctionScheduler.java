@@ -13,8 +13,8 @@ import picasso.server.common.util.DateStaticConstants;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static picasso.server.domain.domains.items.PictureStatus.AFTER_APPROVE;
-import static picasso.server.domain.domains.items.PictureStatus.BIDDING;
+import static picasso.server.domain.domains.picture.items.PictureStatus.AFTER_APPROVE;
+import static picasso.server.domain.domains.picture.items.PictureStatus.BIDDING;
 
 /**
  * 9시에 경매 전 상태인 게시물들을 처리하는 스케쥴러

@@ -9,15 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.auction.service.PictureService;
 import picasso.server.api.mail.service.SendMailService;
 import picasso.server.common.util.DateStaticConstants;
-import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.picture.items.Picture;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static picasso.server.domain.domains.items.PictureStatus.BIDDING;
-import static picasso.server.domain.domains.items.PictureStatus.REJECT;
-import static picasso.server.domain.domains.items.PictureStatus.SUCCESS_BID;
+import static picasso.server.domain.domains.picture.items.PictureStatus.BIDDING;
+import static picasso.server.domain.domains.picture.items.PictureStatus.REJECT;
+import static picasso.server.domain.domains.picture.items.PictureStatus.SUCCESS_BID;
 
 /**
  * 18시에 경매 전 상태인 게시물들을 처리하는 스케쥴러

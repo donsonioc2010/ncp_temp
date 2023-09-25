@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import picasso.server.common.exception.NotFoundRestException;
 import picasso.server.common.exception.NotLoginUserRestException;
-import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.items.PictureBidHistory;
+import picasso.server.domain.domains.picture.items.Picture;
+import picasso.server.domain.domains.picture.items.PictureBidHistory;
+import picasso.server.domain.domains.picture.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
-import picasso.server.domain.domains.repository.PictureBidHistoryRepository;
-import picasso.server.domain.domains.repository.PictureRepository;
+import picasso.server.domain.domains.picture.repository.PictureBidHistoryRepository;
 
 import java.util.Optional;
 
@@ -38,7 +38,7 @@ public class PictureBidHistoryService {
         //아무도 입찰 신청을 하지 않은 경우 또는 요청한 사용자가 입찰 신청한경우 , DB에 저장
         if (optionalTopHistory.isEmpty() || isAbleBiddingPictureByUser(user, findPicture, optionalTopHistory.get(), amount)) {
             PictureBidHistory newBidHistory = PictureBidHistory.builder()
-                    .picture((findPicture))
+                    .picture(findPicture)
                     .user(findUser)
                     .bidAmount(amount)
                     .build();

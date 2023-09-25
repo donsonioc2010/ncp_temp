@@ -2,16 +2,22 @@ package picasso.server.api.auction.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.items.PictureStatus;
-import picasso.server.domain.domains.repository.PictureRepository;
+import picasso.server.domain.domains.picture.items.Picture;
+import picasso.server.domain.domains.picture.items.PictureInfo;
+import picasso.server.domain.domains.picture.items.PictureStatus;
+import picasso.server.domain.domains.picture.repository.PictureRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static picasso.server.domain.domains.items.PictureStatus.BIDDING;
+import static picasso.server.domain.domains.picture.items.PictureStatus.BIDDING;
 
 @Service
 @Transactional
@@ -25,30 +31,38 @@ public class PictureService {
         return pictureRepository.save(picture);
     }
 
-    public List<Picture> findItem() {
-        return pictureRepository.findAll();
+
+    public Page<PictureInfo> preparePictureInfoPage(int page, int pageSize, PictureStatus status) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status, pageable);
+
+        List<PictureInfo> pictureInfoList = picturePage.getContent().stream()
+                .map(this::mapToPictureInfo)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(pictureInfoList, pageable, picturePage.getTotalElements());
     }
 
-    public Optional<Picture> findOne(Long id) {
+    private PictureInfo mapToPictureInfo(Picture picture) {
+        PictureInfo pictureInfo = new PictureInfo();
+        pictureInfo.setId((picture.getPictureId()));
+        pictureInfo.setImageUrl(picture.getImgUrl());
+        pictureInfo.setDetails(picture.getDetails());
+        pictureInfo.setPictureName(picture.getPictureName());
+        pictureInfo.setPainterName(picture.getPainterName());
+        pictureInfo.setStartPrice(picture.getStartingPrice());
+        pictureInfo.setIncrementAmount(picture.getIncrementAmount());
+        pictureInfo.setEndDay(picture.getBidEndDate());
+        return pictureInfo;
+    }
+
+    public Optional<Picture> getPictureById(Long id) {
         return pictureRepository.findById(id);
     }
 
 
     public List<String> extractImageUrlsSortedByDateTime() {
-
-        /*List<Picture> pictures = pictureRepository.findAllByOrderByDateTimeAsc();
-        List<String> imageUrls = new ArrayList<>();
-
-
-        for (Picture picture : pictures) {
-            String imageUrl = picture.getImgUrl();
-            Enum<PictureStatus> status = picture.getPictureStatus();
-            if(status == BIDDING){
-                imageUrls.add(imageUrl);
-            }
-        }
-        return imageUrls;*/
-
         return pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING)
                 .stream()
                 .map(Picture::getImgUrl)

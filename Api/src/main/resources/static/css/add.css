@@ -18,10 +18,56 @@ form {
     border: 1px solid #ccc;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .image-container img {
     width: 100%;
     height: auto;
     display: block;
+}
+.fixed-textarea {
+    width: 200px; /* 원하는 너비로 조정 */
+    height: 150px; /* 원하는 높이로 조정 */
+    resize: none;
+}
+
+.section {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+/*.section {*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    max-width: 80%;*/
+/*    width: 100%;*/
+/*}*/
+
+
+.section button {
+    position: relative;
+    left: 70px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #337ab7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+}
+
+
+.section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 850px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
 }

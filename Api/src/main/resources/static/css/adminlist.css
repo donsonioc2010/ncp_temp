@@ -1,0 +1,70 @@
+/* Body태그 공통 CSS에서 이미 적용함. 사용하면 디자인 꺠짐. ID, Class, Custom Tag 혹은 여러 조건들로 활용하세요. By.Jong1*/
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    min-height: 20px;*/
+/*}*/
+/*
+h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+}
+*/
+/*.image-container img {*/
+/*    display: block; !* 이미지를 블록 요소로 설정하여 가운데 정렬 적용 *!*/
+/*    margin: 0 auto; !* 가운데 정렬을 위한 마진 설정 *!*/
+/*}*/
+
+div.admin-title-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form>div.row {
+    margin-bottom: 5px;
+}
