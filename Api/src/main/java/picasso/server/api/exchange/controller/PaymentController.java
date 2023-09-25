@@ -32,7 +32,6 @@ public class PaymentController {
   @ResponseBody
   @PostMapping("/payment")
   public void createPayment(@RequestBody PostCreatePaymentRequest body) {
-//    log.error("결제 status : {}", body.toString());
     paymentService.savePaymentHistory(body);
     Optional<User> user = userService.findUserById(body.getUserId());
     user.ifPresent(u -> u.updatePoint(body.getPaidAmount()));
