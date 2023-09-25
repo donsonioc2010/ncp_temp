@@ -5,22 +5,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import picasso.server.api.admin.exception.NotAdminUserException;
 import picasso.server.api.admin.service.AdminService;
 import picasso.server.api.user.vo.request.SignUpAdminRequestDto;
-import picasso.server.domain.domains.dto.UserDTO;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 import picasso.server.domain.domains.user.type.UserRole;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static java.time.LocalDateTime.now;
 
 
 @Controller
@@ -36,7 +28,7 @@ public class AdminController {
     public String approvePicture(@PathVariable Long pictureId, HttpSession session) {
         isSessionUserAdmin(session);
         adminService.approvePicture(pictureId);
-        return "redirect:/admin/list";
+        return "redirect:/admin/approvelist";
     }
 
     /**
@@ -47,11 +39,11 @@ public class AdminController {
      * @return
      */
 
-    @GetMapping("/list")
-    public String list(Model model, HttpSession session) {
+    @GetMapping("/approvelist")
+    public String approvelist(Model model, HttpSession session) {
         isSessionUserAdmin(session);
-        model.addAttribute("pictures", adminService.findAll());
-        return "admin/list";
+        model.addAttribute("pictures", adminService.findAllPicture());
+        return "admin/approvelist";
     }
 
     /**
@@ -84,7 +76,7 @@ public class AdminController {
 
     @GetMapping("/form")
     public String AdminForm(HttpSession session) {
-//        isSessionUserAdmin(session);
+        isSessionUserAdmin(session);
         return "admin/form";
     }
 
@@ -97,32 +89,51 @@ public class AdminController {
      */
     @PostMapping("/form")
     public String addAdmin(SignUpAdminRequestDto dto, HttpSession session) {
-//        isSessionUserAdmin(session);
+        isSessionUserAdmin(session);
         User user = User.builder()
                 .email(dto.getEmail())
                 .password(dto.getPassword())
                 .nickName(dto.getNickName())
                 .userRole(UserRole.ADMIN)
-                .profile("https://www.example.com/default-profile-image.jpg")
                 .build();
 
         userRepository.save(user);
 
         return "auth/login";
     }
+
     /**
      * 관리자 계정 조회
      *
      * @param model
      * @param session
+     * @param userRole
      * @return
      */
 
+
     @GetMapping("/user/list")
-    public String AdminList(HttpSession session, Model model) {
+    public String adminUserList(@RequestParam(name = "userRole", defaultValue = "ADMIN") String userRole, HttpSession session, Model model) {
         isSessionUserAdmin(session);
-        model.addAttribute("users", adminService.findAllAdmin());
+
+        if ("ADMIN".equals(userRole)) {
+            model.addAttribute("users", adminService.findAllAdmin());
+        } else if ("USER".equals(userRole)) {
+            model.addAttribute("users", adminService.findAllUser());
+        }
+
         return "admin/memberList";
     }
-}
 
+
+    @PostMapping("/suspend/{userId}")
+
+        public String suspendUser(@PathVariable Long userId, HttpSession session) {
+            isSessionUserAdmin(session);
+            adminService.suspendUser(userId);
+            return "redirect:/admin/user/list?status=USER";
+
+
+        }
+
+}

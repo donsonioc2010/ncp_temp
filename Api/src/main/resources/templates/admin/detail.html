@@ -46,11 +46,13 @@
             <li>
                 <strong>승인 버튼:</strong>
                 <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
-                     <button type="submit">승인</button>
+                     <button type="submit" class="btn btn-success" >승인</button>
                 </form>
             </li>
         </ul>
     </div>
 </div>
+
+
 </body>
 </html>
