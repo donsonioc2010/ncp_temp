@@ -8,18 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-<<<<<<< HEAD:Domain/src/main/java/picasso/server/domain/domains/member/repository/UserRepository.java
-
-  Optional<User> findBynickName(String nickname);
-  Optional<User> findByNickName(String nickname);
-
-  Optional<User> findByEmail(String email);
-=======
->>>>>>> dev:Domain/src/main/java/picasso/server/domain/domains/user/repository/UserRepository.java
+    Optional<User> findByNickName(String nickname);
 
     List<User> findByUserRole(UserRole userRole);
-
-    Optional<User> findByNickName(String nickname);
 
     Optional<User> findByEmail(String email);
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Picture Detail</title>
+</head>
+<body>
+<h1>Picture Detail</h1>
+<div th:if="${picture}">
+  <p th:text="'Picture Name: ' + ${picture.pictureName}"></p>
+  <p th:text="'Painter Name: ' + ${picture.painterName}"></p>
+  <p>Picture:</p>
+  <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${picture.imgUrl} + '?type=f&w=300&h=400' "
+       class="card-img-top" alt="Picture">
+  <!-- 여기에 다른 Picture 정보를 표시할 수 있음 -->
+</div>
+<div th:unless="${picture}">
+  <p>Picture not found.</p>
+</div>
+</body>
+</html>

@@ -66,10 +66,18 @@ public class UserService {
         return userRepository.findByNickName(nickname);
     }
 
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
     }
 }

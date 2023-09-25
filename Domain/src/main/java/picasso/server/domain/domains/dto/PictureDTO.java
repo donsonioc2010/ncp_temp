@@ -2,6 +2,7 @@ package picasso.server.domain.domains.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,7 @@ public class PictureDTO {
     private String size; //그림 사이즈
     private LocalDate bidStartDate;
     private String imgUrl; //그림 url
+    private MultipartFile imageFile;
 }
 
 

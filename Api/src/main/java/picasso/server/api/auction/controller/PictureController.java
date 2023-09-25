@@ -1,25 +1,28 @@
 package picasso.server.api.auction.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import picasso.server.api.auction.service.PictureService;
+import picasso.server.api.user.service.UserService;
 import picasso.server.common.util.NaverObjectStorageUsageType;
 import picasso.server.common.util.NaverObjectStorageUtil;
 import picasso.server.domain.domains.dto.PictureDTO;
+import picasso.server.domain.domains.dto.UserDTO;
 import picasso.server.domain.domains.items.Picture;
 import picasso.server.domain.domains.items.PictureInfo;
 import picasso.server.domain.domains.items.PictureStatus;
+import picasso.server.domain.domains.user.entity.User;
+import picasso.server.domain.domains.user.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -29,6 +32,7 @@ import java.util.List;
 public class PictureController {
 
     private final PictureService pictureService;
+    private final UserService userService;
     private final NaverObjectStorageUtil naverObjectStorageUtil;
     @GetMapping("/new")
     public String createForm(Model model) {
@@ -37,29 +41,41 @@ public class PictureController {
     }
 
     @PostMapping
-    public String add(PictureDTO dto, MultipartFile imageFile, Model model) {
-        Picture picture = new Picture();
-        picture.setPictureId(dto.getPictureId());
-        picture.setPictureName(dto.getPictureName());
-        picture.setPainterName(dto.getPainterName());
-        picture.setSize(dto.getSize());
-        picture.setDetails(dto.getDetails());
-        picture.setStartingPrice(dto.getStartingPrice());
-        picture.setIncrementAmount(dto.getIncrementAmount());
-        picture.setBidStartDate(dto.getBidStartDate());
-        //희망 경매일자 + 7일
-        picture.setBidEndDate(dto.getBidStartDate().plusDays(7));
+    public String add(PictureDTO requestDto,Model model, HttpSession session) {
 
-        List<String> imageUrls = new ArrayList<>();
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String imageUrl = naverObjectStorageUtil.storageFileUpload(NaverObjectStorageUsageType.PAINT, imageFile);
-            picture.setImgUrl(imageUrl);
-            imageUrls.add(imageUrl);
-            model.addAttribute("imageUrls", imageUrls);
-            model.addAttribute("imgURL", imageUrl);
+        User sessionUser = (User) session.getAttribute("loginUser");
+        if (sessionUser == null) {
+            return "redirect:/auth/login"; //로그인 페이지로
         }
 
-        pictureService.saveItem(picture); //- 이 부분은 필요에 따라 주석처리
+        userService.findById(sessionUser.getId()).ifPresent(user -> {
+            Picture picture = new Picture();
+            picture.setPictureId(requestDto.getPictureId());
+            picture.setPictureName(requestDto.getPictureName());
+            picture.setPainterName(requestDto.getPainterName());
+            picture.setSize(requestDto.getSize());
+            picture.setDetails(requestDto.getDetails());
+            picture.setStartingPrice(requestDto.getStartingPrice());
+            picture.setIncrementAmount(requestDto.getIncrementAmount());
+            picture.setBidStartDate(requestDto.getBidStartDate());
+
+
+            //희망 경매일자 + 7일
+            picture.setBidEndDate(requestDto.getBidStartDate().plusDays(7));
+
+            List<String> imageUrls = new ArrayList<>();
+            if ( requestDto.getImageFile() != null && !requestDto.getImageFile().isEmpty()) {
+                String imageUrl = naverObjectStorageUtil.storageFileUpload(NaverObjectStorageUsageType.PAINT, requestDto.getImageFile());
+                picture.setImgUrl(imageUrl);
+                imageUrls.add(imageUrl);
+                model.addAttribute("imageUrls", imageUrls);
+                model.addAttribute("imgURL", imageUrl);
+                log.error("Image URL : " + imageUrl);
+            }
+
+            picture.setUser(user);
+            pictureService.saveItem(picture); //- 이 부분은 필요에 따라 주석처리
+        });
         return "redirect:/pictures/list?page=0&pageSize=10&status=BIDDING";
     }
 
@@ -139,4 +155,16 @@ public class PictureController {
         return "imageList";
     }
 
+    @GetMapping("/{id}")
+    public String viewPictureDetail(@PathVariable Long id, Model model) {
+        Optional<Picture> pictureOptional = pictureService.getPictureById(id);
+
+        if(pictureOptional.isPresent()) {
+            Picture picture = pictureOptional.get();
+            model.addAttribute("picture", picture);
+            return "pictures/pictureDetail";
+        } else {
+            return "error";
+        }
+    }
 }

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PictureInfo {
+    private Long id;
     private String imageUrl;
     private String details;
     private String pictureName;
