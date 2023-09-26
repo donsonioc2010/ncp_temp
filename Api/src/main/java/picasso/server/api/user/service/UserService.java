@@ -23,7 +23,6 @@ public class UserService {
 
         Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
         if (existingUser.isPresent()) {
-            // TODO : Custom Exception ㅇㄷ?
             throw EmailErrorException.EXCEPTION; // 중복 이메일 체크
         }
 
@@ -58,7 +57,6 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    //??
     public Optional<User> findUserByIdAndEmail(Long userId, String email) {
         return userRepository.findByIdAndEmail(userId, email);
     }

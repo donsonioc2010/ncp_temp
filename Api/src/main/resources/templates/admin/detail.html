@@ -4,55 +4,113 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
-<head>
-    <title>그림 상세 정보</title>
-    <link rel="stylesheet" href="../static/css/admindetail.css">
-</head>
-
-<body>
-<div layout:fragment="content">
-    <h1>그림 상세 정보</h1>
-
-    <div>
-        <ul>
-            <li>
-                <strong>ID:</strong> <span th:text="${picture.pictureId}"></span>
-            </li>
-            <li>
-                <strong>그림 URL:</strong> <span th:text="${picture.imgUrl}"></span>
-            </li>
-            <li>
-                <strong>그림 이름:</strong> <span th:text="${picture.pictureName}"></span>
-            </li>
-            <li>
-                <strong>화가 이름:</strong> <span th:text="${picture.painterName}"></span>
-            </li>
-            <li>
-                <strong>그림 설명:</strong> <span th:text="${picture.details}"></span>
-            </li>
-            <li>
-                <strong>시작 가격:</strong> <span th:text="${picture.startingPrice}"></span>
-            </li>
-            <li>
-                <strong>최소 입찰 단위:</strong> <span th:text="${picture.incrementAmount}"></span>
-            </li>
-            <li>
-                <strong>그림 사이즈:</strong> <span th:text="${picture.size}"></span>
-            </li>
-            <li>
-                <strong>생성일:</strong> <span th:text="${picture.bidStartDate}"></span>
-            </li>
-
-            <li>
-                <strong>승인 버튼:</strong>
+<main layout:fragment="content">
+    <link rel="stylesheet" href="/static/css/admindetail.css">
+    <div class="container" style="margin-top: 100px">
+        <div class="row justify-content-between">
+            <div class="col-md-8">
+                <h1>그림 상세 정보</h1>
+            </div>
+            <div class="col-md-4 align-middle">
                 <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
-                     <button type="submit" class="btn btn-success" >승인</button>
+                    <button type="submit" class="btn btn-success w-100">승인</button>
                 </form>
-            </li>
-        </ul>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col">
+                <img th:src="'https://kr.object.ncloudstorage.com/picasso-bucket/'+${picture.imgUrl}"
+                     class="img-fluid" alt="미술품" style="background-color: white; width: 100%; min-height: 400px;">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                                            aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        미술품 정보
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                미술품명
+                                            </div>
+                                            <div class="col-md-10" th:text=" ${picture.pictureName}"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                화가명
+                                            </div>
+                                            <div class="col-md-10" th:text="${picture.painterName}"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                미술품 크기
+                                            </div>
+                                            <div class="col-md-10" th:text="${picture.size}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"
+                                            aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                        미술품 설명
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                    <div class="accordion-body" th:text="${picture.details}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree"
+                                            aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                        경매 정보
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                입찰시작가
+                                            </div>
+                                            <div class="col-md-10" th:text="${picture.startingPrice}"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                최소 입찰 단위
+                                            </div>
+                                            <div class="col-md-10" th:text="${picture.incrementAmount}"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                경매 일정
+                                            </div>
+                                            <div class="col-md-10"
+                                                 th:text="${picture.bidStartDate} + '~' + ${picture.bidEndDate}"></div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-
-</body>
+</main>
 </html>

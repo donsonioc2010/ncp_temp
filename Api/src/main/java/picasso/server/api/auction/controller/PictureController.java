@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -71,7 +72,9 @@ public class PictureController {
             return "redirect:/auth/login"; //로그인 페이지로
         }
 
-        userService.findById(sessionUser.getId()).ifPresent(user -> {
+        Optional<User> optionalUser = userService.findById(sessionUser.getId());
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
             Picture picture = new Picture();
             picture.setPictureId(requestDto.getPictureId());
             picture.setPictureName(requestDto.getPictureName());
@@ -81,6 +84,7 @@ public class PictureController {
             picture.setStartingPrice(requestDto.getStartingPrice());
             picture.setIncrementAmount(requestDto.getIncrementAmount());
             picture.setBidStartDate(requestDto.getBidStartDate());
+            picture.setPictureStatus(PictureStatus.BEFORE_APPROVE);
 
 
             //희망 경매일자 + 7일
@@ -96,9 +100,9 @@ public class PictureController {
             }
 
             picture.setUser(user);
-            pictureService.saveItem(picture); //- 이 부분은 필요에 따라 주석처리
-        });
-        return "redirect:/pictures/list?page=0&pageSize=10&status=BIDDING";
+            return "redirect:/pictures/"+pictureService.saveItem(picture).getPictureId();
+        }
+        return "redirect:/pictures/list?page=0&pageSize=10&status=BEFORE_APPROVE";
     }
 
     /**

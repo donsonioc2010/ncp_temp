@@ -29,16 +29,16 @@
             </thead>
             <tbody class="table-group-divider">
             <tr th:each="picture : ${pictures}" th:if="${#strings.equals(picture.pictureStatus,'BEFORE_APPROVE')}">
-                <td>
-                    <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureId}"></span></a>
+                <td class="text-center">
+                    <a th:href="@{'/admin/detail/' + ${picture.pictureId}}" style="text-decoration: none;"><span th:text="${picture.pictureId}"></span></a>
                 </td>
                 <td>
-                    <a th:href="@{'/admin/detail/' + ${picture.pictureId}}"><span th:text="${picture.pictureName}"></span></a>
+                    <a th:href="@{'/admin/detail/' + ${picture.pictureId}}" style="text-decoration: none;"><span th:text="${picture.pictureName}"></span></a>
                 </td>
-                <td th:text="${picture.startingPrice}"></td>
-                <td th:text="${picture.bidStartDate}"></td>
-                <td th:text="${picture.pictureStatus}"></td>
-                <td>
+                <td class="text-center" th:text="${picture.startingPrice}"></td>
+                <td class="text-center" th:text="${picture.bidStartDate}"></td>
+                <td class="text-center" th:text="${picture.pictureStatus}"></td>
+                <td class="text-center">
                     <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
                         <button type="submit" class="btn btn-success" >Approve</button>
                     </form>

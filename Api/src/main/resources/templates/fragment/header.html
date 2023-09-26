@@ -56,6 +56,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user/mypage">마이 페이지</a></li>
+                                    <li><a class="dropdown-item" href="/pictures/new">경매 등록신청</a></li>
                                     <li><a class="dropdown-item" href="/bid-history/myPictureList">내가 등록한 경매</a></li>
                                     <li><a class="dropdown-item" onclick="requestPayment(event)">포인트 환전</a></li>
                                     <th:block  th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
