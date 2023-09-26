@@ -30,7 +30,7 @@ public class PictureBidHistoryService {
     private final PictureRepository pictureRepository;
     private final PictureBidHistoryRepository pictureBidHistoryRepository;
 
-    public List<PictureBidHistory> getBidAmountListDescByPicture(Picture picture){
+    public List<PictureBidHistory> getBidAmountListDescByPicture(Picture picture) {
         return pictureBidHistoryRepository.findByPictureOrderByBidAmountDesc(picture);
     }
 
@@ -40,6 +40,7 @@ public class PictureBidHistoryService {
 
     /**
      * 입찰 프로세스
+     *
      * @param user
      * @param pictureId
      * @param amount
@@ -48,10 +49,10 @@ public class PictureBidHistoryService {
     @Transactional
     public boolean biddingProcess(HttpSession session, User user, PictureBiddingRequestDto requestDto) {
         User findUser = userRepository.findById(user.getId()).orElseThrow(() -> NotLoginUserRestException.EXCEPTION);
-
         Picture findPicture = pictureRepository.findById(requestDto.getPictureId()).orElseThrow(() -> NotFoundRestException.EXCEPTION);
-        List<PictureBidHistory> history = pictureBidHistoryRepository.findByPicture(findPicture);
-        history.add(
+        pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture)
+                .ifPresent(topHistory -> topHistory.getUser().updatePoint(topHistory.getBidAmount()));
+        pictureBidHistoryRepository.save(
                 PictureBidHistory.builder()
                         .picture(findPicture)
                         .user(findUser)
@@ -60,15 +61,14 @@ public class PictureBidHistoryService {
         );
 
         findUser.minusPoint(requestDto.getAmount());
-        pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture).ifPresent(topHistory ->
-                        topHistory.getUser().updatePoint(topHistory.getBidAmount()));
         userRepository.save(findUser);
         session.setAttribute("loginUser", findUser);
-        return  true;
+        return true;
     }
 
     /**
      * 로그인한 사용자가 입찰 가능 여부를 확인하는 로직
+     *
      * @param user
      * @param picture
      * @param topHistory
@@ -83,6 +83,7 @@ public class PictureBidHistoryService {
 
     /**
      * 경매 입찰을 진행한 사용자가 입찰이 가능한지를 검증한다.
+     *
      * @param sessionHaveLoginUser
      * @param pictureId
      * @return
@@ -109,10 +110,11 @@ public class PictureBidHistoryService {
                 .result(true)
                 .build();
     }
+
     public List<PictureBidHistory> retrieveMyBidHistoryList(User user) {
         return pictureBidHistoryRepository.findAllByUserOrderByCreatedAt(user);
     }
-    
+
     public List<Picture> retrieveMyPictureList(User user, PictureStatus pictureStatus) {
         return pictureRepository.findAllByPictureStatusAndUser(pictureStatus, user);
     }
