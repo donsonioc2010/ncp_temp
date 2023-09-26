@@ -16,4 +16,6 @@ public class PictureInfo {
     private Integer startPrice;
     private Integer incrementAmount;
     private LocalDate endDay;
+    private String startDate;
+    private String endDate;
 }
