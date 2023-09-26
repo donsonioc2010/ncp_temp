@@ -8,69 +8,193 @@
 >
 <main layout:fragment="content">
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css"/>
-<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kranky&display=swap">-->
-<!--    <link rel="stylesheet" href="https://fonts.google.com/noto/specimen/Noto+Sans+KR">-->
 
-    <div class="container body">
+    <div class="container body" style="margin-top: 100px;">
         <div th:if="${picture}" class="picture-details">
-<!--            <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${picture.imgUrl} + '?type=f&w=600&h=800&ttype=jpg-->
-<!--' " alt="Picture" class="picture-img">-->
-<!--          <img class = "frame" src="/static/asset/기린.png">-->
-<!--          <img class = "kuro" src="/static/asset/쿠로미.png">-->
-<!--          <img class = "sina" src="/static/asset/시나모.png">-->
-<!--          <img class = "kuro2" src="/static/asset/쿠로미2.png">-->
-<!--          <img class = "emphasis" src="/static/asset/강조.png">-->
-            <div class="details-box">
-                <div class="details-info">
-                    <p th:text="'Picture Name '"></p>
-                    <p class="text" style="font-size: 27px" th:text=" ${picture.pictureName}"></p>
-                    <p th:text="'Painter Name '"></p>
-                    <p class="text" style="font-size: 27px" th:text="${picture.painterName}"></p>
-                    <p th:text="'Details '"></p>
-<!--                    <p style="font-size: 22px" th:text="'이 편지는 영국에서 시작도ㅓ어 어쩌구 저ㄱ쩌구 졸려서 죽어버릴거 같고 진짜 너무너피곤하곶버ㅐㄷ배ㅑ랮부래뱌줇재ㅜ래줍'"></p>-->
-                    <p style="font-size: 27px" th:text="${picture.getDetails()}"></p>
-                    <p th:text="'Picture Size '"></p>
-                    <p class="text" style="font-size: 27px" th:text="${picture.getSize()}"></p>
-                    <p th:text="'Start Price '"></p>
-                    <p class="text" style="font-size: 27px" th:text="${picture.getStartingPrice()}"></p>
-                    <p th:text="'Minimum Amount'"></p>
-                    <p class="text" style="font-size: 27px" th:text="${picture.getIncrementAmount()}"></p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        입찰하기
-                    </button>
+            <input type="hidden" name="pictureId" id="pictureId" th:value="${picture.pictureId}" />
+            <input type="hidden" name="incrementAmount" id="incrementAmount" th:value="${picture.incrementAmount}" />
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 id="price_amount"></h3>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="row" style="margin-bottom: 30px">
+                <div class="col">
+                    <img th:src="'https://kr.object.ncloudstorage.com/picasso-bucket/'+${picture.imgUrl}"
+                         class="img-fluid" alt="미술품" style="background-color: white; width: 100%; min-height: 400px;">
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 30px">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                                                aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            미술품 정보
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    미술품명
+                                                </div>
+                                                <div class="col-md-10" th:text=" ${picture.pictureName}"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    화가명
+                                                </div>
+                                                <div class="col-md-10" th:text="${picture.painterName}"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    미술품 크기
+                                                </div>
+                                                <div class="col-md-10" th:text="${picture.getSize()}"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <input id="inputPrice" onchange="inputPrice(this)" placeholder="입찰 금액 입력"/>
-                                    <button id="bidButton" onclick="bidResult(this)" type="button">입찰하기</button>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"
+                                                aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                            미술품 설명
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                        <div class="accordion-body" th:text="${picture.getDetails()}">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree"
+                                                aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                            경매 정보
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    입찰시작가
+                                                </div>
+                                                <div class="col-md-10" th:text="${picture.startingPrice}"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    최소 입찰 단위
+                                                </div>
+                                                <div class="col-md-10" th:text="${picture.incrementAmount}"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <th:block th:if="${session.loginUser != null}">
+                <input type="hidden" name="userPoint" id="userPoint" th:value="${session.loginUser.point}" />
+
+                <div class="row justify-content-md-center">
+                    <div class="col-md-4">
+                        <button class="btn btn-info" type="button" style="width: 100%;" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                            입찰 내역
+                        </button>
+
+                        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
+                             id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">입찰내역 History</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <th:block th:if="${pictureBidHistory.size() == 0}">
+                                    입찰내역이 존재하지 않습니다.
+                                </th:block>
+                                <th:block th:if="${pictureBidHistory.size() != 0}">
+                                    입찰내역이 존재합니다.
+                                </th:block>
+
+                                <ul class="list-group">
+                                    <li class="list-group-item">An item</li>
+                                    <li class="list-group-item">A second item</li>
+                                    <li class="list-group-item">A third item</li>
+                                    <li class="list-group-item">A fourth item</li>
+                                    <li class="list-group-item">And a fifth one</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary" style="width: 100%" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            입찰하기
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-md-3">
+                                                <p class="h5  align-baseline">현재 입찰가</p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input class="form-control" id="nowPictureAmount" type="text" placeholder="현재 최소 입찰가"  th:if="${topBidHistory != null}" th:value="${topBidHistory.bidAmount}" aria-label="Disabled input example" disabled>
+                                                <input class="form-control" id="nowPictureAmount" type="text" placeholder="현재 최소 입찰가"  th:if="${topBidHistory == null}" th:value="${picture.startingPrice}" aria-label="Disabled input example" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p class="h5 align-baseline">입찰 희망가</p>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <input id="bidInput" class="form-control me-auto" th:if="${topBidHistory != null}" th:value="${topBidHistory.bidAmount} + ${picture.incrementAmount}"  placeholder="입찰 금액 입력"/>
+                                                <input id="bidInput" class="form-control me-auto" th:if="${topBidHistory == null}" th:value="${picture.startingPrice} + ${picture.incrementAmount}"  placeholder="입찰 금액 입력"/>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button id="bidButton" class="btn btn-primary w-100">
+                                                    입찰
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="/static/js/bidModal.js"></script>
+            </th:block>
             <div th:unless="${picture}">
                 <p>Picture not found.</p>
             </div>
         </div>
     </div>
-  <br><br><br>
 </main>
 <th:block layout:fragment="script">
     <script type="application/javascript" th:inline="javascript">
     </script>
     <script type="text/javascript">
     </script>
-    <script src="/static/js/detailModal.js"></script>
-    <script src="/static/js/bidModal.js"></script>
 </th:block>
 </html>

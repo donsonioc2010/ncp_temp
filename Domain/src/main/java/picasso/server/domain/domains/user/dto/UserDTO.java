@@ -1,4 +1,4 @@
-package picasso.server.domain.domains.dto;
+package picasso.server.domain.domains.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;

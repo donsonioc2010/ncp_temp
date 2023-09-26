@@ -4,7 +4,6 @@ naver:
     region-name: kr-standard
     bucket-name: picasso-bucket
 
-
 spring:
   mail:
     host: smtp.gmail.com
@@ -21,8 +20,14 @@ spring:
   config:
     activate:
       on-profile: common-local
+
+picasso:
+  domain: http://localhost:8080/
 ---
 spring:
   config:
     activate:
       on-profile: common-dev
+
+picasso:
+  domain: http://picasso.jong1.com/

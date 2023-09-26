@@ -39,10 +39,10 @@
 /*    background-color: #005f6b;*/
 /*}*/
 
-.picture-details {
-    display: flex;
-    align-items: center;
-}
+/*.picture-details {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
 
 .picture-img {
     border: 2px solid #DB8681; /* 테두리 스타일 및 색상 설정 */

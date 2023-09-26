@@ -1,15 +1,3 @@
-insert into t_test(name, param1,param2,param3,param4)
-values ('aaaa', 'a','b','c','d');
-insert into t_test(name, param1,param2,param3,param4)
-values ('dddd', 'a','b','c','d');
-insert into t_test(name, param1,param2,param3,param4)
-values ('cccc', 'a','b','c','d');
-insert into t_test(name, param1,param2,param3,param4)
-values ('dddd', 'a','b','c','d');
-insert into t_test(name, param1,param2,param3,param4)
-values ('ffff', 'a','b','c','d');
-
-
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
  values (1, 10, 1000, '2023-09-22', '2023-09-29', 'test1', 'local/paint/d5fdd501-8251-4082-9cc6-f1a65e5ad0a9.jpg', '안유진', '안유진', 'BIDDING' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
@@ -19,9 +7,9 @@ insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
  values (4, 40, 4000, '2023-09-19', '2023-09-26', 'test4', 'local/paint/bf50117d-e28a-4393-8bc4-2fefa7220718.jpeg', '한소희', '한소희','SUCCESS_BID' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (5, 50, 5000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/bf50117d-e28a-4393-8bc4-2fefa7220718.jpeg', '한소희', '한소희','BEFORE_APPROVE' ,'800x600');
+ values (5, 50, 5000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/bf50117d-e28a-4393-8bc4-2fefa7220718.jpeg', '한소희', '한소희','BEFORE_APPROVE' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (6, 60, 6000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/a459f188-89d5-4922-9aff-bd216e63790d.JPG', '고양이', '고양이','BIDDING' ,'800x600');
+ values (6, 60, 6000, '2023-09-28', '2023-10-03', 'test5', 'local/paint/a459f188-89d5-4922-9aff-bd216e63790d.JPG', '고양이', '고양이','BIDDING' ,'800x600');
 
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
  values ('admin@test.com', '1111', '꽌리자', 300, 'DEFAULT', 'SUSPENSION', 'ADMIN', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');

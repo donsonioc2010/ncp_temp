@@ -1,4 +1,4 @@
-package picasso.server.domain.domains.items;
+package picasso.server.domain.domains.payments.items;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

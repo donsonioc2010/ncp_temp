@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.admin.exception.AlreadyChangePictureException;
 import picasso.server.common.exception.NotFoundException;
-import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.repository.PictureRepository;
+import picasso.server.domain.domains.picture.items.Picture;
+import picasso.server.domain.domains.picture.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 import picasso.server.domain.domains.user.type.UserRole;
@@ -15,8 +15,8 @@ import picasso.server.domain.domains.user.type.UserRole;
 import java.util.List;
 import java.util.Optional;
 
-import static picasso.server.domain.domains.items.PictureStatus.AFTER_APPROVE;
-import static picasso.server.domain.domains.items.PictureStatus.BEFORE_APPROVE;
+import static picasso.server.domain.domains.picture.items.PictureStatus.AFTER_APPROVE;
+import static picasso.server.domain.domains.picture.items.PictureStatus.BEFORE_APPROVE;
 
 @Slf4j
 @Service

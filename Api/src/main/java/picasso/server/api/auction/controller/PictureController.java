@@ -6,23 +6,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import picasso.server.api.auction.service.PictureBidHistoryService;
 import picasso.server.api.auction.service.PictureService;
 import picasso.server.api.user.service.UserService;
+import picasso.server.common.exception.NotFoundException;
 import picasso.server.common.util.NaverObjectStorageUsageType;
 import picasso.server.common.util.NaverObjectStorageUtil;
-import picasso.server.domain.domains.dto.PictureDTO;
-import picasso.server.domain.domains.dto.UserDTO;
-import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.items.PictureInfo;
-import picasso.server.domain.domains.items.PictureStatus;
+import picasso.server.domain.domains.picture.dto.PictureDTO;
+import picasso.server.domain.domains.picture.items.Picture;
+import picasso.server.domain.domains.picture.items.PictureInfo;
+import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.user.entity.User;
-import picasso.server.domain.domains.user.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 
 @Slf4j
@@ -34,15 +37,33 @@ public class PictureController {
     private final PictureService pictureService;
     private final UserService userService;
     private final NaverObjectStorageUtil naverObjectStorageUtil;
+    private final PictureBidHistoryService pictureBidHistoryService;
+
+    /**
+     * 경매품 게시물에 대해 등록할 수 있는 페이지로 이동한다.
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/new")
-    public String createForm(Model model) {
+    public String createForm(HttpSession session, Model model) {
+        if (session.getAttribute("loginUser") == null) {
+            throw NotFoundException.EXCEPTION;
+        }
         model.addAttribute("PictureDTO", new PictureDTO());
         return "pictures/createPictureForm";
     }
 
+    /**
+     * 경매품 등록
+     *
+     * @param requestDto
+     * @param model
+     * @param session
+     * @return
+     */
     @PostMapping
-    public String add(PictureDTO requestDto,Model model, HttpSession session) {
-
+    public String add(PictureDTO requestDto, Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("loginUser");
         if (sessionUser == null) {
             return "redirect:/auth/login"; //로그인 페이지로
@@ -64,13 +85,12 @@ public class PictureController {
             picture.setBidEndDate(requestDto.getBidStartDate().plusDays(7));
 
             List<String> imageUrls = new ArrayList<>();
-            if ( requestDto.getImageFile() != null && !requestDto.getImageFile().isEmpty()) {
+            if (requestDto.getImageFile() != null && !requestDto.getImageFile().isEmpty()) {
                 String imageUrl = naverObjectStorageUtil.storageFileUpload(NaverObjectStorageUsageType.PAINT, requestDto.getImageFile());
                 picture.setImgUrl(imageUrl);
                 imageUrls.add(imageUrl);
                 model.addAttribute("imageUrls", imageUrls);
                 model.addAttribute("imgURL", imageUrl);
-                log.error("Image URL : " + imageUrl);
             }
 
             picture.setUser(user);
@@ -79,65 +99,15 @@ public class PictureController {
         return "redirect:/pictures/list?page=0&pageSize=10&status=BIDDING";
     }
 
-//    @GetMapping("/list")
-//    public String imgUrls(Model model) {
-////        List<String> imageUrls = pictureService.extractImageUrlsSortedByDateTime();
-////        model.addAttribute("imageUrls", imageUrls);
-//        Map<String, List<?>> pictureDataMap = new HashMap<>();
-//
-//
-//        List<String> imageUrls = pictureService.extractImageUrlsSortedByDateTime();
-//        List<String> details = pictureService.extractDetail();
-//        List<String> pictureNames = pictureService.extractPictureName();
-//        List<String> painterNames = pictureService.extractPainterName();
-//        List<Integer> startPrices = pictureService.extractStartPrice();
-//        List<Integer> incrementAmounts = pictureService.extractIncrementAmount();
-//
-//        pictureDataMap.put("imageUrls", imageUrls);
-//        pictureDataMap.put("details", details);
-//        pictureDataMap.put("pictureNames", pictureNames);
-//        pictureDataMap.put("painterNames", painterNames);
-//        pictureDataMap.put("startPrices", startPrices);
-//        pictureDataMap.put("incrementAmounts", incrementAmounts);
-//
-//
-//        model.addAttribute("imageUrls", imageUrls);
-////        model.addAttribute("details", details);
-////        model.addAttribute("picturesNames", pictureNames);
-////        model.addAttribute("painterNames", painterNames);
-////        model.addAttribute("startPrices", startPrices);
-////        model.addAttribute("incrementAmounts", incrementAmounts);
-//        model.addAttribute("pictureDataMap", pictureDataMap);
-//        return "imageList"; // Change to your Thymeleaf template name
-//    }
-
-//    @GetMapping("/list")
-//    public String imgUrls(Model model,
-//                          @RequestParam(defaultValue = "0") int page,
-//                          @RequestParam(defaultValue = "7") int pageSize,
-//                          @RequestParam(defaultValue = "AFTER_APPROVE") PictureStatus status
-//    ) {
-//        Page<String> imageUrlsPage = pictureService.extractImageUrlsSortedByDateTime(page, pageSize, status);
-//
-//        Map<String, Object> pictureDataMap = new HashMap<>();
-//        pictureDataMap.put("imageUrls", imageUrlsPage.getContent());
-//        pictureDataMap.put("details", pictureService.extractDetail(status));
-//        pictureDataMap.put("pictureNames", pictureService.extractPictureName(status));
-//        pictureDataMap.put("painterNames", pictureService.extractPainterName(status));
-//        pictureDataMap.put("startPrices", pictureService.extractStartPrice(status));
-//        pictureDataMap.put("incrementAmounts", pictureService.extractIncrementAmount(status));
-//        pictureDataMap.put("dateDifferences", pictureService.extractEndDay(status));
-//
-//        model.addAttribute("imageUrls", imageUrlsPage);
-//        model.addAttribute("pictureDataMap", pictureDataMap);
-//        model.addAttribute("nextPage", page + 1);
-//        model.addAttribute("previousPage", page - 1);
-//        model.addAttribute("pageSize", imageUrlsPage.getSize());
-//        model.addAttribute("pageSize2", imageUrlsPage.getNumberOfElements());
-//
-//        return "imageList";
-//    }
-
+    /**
+     * 게시물 리스트 조회
+     *
+     * @param model
+     * @param page     조회할 페이지 Number
+     * @param pageSize 한번에 조회할 Size
+     * @param status   조회를 희망하는 경매품의 Status
+     * @return
+     */
     @GetMapping("/list")
     public String imgUrls(Model model,
                           @RequestParam(defaultValue = "0") int page,
@@ -155,16 +125,21 @@ public class PictureController {
         return "imageList";
     }
 
+    /**
+     * 게시물의 상세페이지 조회
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/{id}")
     public String viewPictureDetail(@PathVariable Long id, Model model) {
-        Optional<Picture> pictureOptional = pictureService.getPictureById(id);
-
-        if(pictureOptional.isPresent()) {
-            Picture picture = pictureOptional.get();
-            model.addAttribute("picture", picture);
-            return "pictures/pictureDetail";
-        } else {
-            return "error";
-        }
+        Picture picture = pictureService.getPictureById(id).orElseThrow(() -> NotFoundException.EXCEPTION);
+        model.addAllAttributes(new HashMap<>() {{
+            put("picture", picture);
+            put("pictureBidHistory", pictureBidHistoryService.getBidAmountListDescByPicture(picture));
+            put("topBidHistory", pictureBidHistoryService.getTopBidAmountByPicture(picture));
+        }});
+        return "pictures/pictureDetail";
     }
 }
