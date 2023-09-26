@@ -95,6 +95,7 @@ public class User {
   private LocalDateTime loginAt = LocalDateTime.now();
 
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  @Builder.Default
   private List<Picture> pictures = new ArrayList<>();
   
   public void updatePoint(Long point) {
