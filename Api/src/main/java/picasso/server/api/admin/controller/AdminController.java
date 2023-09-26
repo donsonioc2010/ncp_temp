@@ -122,7 +122,7 @@ public class AdminController {
             model.addAttribute("users", adminService.findAllUser());
         }
 
-        return "admin/memberList";
+        return "admin/memberlist";
     }
 
 
