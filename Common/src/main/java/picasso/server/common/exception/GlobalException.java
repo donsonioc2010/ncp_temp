@@ -28,6 +28,8 @@ public enum GlobalException implements BaseErrorCode {
     PICTURE_STATUS_AFTER_APPROVE(INTERNAL_SERVER_ERROR.value(), "이미 관리자가 승인한 게시물 입니다."),
     NOT_LOGIN_EXCEPTION(UNAUTHORIZED.value(),  "로그인이 필요합니다."),
     NEED_LOGIN_ERROR(UNAUTHORIZED.value(), "로그인이 필요한 기능입니다."),
+    NOT_FOUND_USER_ERROR(NOT_FOUND.value(), "존재하지 않은 회원입니다."),
+    USER_STATUS_NOT_ACTIVE(INTERNAL_SERVER_ERROR.value(), "정지할 수 없는 유저입니다.")
     ;
 
     private final Integer statusCode;
