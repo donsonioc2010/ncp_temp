@@ -7,7 +7,7 @@
         layout:decorate="~{layout/layout}"
 >
 <main layout:fragment="content">
-  <link rel="stylesheet" type="text/css" href="/static/css/member/mypage.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/mypage.css" />
   <div class="container">
     <div class="mypage-container">
       <form th:action="@{/user/update}" method="post" id="mypage-form" enctype="multipart/form-data">
@@ -60,7 +60,8 @@
       <div class="row">
         <div class="col">
           <button onclick="location.href='/bid-history/myBidList'" type="button" class="btn btn-primary btn-lg" style="width:100%;">내 입찰 내역</button>
-          <br/>
+        </div>
+        <div class="col">
           <button onclick="location.href='/bid-history/myPictureList'" type="button" class="btn btn-primary btn-lg" style="width:100%;">내가 등록한 경매 내역</button>
         </div>
       </div>

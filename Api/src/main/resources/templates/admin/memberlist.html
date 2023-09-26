@@ -7,45 +7,42 @@
         layout:decorate="~{layout/layout}"
 >
 <main layout:fragment="content">
-    <div class="container">
-        <link rel="stylesheet" type="text/css" href="/static/css/adminlist.css">
-        <div class="row">
+    <link rel="stylesheet" type="text/css" href="/static/css/adminlist.css">
+    <div class="container" style="margin-top: 100px;">
+        <div class="row" style="margin-bottom: 10px;">
             <div class="col">
                 <div class="admin-title-row">
                     <h1>관리자 계정 대쉬보드</h1>
                     <input type="button" value="계정 생성" class="btn btn-primary" style="height: 50%;"
                            onClick="moveForm();"
                            th:if="${session.loginUser.userRole.name().equals('ADMIN')}"/>
-
-
                 </div>
             </div>
         </div>
 
         <table  class="table">
             <thead>
-            <tr>
-                <th>ID 번호</th>
-                <th>이메일</th>
-                <th>최근 로그인 시간</th>
-                <th>최근 수정 시간</th>
-                <th>별명</th>
-                <th>회원 상태</th>
-               <th th:if="${user != null && user.userRole == 'USER'}">계정 정지 버튼</th>
-
+            <tr class="table-info">
+                <th class="text-center">ID 번호</th>
+                <th class="text-center">이메일</th>
+                <th class="text-center">최근 로그인 시간</th>
+                <th class="text-center">최근 수정 시간</th>
+                <th class="text-center">별명</th>
+                <th class="text-center">회원 상태</th>
+                <th class="text-center" th:if="${!adminPage}">계정 정지 버튼</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
             <tr th:each="user : ${users}" th:if="${#strings.equals(user.userStatus, 'ACTIVE')}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.loginAt}"></td>
-                <td th:text="${user.updatedAt}"></td>
-                <td th:text="${user.nickName}"></td>
-                <td th:text="${user.userStatus.name()}"></td>
-                <td>
+                <td class="text-center" th:text="${user.id}"></td>
+                <td class="text-center" th:text="${user.email}"></td>
+                <td class="text-center" th:text="${user.loginAt}"></td>
+                <td class="text-center" th:text="${user.updatedAt}"></td>
+                <td class="text-center" th:text="${user.nickName}"></td>
+                <td class="text-center" th:text="${user.userStatus.name()}"></td>
+                <td class="text-center" th:if="${!adminPage}">
                     <form th:action="@{'/admin/suspend/' + ${user.id}}" method="post" >
-                        <button type="submit" class="btn btn-danger"  th:if="${user != null && #strings.equals(user.userRole,'USER')}">계정 정지 버튼</button>
+                        <button type="submit" class="btn btn-danger" >계정 정지 버튼</button>
                     </form>
                 </td>
             </tr>

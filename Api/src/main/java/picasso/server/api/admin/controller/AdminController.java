@@ -5,10 +5,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import picasso.server.api.admin.exception.NotAdminUserException;
-import picasso.server.api.admin.service.AdminService;
 import picasso.server.api.admin.request.SignUpAdminRequestDto;
+import picasso.server.api.admin.service.AdminService;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 import picasso.server.domain.domains.user.type.UserRole;
@@ -117,8 +121,10 @@ public class AdminController {
         isSessionUserAdmin(session);
 
         if ("ADMIN".equals(userRole)) {
+            model.addAttribute("adminPage", true);
             model.addAttribute("users", adminService.findAllAdmin());
-        } else if ("USER".equals(userRole)) {
+        } else{
+            model.addAttribute("adminPage", false);
             model.addAttribute("users", adminService.findAllUser());
         }
 

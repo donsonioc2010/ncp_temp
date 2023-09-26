@@ -4,83 +4,61 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}">
-<head>
-    <style>
-        .text-center.login-form {
-            margin: 10px;
-            background-color:white;
-            display: flex;
-            flex-direction: column;
-            border-radius: 70px;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
-            margin-left: 37%;
-            border: 10px solid #18ACDB;
-            width: 380px;
-        }
-
-        .login-title {
-        font-family: Sigmar One;
-        font-style: normal;
-        color: #18ACDB;
-        }
-
-        .text-center {
-        text-align: center;
-        border: 10px solid #18ACDB;
-        }
-
-.centered-button {
-    text-align: center;
-    margin-left: 28%;
-}
-    </style>
-</head>
-<body>
+        layout:decorate="~{layout/layout}"
+>
 <main layout:fragment="content">
-
-    <!--TODO : style로 뺴면 안대영?-->
-    <div style="margin:80px; background-color:white; display: flex; flex-direction: column; border-radius : 70px; justify-content: center; align-items: center; height:50vh; margin-left: 37%; border: 10px solid #18ACDB; width: 380px;">
-        <form th:action="@{/auth/login}" th:object="${requestDto}" method="post" class="login-form">
-            <h2 style="text-align:center; font-family : Sigmar One; font-style: normal; color: #18ACDB;">LOGIN</h2>
-            <br>
-            <div>
-                <label for="email"></label>
-                <input type="email" id="email" name="email" placeholder="email" style="background-color:#E8F0FE; text-align: center;" required>
-            </div>
-            <div>
-                <label for="password"></label>
-                <input type="password" id="password" name="password" placeholder="password" style="background-color:#E8F0FE; text-align: center;" required>
-            </div>
-            <br>
-            <div>
-                <input type="checkbox" id="rememberMe" name="rememberMe" style="text-align: center;">
-                <label for="rememberMe">&nbsp 자동 로그인</label>
-            </div>
-            <br>
-            <div>
-            <button class="btn btn-primary before-login-btn centered-button" type="submit" style="text-align: center; margin-left: 24%;">LOGIN</button>
-            </div>
-        </form>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css"/>
+    <div class="container">
+        <div class="d-flex justify-content-center bg-white align-items-center" id="login-box">
+            <form th:action="@{/auth/login}" th:object="${requestDto}" method="post" class="login-form">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="login-title">LOGIN</h2>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-12">
+                        <input type="email" id="email" name="email" placeholder="email" class="text-center" required/>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-12">
+                        <input type="password" id="password" name="password" placeholder="password" class="text-center"
+                               required/>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                자동 로그인
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <button class="btn btn-primary before-login-btn centered-button text-center" type="submit">LOGIN
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-
 </main>
 <th:block layout:fragment="script">
     <script type="application/javascript" th:inline="javascript">
-        function loginCheck(){
-         var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
+        function loginCheck() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
 
-    if (!email || !password) {
-        alert('아이디와 비밀번호를 모두 입력해주세요.');
-        return false;
-    }
-    return true;
-     </script>
+            if (!email || !password) {
+                alert('아이디와 비밀번호를 모두 입력해주세요.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 </th:block>
-</body>
 </html>
 
 
