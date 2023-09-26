@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import picasso.server.api.exchange.model.request.PostCreatePaymentRequest;
 import picasso.server.api.exchange.validator.PaymentValidator;
-import picasso.server.domain.domains.items.PGName;
-import picasso.server.domain.domains.items.PaymentHistory;
-import picasso.server.domain.domains.repository.PaymentHistoryRepository;
+import picasso.server.domain.domains.payments.items.PGName;
+import picasso.server.domain.domains.payments.entity.PaymentHistory;
+import picasso.server.domain.domains.payments.repository.PaymentHistoryRepository;
 
 @Service
 @RequiredArgsConstructor

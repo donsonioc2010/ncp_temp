@@ -1,20 +1,74 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>My Page</title>
-</head>
-<body>
-<form th:action="@{/user}" method="post">
-  <label for="nickname">Nickname:</label>
-  <input type="text" id="nickname" name="nickname" /><br/>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<main layout:fragment="content">
+  <link rel="stylesheet" type="text/css" href="/static/css/member/mypage.css" />
+  <div class="container">
+    <div class="mypage-container">
+      <form th:action="@{/user/update}" method="post" id="mypage-form" enctype="multipart/form-data">
+        <div class="row mypage-title">
+          <h1>마이페이지</h1>
+        </div>
 
-  <label for="point">Point:</label>
-  <input type="text" id="point" name="point" /><br/>
+        <div class="row d-flex align-items-center">
+          <div class="col-md-4 mb-5">
+            <img id="thumbnail-preview" th:if="${user.profile != null}" th:src="|https://kr.object.ncloudstorage.com/picasso-bucket/${user.profile}|" class="img-thumbnail" alt="..." style="width: 100%; height: 300px;">
+          </div>
 
-  <label for="profile">Profile:</label>
-  <input type="file" id="profile" name="profile" /><br/>>
-  <button type="submit">등록</button>
+          <div class="col-md-8">
+            <div class="mb-3 row">
+              <label for="chgNickName" class="col-sm-2 col-form-label">NickName</label>
+              <div class="col-sm-10">
+                <input type="hidden" id="orgNickName" name="orgNickName" th:value="${user.nickName}" />
+                <input type="text" class="form-control" id="chgNickName" name="chgNickName" th:value="${user.nickName}">
+              </div>
+            </div>
 
-</form>
-</body>
+            <div class="mb-3 row">
+              <label for="point" class="col-sm-2 col-form-label">Point</label>
+              <div class="col-sm-10">
+                <input type="text" readonly class="form-control-plaintext" id="point" th:value="${user.point}">
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label for="profile" class="col-sm-2 col-form-label">Profile</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="profile" name="profile" accept=".jpg, .jpeg, .png" onchange="previewThumbnail(); validateFileExtension(this);">
+                <span id="filename" class="d-block mt-2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" style="margin-bottom:10px;">
+          <div class="col" >
+            <button type="button" style="width:100%;" class="btn btn-secondary btn-lg">취소</button>
+          </div>
+          <div class="col" >
+            <button type="submit" style="width:100%;" class="btn btn-primary btn-lg">수정</button>
+          </div>
+        </div>
+      </form>
+      <hr>
+      <div class="row">
+        <div class="col">
+          <button onclick="location.href='/bid-history/myBidList'" type="button" class="btn btn-primary btn-lg" style="width:100%;">내 입찰 내역</button>
+          <br/>
+          <button onclick="location.href='/bid-history/myPictureList'" type="button" class="btn btn-primary btn-lg" style="width:100%;">내가 등록한 경매 내역</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<th:block layout:fragment="script">
+  <script src="/static/js/mypage.js"></script>
+</th:block>
 </html>

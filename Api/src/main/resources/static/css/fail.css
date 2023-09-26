@@ -1,0 +1,18 @@
+#popup-menu {
+    display: flex;
+    height: 700px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: #ff0000;
+}
+
+#popup-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#popup-footer {
+    display: flex;
+    justify-content: center;
+}

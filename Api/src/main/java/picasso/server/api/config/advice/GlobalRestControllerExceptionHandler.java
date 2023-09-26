@@ -8,16 +8,15 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import picasso.server.common.dto.ErrorDetail;
-import picasso.server.common.exception.BaseException;
 import picasso.server.common.exception.GlobalException;
+import picasso.server.common.exception.RestBaseException;
 
-//TODO : 현재 `GlobalControllerExceptionHandler`와 동일한 코드, 추후 수정 필요
 @Slf4j
 @RequiredArgsConstructor
 @RestControllerAdvice
 public class GlobalRestControllerExceptionHandler {
-    @ExceptionHandler(BaseException.class)
-    protected ResponseEntity<ErrorDetail> baseExceptionHandle(BaseException e, HttpServletRequest request) {
+    @ExceptionHandler(RestBaseException.class)
+    protected ResponseEntity<ErrorDetail> baseExceptionHandle(RestBaseException e, HttpServletRequest request) {
         ErrorDetail errorDetail = e.getErrorCode().getErrorDetail();
         log.warn("ExceptionName >>> {}, ErrorCode >>> {}, ExceptionReason >>> {}",
                 e.getClass(), errorDetail.getStatusCode(), errorDetail.getReason());

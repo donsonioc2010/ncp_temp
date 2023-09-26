@@ -7,14 +7,17 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import picasso.server.domain.domains.items.Picture;
-import picasso.server.domain.domains.items.PictureInfo;
-import picasso.server.domain.domains.items.PictureStatus;
-import picasso.server.domain.domains.repository.PictureRepository;
+import picasso.server.domain.domains.picture.items.Picture;
+import picasso.server.domain.domains.picture.items.PictureInfo;
+import picasso.server.domain.domains.picture.items.PictureStatus;
+import picasso.server.domain.domains.picture.repository.PictureRepository;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static picasso.server.domain.domains.picture.items.PictureStatus.BIDDING;
 
 @Service
 @Transactional
@@ -22,112 +25,11 @@ import java.util.stream.Collectors;
 public class PictureService {
 
     private final PictureRepository pictureRepository;
-    private final Map<String, Picture> imageInfoMap = new HashMap<>();
-
-//    public Picture getPictureInfo(String imageUrl) {
-//        return imageInfoMap.get(imageUrl);
-//    }
-
 
     //아이템등록
     public Picture saveItem(Picture picture) {
         return pictureRepository.save(picture);
     }
-
-//    public List<Picture> findItem() {
-//        return pictureRepository.findAll();
-//    }
-//
-//    public Optional<Picture> findOne(Long id) {
-//        return pictureRepository.findById(id);
-//    }
-
-
-//    public Page<String> extractImageUrlsSortedByDateTime(int page, int pageSize, PictureStatus status) {
-//        Pageable pageable = PageRequest.of(page, pageSize);
-//
-//        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(
-//                status, pageable);
-//
-//        // 페이지에서 이미지 URL 추출
-//        List<String> imageUrls = picturePage.getContent().stream()
-//                .map(Picture::getImgUrl)
-//                .collect(Collectors.toList());
-//
-//
-//        return new PageImpl<>(imageUrls, pageable, picturePage.getTotalElements());
-//    }
-
-
-//    public List<String> extractDetail(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> detailsList = pictures.stream()
-//                .map(Picture::getDetails)
-//                .collect(Collectors.toList());
-//        return detailsList;
-//    }
-
-//    public List<String> extractPictureName(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> pictureNameList = pictures.stream()
-//                .map(Picture::getPictureName)
-//                .collect(Collectors.toList());
-//        return pictureNameList;
-//    }
-
-//    public List<String> extractPainterName(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> painterNameList = pictures.stream()
-//                .map(Picture::getPainterName)
-//                .collect(Collectors.toList());
-//        return painterNameList;
-//    }
-
-//    public List<Integer> extractStartPrice(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<Integer> startPriceList = pictures.stream()
-//                .map(Picture::getStartingPrice)
-//                .collect(Collectors.toList());
-//        return startPriceList;
-//    }
-
-//    public List<Integer> extractIncrementAmount(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<Integer> incrementAmountList = pictures.stream()
-//                .map(Picture::getIncrementAmount)
-//                .collect(Collectors.toList());
-//        return incrementAmountList;
-//    }
-
-
-//    public List<LocalDate> extractEndDay(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<LocalDate> endDayList = pictures.stream()
-//                .map(Picture::getBidEndDate)
-//                .collect(Collectors.toList());
-//        return endDayList;
-//    }
-
-
-//    public Map<String, String> createUrlToPictureNameMap(PictureStatus status) {
-//        List<Picture> pictures = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(status);
-//        List<String> urlList = pictures.stream()
-//                .map(Picture::getImgUrl)
-//                .collect(Collectors.toList());
-//
-//        List<String> pictureNameList = pictures.stream()
-//                .map(Picture::getPictureName)
-//                .collect(Collectors.toList());
-//
-//        // 각 URL을 키로 하고, 해당 URL에 대응하는 pictureName을 값으로 설정
-//        Map<String, String> urlToPictureNameMap = new HashMap<>();
-//        for (int i = 0; i < urlList.size(); i++) {
-//                urlToPictureNameMap.put(urlList.get(i), pictureNameList.get(i));
-//        }
-//
-//        return urlToPictureNameMap;
-//    }
-
 
 
     public Page<PictureInfo> preparePictureInfoPage(int page, int pageSize, PictureStatus status) {
@@ -144,6 +46,7 @@ public class PictureService {
 
     private PictureInfo mapToPictureInfo(Picture picture) {
         PictureInfo pictureInfo = new PictureInfo();
+        pictureInfo.setId((picture.getPictureId()));
         pictureInfo.setImageUrl(picture.getImgUrl());
         pictureInfo.setDetails(picture.getDetails());
         pictureInfo.setPictureName(picture.getPictureName());
@@ -152,6 +55,59 @@ public class PictureService {
         pictureInfo.setIncrementAmount(picture.getIncrementAmount());
         pictureInfo.setEndDay(picture.getBidEndDate());
         return pictureInfo;
+    }
+
+    public Optional<Picture> getPictureById(Long id) {
+        return pictureRepository.findById(id);
+    }
+
+    public List<String> extractImageUrlsSortedByDateTime() {
+        return pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING)
+                .stream()
+                .map(Picture::getImgUrl)
+                .toList();
+    }
+
+    /**
+     * 찾아야 하는 상태값과 시작일자를 받아, 상태값을 updateStatus로 변경한다.
+     *
+     * @param searchStatus 찾아야 하는 상태값
+     * @param updateStatus 변경하고자 하는 상태값
+     * @param bidStartDate   찾아야 하는 경매 종료 일자
+     * @return Picture List를 반환한다.
+     */
+    public List<Picture> changePictureStatusByPictureStatusAndBidStartDate(PictureStatus searchStatus, PictureStatus updateStatus, LocalDate bidStartDate) {
+        List<Picture> result = pictureRepository
+                .findAllByPictureStatusAndBidStartDate(searchStatus, bidStartDate);
+
+        result.forEach(picture -> picture.setPictureStatus(updateStatus));
+        return result;
+    }
+
+    /**
+     * 찾아야 하는 상태값과 종료일자를 받아, 상태값을 updateStatus로 변경한다.
+     *
+     * @param searchStatus 찾아야 하는 상태값
+     * @param updateStatus 변경하고자 하는 상태값
+     * @param bidEndDate   찾아야 하는 경매 종료 일자
+     * @return Picture List를 반환한다.
+     */
+    public List<Picture> changePictureStatusByPictureStatusAndBidEndDate(PictureStatus searchStatus, PictureStatus updateStatus, LocalDate bidEndDate) {
+        List<Picture> result = pictureRepository
+                .findAllByPictureStatusAndBidEndDate(searchStatus, bidEndDate);
+
+        result.forEach(picture -> picture.setPictureStatus(updateStatus));
+        return result;
+    }
+
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<Picture> findPictureStatusByStatusAndBidEndDate(PictureStatus searchStatus, LocalDate bidEndDate) {
+        return pictureRepository
+                .findAllByPictureStatusAndBidEndDate(searchStatus, bidEndDate);
+    }
+
+    public List<Picture> saveAllPictureList(List<Picture> saveList) {
+        return pictureRepository.saveAll(saveList);
     }
 
 }
