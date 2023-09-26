@@ -3,6 +3,7 @@ package picasso.server.api.user.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import picasso.server.api.user.exception.EmailErrorException;
 import picasso.server.api.user.vo.request.LoginRequestDto;
 import picasso.server.api.user.vo.request.SignUpRequestDto;
 import picasso.server.domain.domains.user.entity.User;
@@ -22,18 +23,15 @@ public class UserService {
 
         Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
         if (existingUser.isPresent()) {
-            throw new RuntimeException("이미 등록된 이메일입니다."); // 중복 이메일 체크
+            // TODO : Custom Exception ㅇㄷ?
+            throw EmailErrorException.EXCEPTION; // 중복 이메일 체크
         }
 
-        User newUser = userRepository.save(User.builder()
+    return userRepository.save(User.builder()
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .nickName(userDto.getNickName())
                 .build());
-
-       // emailService.sendVerificationEmail(newUser);   sendVerificationEmail: 이메일 전송 로직 추가,,?
-
-        return newUser;
     }
 
     public Optional<User> login(LoginRequestDto userDto) {
@@ -60,8 +58,12 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    //??
     public Optional<User> findUserByIdAndEmail(Long userId, String email) {
         return userRepository.findByIdAndEmail(userId, email);
     }
 
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
