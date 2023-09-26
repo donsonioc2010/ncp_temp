@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import picasso.server.api.user.exception.EmailErrorException;
 import picasso.server.api.user.vo.request.LoginRequestDto;
 import picasso.server.api.user.vo.request.SignUpRequestDto;
+import picasso.server.domain.domains.user.dto.UserDTO;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 
@@ -58,12 +59,15 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    //??
+
     public Optional<User> findUserByIdAndEmail(Long userId, String email) {
         return userRepository.findByIdAndEmail(userId, email);
     }
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      >
 <head>
     <meta charset="UTF-8">
     <title>Create Picture</title>
@@ -13,7 +14,7 @@
 <div style='display:flex; gap:50px; align-items:center;'>
     <form th:object="${PictureDTO}" th:action="@{/pictures}" method="post" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-md-6" style="margin-bottom: 20px;">
+            <div>
                 <h4>사진 선택</h4>
                 <div class="input-group mb-8" style="width: 250px;">
                     <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*"
@@ -25,52 +26,51 @@
                 </div>
             </div>
         </div>
-    </form>
+<!--    </form>-->
 
     <div class="section-container">
         <!-- 섹션 2: 일반 그림 정보 (디테일 제외) -->
         <div class="section">
-            <form th:object="${PictureDTO}" th:action="@{/pictures}" method="post" enctype="multipart/form-data"
-                  style="width: 250px;">
-                <div class="col-md-8" style="margin-bottom: 20px;">
+<!--            <form th:object="${PictureDTO}" th:action="@{/pictures}" method="post" enctype="multipart/form-data"
+                  style="width: 250px;">-->
+                <div style="margin-bottom: 20px;">
                     <h4>그림 정보 입력</h4>
-                    <label for="pictureName">그림 명 :</label><br>
+                    <label for="pictureName">그림 명</label><br>
                     <input type="text" id="pictureName" name="pictureName" th:field="*{pictureName}" required><br><br>
 
-                    <label for="painterName">화가:</label><br>
+                    <label for="painterName">화가</label><br>
                     <input type="text" id="painterName" name="painterName" th:field="*{painterName}" required><br><br>
 
-                    <label for="size">그림 크기:</label><br>
+                    <label for="size">그림 크기</label><br>
                     <input type="text" id="size" name="size" th:field="*{size}" required><br><br>
 
                     <form th:object="${PictureDTO}" th:action="@{/pictures}" method="post"
                           enctype="multipart/form-data">
-                        <div class="col-md-8" style="margin-bottom: 20px;">
-                            <label for="details">설 명:</label><br>
+                            <label for="details">설 명</label><br>
                             <textarea id="details" name="details" th:field="*{details}" required class="fixed-textarea"></textarea><br><br>
 
-                            <label for="StartingPrice">시작가격:</label><br>
+                            <label for="StartingPrice">시작가격</label><br>
                             <input type="number" id="StartingPrice" name="StartingPrice" th:field="*{startingPrice}"
                                    required><br><br>
 
-                            <label for="auctionDuration">경매 시작일:</label><br>
+                            <label for="auctionDuration">경매 시작일</label><br>
                             <input type="date" id="auctionDuration" name="auctionDuration" th:field="*{bidStartDate}"
                                    required><br><br>
 
-                            <label for="incrementAmount">증가 금액:</label>
+                            <label for="incrementAmount">증가 금액</label>
                             <input type="number" id="incrementAmount" name="incrementAmount"
                                    th:field="*{incrementAmount}"
                                    required><br><br>
 
                             <!-- 그 외 상세 정보 입력란 추가 -->
 
-                            <button type="submit">생성</button>
-                        </div>
+                                <button type="submit">생성</button>
                     </form>
                 </div>
-            </form>
+<!--            </form>-->
         </div>
     </div>
+    </form>
 </div>
     <script type="text/javascript" src="/static/js/bootstrap.js"></script>
     <script src="/static/js/resize.js"></script>

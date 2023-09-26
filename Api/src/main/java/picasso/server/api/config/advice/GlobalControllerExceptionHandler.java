@@ -11,7 +11,6 @@ import picasso.server.common.dto.ErrorDetail;
 import picasso.server.common.exception.BaseException;
 import picasso.server.common.exception.GlobalException;
 
-//TODO : 현재 `GlobalRestControllerExceptionHandler`와 동일한 코드, 추후 수정 필요
 @Slf4j
 @RequiredArgsConstructor
 @ControllerAdvice
@@ -21,8 +20,6 @@ public class GlobalControllerExceptionHandler {
         ErrorDetail errorDetail = e.getErrorCode().getErrorDetail();
         log.warn("ExceptionName >>> {}, ErrorCode >>> {}, ExceptionReason >>> {}",
                 e.getClass(), errorDetail.getStatusCode(), errorDetail.getReason());
-
-        //return ResponseEntity.status(errorDetail.getStatusCode()).body(errorDetail);
         return "redirect:/error";
     }
 
