@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import picasso.server.api.user.exception.EmailErrorException;
 import picasso.server.api.user.vo.request.LoginRequestDto;
 import picasso.server.api.user.vo.request.SignUpRequestDto;
-import picasso.server.domain.domains.user.dto.UserDTO;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 
