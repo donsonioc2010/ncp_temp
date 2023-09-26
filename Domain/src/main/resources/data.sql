@@ -33,26 +33,26 @@ insert into tbl_user  (email, password, nick_name, point, login_type, user_statu
 
 
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (1, 10, 1000, '2023-09-22', '2023-09-29', '안유진 이쁘다', 'local/paint/1.png', '안유진', '안유진', 'BIDDING' ,'800x600');
+ values (1, 10, 1000, '2023-09-22', '2023-09-29', 'I love America', 'local/paint/1.png', 'MAGA', 'Make America Great Again', 'BIDDING' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (2, 20, 2000, '2023-09-21', '2023-09-28', '은채 귀엽다', 'local/paint/2.png', '은채', '은채', 'SUCCESS_BID','1000x800');
+ values (2, 20, 2000, '2023-09-21', '2023-09-28', 'Nooooooooooooooo', 'local/paint/2.png', 'Abdo Musa', '절규하는 몽환', 'SUCCESS_BID','1000x800');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (3, 30, 3000, '2023-09-20', '2023-09-27', '사랑해요 카리나', 'local/paint/3.png', '카리나', '카리나','BIDDING' ,'800x600');
+ values (3, 30, 3000, '2023-09-20', '2023-09-27', '내 눈썹 살려내라', 'local/paint/3.png', 'Jan pierro', '모나리자의 마음','BIDDING' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (4, 40, 4000, '2023-09-19', '2023-09-26', '별이 빛나는 한소희', 'local/paint/4.png', '별이빛나는', '한소희','SUCCESS_BID' ,'1200x600');
+ values (4, 40, 4000, '2023-09-19', '2023-09-26', '9회말 주자 만루 풀카운트', 'local/paint/4.png', '아 이대호', '좌 중간 안타','SUCCESS_BID' ,'1200x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (5, 50, 5000, '2023-09-28', '2023-10-03', '한소용', 'local/paint/5.png', '한수요', '한구요','BEFORE_APPROVE' ,'800x600');
+values (5, 50, 5000, '2023-09-28', '2023-10-03', 'Dont', 'local/paint/5.png', 'Louis Vui', '이 그림은 1982년 영국에서 시작되어','BEFORE_APPROVE' ,'800x600');
 
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (6, 15000, 21000, '2023-09-22', '2023-09-29', 'test1', 'local/paint/1.png', '안유진', '안유진', 'BIDDING' ,'400x400');
+values (6, 15000, 21000, '2023-09-22', '2023-09-29', 'test1', 'local/paint/6.png', '좋은사람 좋은자리', '그대 눈의 cheers', 'BIDDING' ,'400x400');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (7, 2000, 14000, '2023-09-20', '2023-09-27', 'test2', 'local/paint/2.png', '은채', '은채', 'AFTER_APPROVE','1000x600');
+values (7, 2000, 14000, '2023-09-20', '2023-09-27', 'test2', 'local/paint/7.png', '베인', '여전히 내 맘속에', 'AFTER_APPROVE','1000x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (8, 30000, 6000, '2023-09-20', '2023-09-27', 'test3', 'local/paint/3.png', '카리나', '카리나','BIDDING' ,'800x1200');
+values (8, 30000, 6000, '2023-09-20', '2023-09-27', 'test3', 'local/paint/8.png', '과학', '죽음은 바람과 같지','BIDDING' ,'444X444');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (9, 4000, 9000, '2023-09-15', '2023-09-22', 'test4', 'local/paint/4.png', '별이빛나는', '한소희','SUCCESS_BID' ,'1000x600');
+values (9, 4000, 9000, '2023-09-15', '2023-09-22', 'test4', 'local/paint/9.png', '원숭이', '원피스는 존재한다','SUCCESS_BID' ,'1000x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
-values (10, 50000, 100000, '2023-09-28', '2023-10-03', 'test5 ', 'local/paint/5.png', '한지요', '한조요','BEFORE_APPROVE' ,'800x600');
+values (10, 50000, 100000, '2023-09-28', '2023-10-03', 'test5 ', 'local/paint/10.png', '겐지', '한조 대기중','BEFORE_APPROVE' ,'800x600');
 
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
 values (11, 10, 1000, '2023-09-22', '2023-09-29', '안유진 이쁘다', 'local/paint/1.png', '안유진', '안유진', 'BIDDING' ,'800x600');
