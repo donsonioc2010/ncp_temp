@@ -40,4 +40,8 @@ public interface PictureBidHistoryRepository extends JpaRepository<PictureBidHis
     List<PictureBidHistory> findByUserOrderByCreatedAtDesc(User user);
 
     List<PictureBidHistory> findByPictureOrderByBidAmountDesc(Picture picture);
+
+    List<PictureBidHistory> findByPicture(Picture picture);
+
+    List<PictureBidHistory> findAllByUserOrderByCreatedAt(User user);
 }

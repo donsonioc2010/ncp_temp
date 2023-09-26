@@ -1,12 +1,17 @@
 package picasso.server.api.auction.service;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import picasso.server.api.auction.dto.request.PictureBiddingRequestDto;
+import picasso.server.api.auction.dto.response.PictureAbleBidResponseDto;
 import picasso.server.common.exception.NotFoundRestException;
 import picasso.server.common.exception.NotLoginUserRestException;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.items.PictureBidHistory;
+import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.picture.repository.PictureBidHistoryRepository;
 import picasso.server.domain.domains.picture.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
@@ -18,6 +23,7 @@ import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class PictureBidHistoryService {
     private final UserRepository userRepository;
@@ -39,23 +45,26 @@ public class PictureBidHistoryService {
      * @param amount
      * @return
      */
-    public boolean biddingProcess(User user, Long pictureId, Long amount) {
+    @Transactional
+    public boolean biddingProcess(HttpSession session, User user, PictureBiddingRequestDto requestDto) {
         User findUser = userRepository.findById(user.getId()).orElseThrow(() -> NotLoginUserRestException.EXCEPTION);
-        Picture findPicture = pictureRepository.findById(pictureId).orElseThrow(() -> NotFoundRestException.EXCEPTION);
-        Optional<PictureBidHistory> optionalTopHistory = pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture);
 
-        //아무도 입찰 신청을 하지 않은 경우 또는 요청한 사용자가 입찰 신청한경우 , DB에 저장
-        if (optionalTopHistory.isEmpty() || isAbleBiddingPictureByUser(user, findPicture, optionalTopHistory.get(), amount)) {
-            PictureBidHistory newBidHistory = PictureBidHistory.builder()
-                    .picture(findPicture)
-                    .user(findUser)
-                    .bidAmount(amount)
-                    .build();
-            findPicture.addBidHistory(newBidHistory);
-            pictureRepository.save(findPicture);
-            return true;
-        }
-        return false;
+        Picture findPicture = pictureRepository.findById(requestDto.getPictureId()).orElseThrow(() -> NotFoundRestException.EXCEPTION);
+        List<PictureBidHistory> history = pictureBidHistoryRepository.findByPicture(findPicture);
+        history.add(
+                PictureBidHistory.builder()
+                        .picture(findPicture)
+                        .user(findUser)
+                        .bidAmount(requestDto.getAmount())
+                        .build()
+        );
+
+        findUser.minusPoint(requestDto.getAmount());
+        pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture).ifPresent(topHistory ->
+                        topHistory.getUser().updatePoint(topHistory.getBidAmount()));
+        userRepository.save(findUser);
+        session.setAttribute("loginUser", findUser);
+        return  true;
     }
 
     /**
@@ -70,5 +79,41 @@ public class PictureBidHistoryService {
 
         // 사용자가 최종 입찰자가 아니거나 또는
         return !topHistory.getUser().equals(user) && amount <= topHistory.getBidAmount() + picture.getIncrementAmount();
+    }
+
+    /**
+     * 경매 입찰을 진행한 사용자가 입찰이 가능한지를 검증한다.
+     * @param sessionHaveLoginUser
+     * @param pictureId
+     * @return
+     */
+    @Transactional
+    public PictureAbleBidResponseDto getSessionUserBiddingResult(User sessionHaveLoginUser, Long pictureId) {
+        Picture findPicture = pictureRepository.findById(pictureId).orElseThrow(() -> NotFoundRestException.EXCEPTION);
+        Optional<PictureBidHistory> optionalTopHistory = pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture);
+        if (sessionHaveLoginUser.getEmail().equals(findPicture.getUser().getEmail())) {
+            return PictureAbleBidResponseDto.builder()
+                    .result(false)
+                    .message("경매품 등록자는 입찰이 불가합니다.")
+                    .build();
+        }
+
+        if (optionalTopHistory.isPresent() && optionalTopHistory.get().getUser().getEmail().equals(sessionHaveLoginUser.getEmail())) {
+            return PictureAbleBidResponseDto.builder()
+                    .result(false)
+                    .message("가장 최근 입찰자 입니다.")
+                    .build();
+        }
+
+        return PictureAbleBidResponseDto.builder()
+                .result(true)
+                .build();
+    }
+    public List<PictureBidHistory> retrieveMyBidHistoryList(User user) {
+        return pictureBidHistoryRepository.findAllByUserOrderByCreatedAt(user);
+    }
+    
+    public List<Picture> retrieveMyPictureList(User user, PictureStatus pictureStatus) {
+        return pictureRepository.findAllByPictureStatusAndUser(pictureStatus, user);
     }
 }
