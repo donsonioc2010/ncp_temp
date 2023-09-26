@@ -2,6 +2,7 @@ package picasso.server.common.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 import picasso.server.common.dto.ErrorDetail;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -30,7 +31,8 @@ public enum GlobalException implements BaseErrorCode {
     NEED_LOGIN_ERROR(UNAUTHORIZED.value(), "로그인이 필요한 기능입니다."),
     LOGIN_ERROR(NOT_FOUND.value(), "자동로그인 실패"),
     STATUS_ERROR(NOT_FOUND.value(), "비활성화되어 있습니다"),
-    EMAIL_ERROR(NOT_FOUND.value(), "이메일이 없습니다")
+    EMAIL_ERROR(NOT_FOUND.value(), "이메일이 없습니다"),
+    USER_NOT_FOUND_ERROR(NOT_FOUND.value(), "유저를 찾을 수 없습니다.")
     ;
 
     private final Integer statusCode;

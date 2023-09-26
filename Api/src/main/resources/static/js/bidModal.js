@@ -8,7 +8,6 @@ function inputPrice(e){
     priceAmount.textContent = "입찰 금액 : " + bidNum + "원";
 }
 
-
 var amount = document.getElementById('inputPrice');
 var userId;
 var bidResult = obj => {
