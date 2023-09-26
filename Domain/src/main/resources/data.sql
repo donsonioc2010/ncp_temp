@@ -11,7 +11,7 @@ values ('ffff', 'a','b','c','d');
 
 -- 테스트용 데이터
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('admin@test.com', '1111', '꽌리자', 300, 'DEFAULT', 'SUSPENSION', 'ADMIN', '2023-09-20 10:00:00', '2023-08-21 12:00:00', '2023-08-22 12:00:00');
+values ('admin@test.com', '1111', '꽌리자', 300, 'DEFAULT', 'SUSPENSION', 'ADMIN', '2023-09-20 10:00:00', '2023-08-21 12:00:00', '2023-08-22 12:00:00');
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
 values ('admin1@test.com', '1111', '광리자', 300, 'DEFAULT', 'NOT_ACTIVE', 'ADMIN', '2023-09-20 10:00:00', '2023-08-13 12:00:00', '2023-08-22 12:00:00');
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
@@ -19,11 +19,11 @@ values ('admin2@test.com', '1111', '퐝리자', 300, 'DEFAULT', 'ACTIVE', 'ADMIN
 
 
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test1@test.com', '1111', '안뇽', 100, 'KAKAO', 'ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+values ('test1@test.com', '1111', '안뇽', 100, 'KAKAO', 'ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test2@test.com', '2222', '화요일', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
+values ('test2@test.com', '2222', '화요일', 100, 'NAVER', 'NOT_ACTIVE', 'USER', '2023-09-18 10:00:00', '2023-08-22 10:00:00', '2023-08-22 10:00:00');
 insert into tbl_user  (email, password, nick_name, point, login_type, user_status, user_role, created_at, updated_at, login_at)
- values ('test3@test.com', '3333', '3번', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
+values ('test3@test.com', '3333', '3번', 300, 'DEFAULT', 'SUSPENSION', 'USER', '2023-09-20 10:00:00', '2023-08-22 12:00:00', '2023-08-22 12:00:00');
 
 
 
@@ -33,13 +33,13 @@ insert into tbl_user  (email, password, nick_name, point, login_type, user_statu
 
 
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (1, 10, 1000, '2023-09-22', '2023-09-29', 'I love America', 'local/paint/1.png', 'MAGA', 'Make America Great Again', 'BIDDING' ,'800x600');
+values (1, 10, 1000, '2023-09-22', '2023-09-29', 'I love America', 'local/paint/1.png', 'MAGA', 'Make America Great Again', 'BIDDING' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (2, 20, 2000, '2023-09-21', '2023-09-28', 'Nooooooooooooooo', 'local/paint/2.png', 'Abdo Musa', '절규하는 몽환', 'SUCCESS_BID','1000x800');
+values (2, 20, 2000, '2023-09-21', '2023-09-28', 'Nooooooooooooooo', 'local/paint/2.png', 'Abdo Musa', '절규하는 몽환', 'SUCCESS_BID','1000x800');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (3, 30, 3000, '2023-09-20', '2023-09-27', '내 눈썹 살려내라', 'local/paint/3.png', 'Jan pierro', '모나리자의 마음','BIDDING' ,'800x600');
+values (3, 30, 3000, '2023-09-20', '2023-09-27', '내 눈썹 살려내라', 'local/paint/3.png', 'Jan pierro', '모나리자의 마음','BIDDING' ,'800x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
- values (4, 40, 4000, '2023-09-19', '2023-09-26', '9회말 주자 만루 풀카운트', 'local/paint/4.png', '아 이대호', '좌 중간 안타','SUCCESS_BID' ,'1200x600');
+values (4, 40, 4000, '2023-09-19', '2023-09-26', '9회말 주자 만루 풀카운트', 'local/paint/4.png', '아 이대호', '좌 중간 안타','SUCCESS_BID' ,'1200x600');
 insert into tbl_picture(picture_id, increment_amount, starting_price, bid_start_date, bid_end_date, details, img_url, painter_name, picture_name, picture_status, size)
 values (5, 50, 5000, '2023-09-28', '2023-10-03', 'Dont', 'local/paint/5.png', 'Louis Vui', '이 그림은 1982년 영국에서 시작되어','BEFORE_APPROVE' ,'800x600');
 
