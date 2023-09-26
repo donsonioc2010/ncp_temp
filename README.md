@@ -1,5 +1,6 @@
 # Picasso 
-[홈페이지 링크](http://picasso.jong1.com/) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdonsonioc2010%2Fpicasso&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) 
+- [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdonsonioc2010%2Fpicasso&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+- [홈페이지 링크](http://picasso.jong1.com/) 
 
 ---
 ## 주제
@@ -30,12 +31,20 @@
 ---
 
 ## TechStack
-### Tech
+### FrontEnd
+![Thymeleaf](https://img.shields.io/badge/Bootstrap-v.5-7952B3?style=flat&logo=bootstrap&logoColor=white)
+![HTML5](https://img.shields.io/badge/html-5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css-3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-E7DF1E?style=flat&logo=javascript&logoColor=white)
+![Jquery](https://img.shields.io/badge/jQuery-v.3.7-0769AD?style=flat&logo=jquery&logoColor=white)
+
+### BackEnd
 ![JDK17](https://img.shields.io/badge/Java-v.17-CC0000?style=flat&logo=OpenJDK&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-v.8-02303A?style=flat&logo=Gradle&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring-Boot_v.3-6DB33F?style=flat&logo=Spring-Boot&logoColor=white)
 ![Spring Data JPA](https://img.shields.io/badge/Spring-Data_JPA-6DB33F?style=flat&logo=Spring&logoColor=white)
-![Thymeleaf](https://img.shields.io/badge/Thymeleaf-v.3-005F0F?style=flat&logo=Thymeleaf&logoColor=white)
+
+### Database
 ![MySQL](https://img.shields.io/badge/MySQL-v.8.0.33-4479A1?style=flat&logo=MySQL&logoColor=white)
 ![H2](https://img.shields.io/badge/H2-v.2.1-4479A1?style=flat&logo=h2&logoColor=white)
 
@@ -52,6 +61,17 @@
 
 ---
 ## ProtoType Wire Frame
+> 초안으로 제작한 WireFrame 다들..그저 BackEnd였다...
+
+![1](Docs/wireframe/1.png)
+![2](Docs/wireframe/2.png)
+![3](Docs/wireframe/3.png)
+![4](Docs/wireframe/4.png)
+![5](Docs/wireframe/5.png)
+![6](Docs/wireframe/6.png)
+![7](Docs/wireframe/7.png)
+![8](Docs/wireframe/8.png)
+![9](Docs/wireframe/9.png)
 
 ---
 ## ERD
@@ -59,12 +79,16 @@
 > DBDocs의 문서화 내용 변경하고싶은 경우   
 > `./Docs/Picasso.dbml`의 파일 내용을 변경한 다음 `dev`브랜치에 Push가 진행될 경우 자동 갱신됩니다.
 
-
 - [DBDocs 링크](https://dbdocs.io/donsonioc2010/Picasso)
+
+### ERD Image
+![ERD](Docs/erd.png)
+
+
 ---
 ## 구현 기능
 
 ---
 ## CI/CD
-> 
+
 ![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=Github-Actions&logoColor=white)

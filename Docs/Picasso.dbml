@@ -2,20 +2,17 @@ Project Picasso{
   database_type: 'MySQL'
   Note: '''
     # Picasso DB스키마 구조
-
-    ## 전달사항
-    - 완벽한 ERD는 아니에요 수정필요하면 맘껏 수정하셔도 됩니다.
   '''
 }
 
-Table Auth.user [
+Table Auth.tbl_user [
   headercolor: #E4A62E, note: '사용자 계정 정보 저장 테이블'
 ] {
-  id long [pk, increment, note: "User UID"]
+  id bigint [pk, not null, increment, note:'사용자 UID']
   email varchar [unique, not null , note: "사용자 로그인 ID"]
-  password varchar [not null, note: "사용자 패스워드"]
-  nick_name varchar [unique, not null, note: "사용자 닉네임"]
-  profile varchar [note: "프로필 링크"]
+  nick_name varchar(255) [not null, note: '사용자 NickName']
+  password varchar(255) [not null, note: '패스워드']
+  profile varchar(255) [note: "프로필 링크"]
   point long [default: 0, note: "사용자 보유중인 포인트 금액"]
   login_type varchar [
     not null, default: "DEFAULT",
@@ -26,7 +23,15 @@ Table Auth.user [
       - NAVER: 네이버
     '''
   ]
-  status varchar [
+  user_role varchar [
+    not null, default: "USER",
+    note: '''
+      사용자 권한
+      - USER: 사용자
+      - ADMIN: 관리자
+    '''
+  ]
+  user_status varchar [
     not null,
     note: '''
       가입 방법에 따라 DEFAULT가 달라져야 하기 때문에 DEFAULT를 일부로 부여하지 않음.
@@ -36,50 +41,41 @@ Table Auth.user [
       - DELETE: 회원 탈퇴 및 삭제 필요 계정
     '''
   ]
-  role varchar [
-    not null, default: "USER",
-    note: '''
-      사용자 권한
-      - USER: 사용자
-      - ADMIN: 관리자
-    '''
-  ]
-  created_at datetime [not null, default: `now()`, note: '회원 가입일']
-  updated_at datetime [not null, default: `now()`, note: '마지막 업데이트일']
+  created_at datetime [not null, default: `now()`, note: '계정 생성일']
+  login_at datetime [not null, default: `now()`, note: '마지막 로그인 시간']
 }
 
-Table Auth.user_login_history [
-  headercolor: #E4A62E, note: '사용자 계정 로그인 기록 로그'
+//--결제
+Table Payment.tbl_payment_history [
+  headercolor: #24BAB1,
+  note: '금액 갱신 히스토리'
 ] {
-  id long [pk, increment, note: "pk"]
-  user_id long [ref: > Auth.user.id, note: '사용자 UID']
-  login_at datetime [not null, note: '사용자 로그인 일시']
-}
-
-Table Auth.social_info [
-  headercolor: #E4A62E,
-  note: '소셜 사용자를 위한 추가 정보, 추후 소셜로그인 구현시 사용'
-]{
-  user_id long [ref: - Auth.user.id]
-  access_token varchar [not null, note: '액세스 토큰 [필요 없을수도 있슴]']
-  refresh_token varchar [not null, note: '소셜 재로그인을 위한 리프래시 토큰']
-  created_at datetime [not null, default: `now()`]
+  id bigint [pk, increment, note:'PK ID']
+  amount bigint [not null, note:'결제 정보']
+  user_id bigint [not null, note: '사용자 ID']
+  merchant_uid varchar(255) [not null, note: '결제 번호']
+  pg_name varchar(255) [not null, note: '''
+    - KAKAO : 카카오 결제
+    - TOSS  : 토스 결제
+  ''']
+  product_name varchar(255) [not null, note: '결제 상품 명']
+  primary key (id)
 }
 
 //---------------------------------------------------------
-Table Board.article[
+Table Picture.tbl_picture[
   headercolor: #24BAB1,
   note: '게시물(경매 물품 게시물)'
 ] {
-  id long [pk, increment, note: '게시물 ID']
-  title varchar [not null, note: '작품명, 게시물 제목']
-  content blob [note: '게시물 내용, 물품에 대한 상세 설명']
-  photo_link varchar [not null, note: '게시물 이미지 링크']
-  artist varchar [not null, note: "화가 명"]
-  min_increase_amount long [not null, note: "최소 입찰 단위"]
-  start_amount long [not null, default: 0, note: "입찰 시작가"]
-  now_amount long [not null, note: "현재 입찰가(최고가)"]
-  status varchar [default: 'BEFORE_APPROVE', note:'''
+  picture_id bigint [pk, increment, note: '게시물 ID']
+  picture_name varchar [not null, note: '작품명, 게시물 제목']
+  painter_name varchar [not null, note: '화가 명']
+  detail clob [note: '게시물 내용, 물품에 대한 상세 설명']
+  img_url varchar [not null, note: '게시물 이미지 링크']
+  increase_amount long [not null, note: "최소 입찰 단위"]
+  starting_price long [not null, default: 0, note: "입찰 시작가"]
+  size varchar [not null, note: '그림 SIZE']
+  picture_status varchar [default: 'BEFORE_APPROVE', note:'''
     게시물 상태
     - BEFORE_APPROVE : 입찰 전(관리자 승인 전)
     - AFTER_APPROVE : 입찰 전(관리자 승인 후)
@@ -89,55 +85,32 @@ Table Board.article[
 
     게시물의 경우 BeforeApprove 상태에서만 수정 가능
   ''']
-  created_at datetime [default: `now()`, note: '게시물 생성일']
-  created_user long [not null, note: '게시물 작성 사용자 ID입력, 관계를 묶지는 않은 이유는 Optional한 관계로 하기 떄문']
-  updated_at datetime [default: `now()`, note: '게시물 정보 업데이트']
-  updated_user long [not null, note: '마지막에 수정한 사용자 ID입력, 관계를 묶지는 않은 이유는 Optional한 관계로 하기 떄문']
+  user_id bigint [ref:> Auth.tbl_user.id, not null, note:'사용자 ID']
+  bid_start_date date [default: `now()`, note: '경매 시작일']
+  bid_end_date date [default: `now()`, note: '경매 종료일']
 }
 
-Table Board.article_amount_history [
+Table Picture.tbl_picture_bid_history [
   headercolor: #24BAB1,
   note: '금액 갱신 히스토리'
 ] {
-  id long [pk, increment, note: 'PK를 위한 ID']
-  article_id long [ref: > Board.article.id, note:'게시물 ID']
-  amount long [note: '최고가를 갱신했던 금액들']
-  created_at datetime [default: 'now()', note: '해당 금액 갱신 시간']
+  id bigint [pk, not null, increment, note: 'PK']
+  bid_amount bigint [not null, note: '입찰 희망가']
+  created_at datetime [not null, note: '입찰시간']
+  picture_id bigint [ref:> Picture.tbl_picture.picture_id ,not null, note: '입찰을 진행한 Picture ID']
+  user_id bigint [ref:- Auth.tbl_user.id ,not null, note: '입찰 사용자 ID']
 }
-
-Table Exchange.payment_history [
-  headercolor: #2563eb,
-  note: '결제 히스토리'
-] {
-  id long [pk, increment, note: '결제 정보 하나하나에 대한 ID']
-  pg varchar [not null, note: '''
-  결제 플랫폼
-  ex) 카카오페이, 토스페이, 이니시스
-  ''']
-  pay_method varchar(20) [not null, default: 'card', note: '결제 방법']
-  merchant_uid int [not null, unique, note: '''
-  주문 번호 : 서버에서 고유하게 지정할 예정.
-  아마 게시물(경매 물품)의 id를 변형할듯함
-  ''']
-  product_name varchar(100) [not null, note: '상품 이름', default: '피카소 포인트 환전']
-  amount int [not null, note: '결제 가격']
-  buyer_id int [not null, ref: > Auth.user.id, note: '구매자 ID']
-}
+//---------------
 
 //사용자 정보 관련 그룹
 TableGroup User {
-  Auth.user
-  Auth.social_info
-  Auth.user_login_history
+  Auth.tbl_user
+  Payment.tbl_payment_history
 }
 
 // 게시물 그룹
-TableGroup Board_Article {
-  Board.article
-  Board.article_amount_history
+TableGroup Picture {
+  Picture.tbl_picture
+  Picture.tbl_picture_bid_history
 }
 
-// 포인트 환전 관련 그룹
-TableGroup Exchange {
-  Exchange.payment_history
-}
