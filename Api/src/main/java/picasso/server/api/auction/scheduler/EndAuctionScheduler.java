@@ -47,7 +47,6 @@ public class EndAuctionScheduler {
                     }
                 }
         );
-        pictureService.saveAllPictureList(todayEndPictursList);
         log.info("Today End Auctions Schedule End Time  >>> {}", LocalDateTime.now());
     }
 

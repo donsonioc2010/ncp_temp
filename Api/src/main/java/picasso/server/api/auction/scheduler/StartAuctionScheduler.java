@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static picasso.server.domain.domains.picture.items.PictureStatus.AFTER_APPROVE;
+import static picasso.server.domain.domains.picture.items.PictureStatus.BEFORE_APPROVE;
 import static picasso.server.domain.domains.picture.items.PictureStatus.BIDDING;
 
 /**
@@ -33,7 +34,7 @@ public class StartAuctionScheduler {
     public void startApprovePictureToBiddingAuction() {
         log.info("Start Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
         pictureService
-                .changePictureStatusByPictureStatusAndBidEndDate(AFTER_APPROVE, BIDDING, LocalDate.now())
+                .changePictureStatusByPictureStatusAndBidStartDate(AFTER_APPROVE, BIDDING, LocalDate.now())
                 .forEach(sendMailService::startBiddingMail);
         log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }
@@ -44,7 +45,7 @@ public class StartAuctionScheduler {
     public void startNotApprovePictureToRejectAuction() {
         log.info("Start Reject Picture Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
         pictureService
-                .changePictureStatusByPictureStatusAndBidEndDate(AFTER_APPROVE, BIDDING, LocalDate.now())
+                .changePictureStatusByPictureStatusAndBidStartDate(BEFORE_APPROVE, BIDDING, LocalDate.now())
                 .forEach(sendMailService::pictureRejectMailWithNotApproveAdmin);
         log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }

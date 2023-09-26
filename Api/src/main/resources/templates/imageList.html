@@ -1,77 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+<main layout:fragment="content">
+    <link rel="stylesheet" type="text/css" href="/static/css/image.css"/>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>경매</title>
-    <link rel="stylesheet" href="../static/css/image.css">
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <link rel="icon" href="data:,">
-</head>
-<!--<body class="img12">-->
-<!--<header th:include="fragment/header2.html :: header"></header>-->
-<!--<section class="special-section">-->
-<!--    <div>-->
-<!--&lt;!&ndash;        <div th:each="imageUrl, idx : ${imageUrls}">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="img-box">&ndash;&gt;-->
-<!--&lt;!&ndash;                <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${imageUrl} + '?type=f&w=300&h=400' "&ndash;&gt;-->
-<!--&lt;!&ndash;                     alt="Image">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span>그림명: <span th:text="${pictureDataMap['pictureNames'][idx.index]}"></span></span><br>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span>화가: <span th:text="${pictureDataMap['painterNames'][idx.index]}"></span></span><br>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span>설명: <span th:text="${pictureDataMap['details'][idx.index]}"></span></span><br>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span>가격: <span th:text="${pictureDataMap['startPrices'][idx.index]}"></span></span><br>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span>Remaining Days: <span th:text="${pictureDataMap['dateDifferences'][idx.index]}"></span></span><br><br>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div th:each="pictureInfo : ${pictureInfoPage}">-->
-<!--            <div class="img-box">-->
-<!--                <img th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/' + ${pictureInfo.imageUrl} + '?type=f&w=300&h=400' ">-->
-<!--                <p>Details: <span th:text="${pictureInfo.details}"></span></p>-->
-<!--                <p>Picture Name: <span th:text="${pictureInfo.pictureName}"></span></p>-->
-<!--                <p>Painter Name: <span th:text="${pictureInfo.painterName}"></span></p>-->
-<!--                <p>Starting Price: <span th:text="${pictureInfo.startPrice}"></span></p>-->
-<!--                <p>Increment Amount: <span th:text="${pictureInfo.incrementAmount}"></span></p>-->
-<!--                <p>Bid End Date: <span th:text="${pictureInfo.endDay}"></span></p>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-
-<!--        &lt;!&ndash; Pagination &ndash;&gt;-->
-<!--&lt;!&ndash;        <div>&ndash;&gt;-->
-<!--&lt;!&ndash;        <button th:disabled="${!imageUrlsPage.hasPrevious()}" th:href="@{'/list?page=' + ${previousPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Previous</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        <span th:text="${nextPage}"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;        <button th:disabled="${!imageUrlsPage.hasNext()}" th:href="@{'/list?page=' + ${nextPage} + '&pageSize=' + ${pageSize} + '&status=' + ${status}}">Next</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-
-
-<!--    </div>-->
-<!--</section>-->
-<!--</body>-->
-<!--<div class="pagination-links">-->
-<!--    <nav aria-label="...">-->
-<!--        <ul class="pagination">-->
-<!--            <li class="page-item">-->
-<!--                <a class="page-link" href="#" onclick="changePage('Previous')">Previous</a>-->
-<!--            </li>-->
-<!--            <li class="page-item"><a class="page-link" href="#" onclick="changePage(0)">1</a></li>-->
-<!--            <li class="page-item"><a class="page-link" href="#" onclick="changePage(1)">2</a></li>-->
-<!--            <li class="page-item"><a class="page-link" href="#" onclick="changePage(2)">3</a></li>-->
-<!--            <li class="page-item">-->
-<!--                <a class="page-link" href="#" onclick="changePage('Next')">Next</a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--</div>-->
-<body class="img12">
-<header th:include="fragment/header2.html :: header"></header>
 <section class="special-section">
-    <div class="container">
+    <div class="container-fluid" style="margin-top:100px;">
         <div class="row">
             <div th:each="pictureInfo : ${pictureInfoPage}" class="col-md-3">
                 <div class="card mb-3">
@@ -80,12 +19,17 @@
                          class="card-img-top" alt="Picture">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${pictureInfo.pictureName}"></h5>
-                        <p class="card-text">Details: <span th:text="${pictureInfo.details}"></span></p>
-                        <p class="card-text">Painter Name: <span th:text="${pictureInfo.painterName}"></span></p>
-                        <p class="card-text">Starting Price: <span th:text="${pictureInfo.startPrice}"></span></p>
-                        <p class="card-text">Increment Amount: <span th:text="${pictureInfo.incrementAmount}"></span></p>
-                        <p class="card-text">경매 종료 날짜:<br> <span th:text="${pictureInfo.endDay}"></span></p>
+                        <h5 class="card-title d-flex align-items-center" >
+                            <b class="d-inline-block text-truncate" style="max-width: 180px;" th:text="${pictureInfo.pictureName}"></b>
+                            <div class="vr" style="margin-left: 10px;margin-right: 10px;"></div>
+                            <small class="d-inline-block text-truncate" style="max-width: 100px;" th:text="${pictureInfo.painterName}"></small>
+                        </h5>
+                        <div class="row">
+                            <div class="col" >
+                                <span th:text="${pictureInfo.getStartDate()}"></span>~
+                                <span th:text="${pictureInfo.getEndDate()}"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,7 +38,7 @@
 </section>
 
 <!-- Pagination -->
-<div class="pagination-links">
+<div class="pagination-links" style="margin-top: 40px;margin-bottom: 40px;">
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item">
@@ -109,8 +53,11 @@
         </ul>
     </nav>
 </div>
+</main>
+<th:block layout:fragment="script">
 
 <script src="../static/js/imgURL.js"></script>
 <script src="../static/js/onClick.js"></script>
-</body>
+</th:block>
+
 </html>

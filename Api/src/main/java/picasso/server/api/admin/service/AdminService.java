@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.admin.exception.AlreadyChangePictureException;
+import picasso.server.api.mail.service.SendMailService;
 import picasso.server.common.exception.NotFoundException;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.repository.PictureRepository;
@@ -25,6 +26,7 @@ import static picasso.server.domain.domains.picture.items.PictureStatus.BEFORE_A
 public class AdminService {
     private final PictureRepository pictureRepository;
     private final UserRepository userRepository;
+    private final SendMailService sendMailService;
 
     // TODO : 추후 Pagenation으로의 수정 필요함.
     @Transactional(readOnly = true)
@@ -56,6 +58,7 @@ public class AdminService {
                 pictureRepository.save(picture);
                 log.info("ApprovePicture Success >>> Picture Id : {}, Title : {}",
                         picture.getPictureId(), picture.getPictureName());
+                sendMailService.adminApproveMail(picture);
                 return;
             }
             log.warn("ApprovePicture Failure >>> Picture Id : {}, Title : {}",
