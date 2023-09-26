@@ -16,6 +16,8 @@
                     <input type="button" value="계정 생성" class="btn btn-primary" style="height: 50%;"
                            onClick="moveForm();"
                            th:if="${session.loginUser.userRole.name().equals('ADMIN')}"/>
+
+
                 </div>
             </div>
         </div>
@@ -28,18 +30,26 @@
                 <th>최근 로그인 시간</th>
                 <th>최근 수정 시간</th>
                 <th>별명</th>
-                <th>프로필 링크</th>
+                <th>회원 상태</th>
+               <th th:if="${user != null && user.userRole == 'USER'}">계정 정지 버튼</th>
+
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            <tr th:each="user : ${users}">
+            <tr th:each="user : ${users}" th:if="${#strings.equals(user.userStatus, 'ACTIVE')}">
                 <td th:text="${user.id}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.loginAt}"></td>
                 <td th:text="${user.updatedAt}"></td>
                 <td th:text="${user.nickName}"></td>
-                <td th:text="${user.profile}"></td>
+                <td th:text="${user.userStatus.name()}"></td>
+                <td>
+                    <form th:action="@{'/admin/suspend/' + ${user.id}}" method="post" >
+                        <button type="submit" class="btn btn-danger"  th:if="${user != null && #strings.equals(user.userRole,'USER')}">계정 정지 버튼</button>
+                    </form>
+                </td>
             </tr>
+
             </tbody>
         </table>
     </div>
@@ -53,4 +63,11 @@
     <script type="text/javascript">
     </script>
 </th:block>
+
+
+
+
+
+
+
 </html>

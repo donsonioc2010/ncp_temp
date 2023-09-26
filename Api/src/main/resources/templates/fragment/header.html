@@ -60,8 +60,9 @@
                                     <li><a class="dropdown-item" onclick="requestPayment(event)">포인트 환전</a></li>
                                     <th:block  th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="/admin/list">경매품 인가 대시보드</a></li>
-                                        <li><a class="dropdown-item" href="/admin/user/list">관리자 계정 관리</a></li>
+                                        <li><a class="dropdown-item" href="/admin/approvelist">경매품 인가 대시보드</a></li>
+                                        <li><a class="dropdown-item" href="/admin/user/list?userRole=ADMIN">관리자 계정 관리</a></li>
+                                        <li><a class="dropdown-item" href="/admin/user/list?userRole=USER">사용자 계정 관리</a></li>
                                     </th:block>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">로그아웃</a></li>
@@ -78,6 +79,12 @@
                 </th:block>
             </div>
         </div>
+
     </div>
 </header>
+
+
+
 </html>
+
+

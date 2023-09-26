@@ -1,4 +1,4 @@
-package picasso.server.api.user.vo.request;
+package picasso.server.api.admin.request;
 
 import lombok.*;
 

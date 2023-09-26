@@ -1,57 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
-    <title>Picasso - 그림 상세 정보</title>
-    <link rel="stylesheet" href="../static/css/detail.css">
+    <title>그림 상세 정보</title>
+    <link rel="stylesheet" href="../static/css/admindetail.css">
 </head>
+
 <body>
-<h1>그림 상세 정보</h1>
+<div layout:fragment="content">
+    <h1>그림 상세 정보</h1>
 
-<table>
-    <tr>
-        <th>ID:</th>
-        <td th:text="${picture.pictureId}"></td>
-    </tr>
-    <tr>
-        <th>그림 URL:</th>
-        <td th:text="${picture.imgUrl}"></td>
-    </tr>
-    <tr>
-        <th>그림 이름:</th>
-        <td th:text="${picture.pictureName}"></td>
-    </tr>
-    <tr>
-        <th>화가 이름:</th>
-        <td th:text="${picture.painterName}"></td>
-    </tr>
-    <tr>
-        <th>그림 설명:</th>
-        <td th:text="${picture.details}"></td>
-    </tr>
-    <tr>
-        <th>시작 가격:</th>
-        <td th:text="${picture.startingPrice}"></td>
-    </tr>
-    <tr>
-        <th>최소 입찰 단위:</th>
-        <td th:text="${picture.incrementAmount}"></td>
-    </tr>
-    <tr>
-        <th>그림 사이즈:</th>
-        <td th:text="${picture.size}"></td>
-    </tr>
-    <tr>
-        <th>생성일:</th>
-        <td th:text="${picture.bidStartDate}"></td>
-    </tr>
+    <div>
+        <ul>
+            <li>
+                <strong>ID:</strong> <span th:text="${picture.pictureId}"></span>
+            </li>
+            <li>
+                <strong>그림 URL:</strong> <span th:text="${picture.imgUrl}"></span>
+            </li>
+            <li>
+                <strong>그림 이름:</strong> <span th:text="${picture.pictureName}"></span>
+            </li>
+            <li>
+                <strong>화가 이름:</strong> <span th:text="${picture.painterName}"></span>
+            </li>
+            <li>
+                <strong>그림 설명:</strong> <span th:text="${picture.details}"></span>
+            </li>
+            <li>
+                <strong>시작 가격:</strong> <span th:text="${picture.startingPrice}"></span>
+            </li>
+            <li>
+                <strong>최소 입찰 단위:</strong> <span th:text="${picture.incrementAmount}"></span>
+            </li>
+            <li>
+                <strong>그림 사이즈:</strong> <span th:text="${picture.size}"></span>
+            </li>
+            <li>
+                <strong>생성일:</strong> <span th:text="${picture.bidStartDate}"></span>
+            </li>
 
-    <td>
-        <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post" >
-            <button type="submit">Approve</button>
-        </form>
-    </td>
+            <li>
+                <strong>승인 버튼:</strong>
+                <form th:action="@{'/admin/approve/' + ${picture.pictureId}}" method="post">
+                     <button type="submit" class="btn btn-success" >승인</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
 
-</table>
 
 </body>
 </html>
