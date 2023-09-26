@@ -70,7 +70,7 @@ public class AuthController {
   }
 
 
-    /*
+  /*
    * 로그인 기능 구현
    *
    * @param requestDto
@@ -125,43 +125,24 @@ public class AuthController {
    * @param requestDto
    * @return
    */
-
   @PostMapping("/signup")
   public String signUp(SignUpRequestDto requestDto, HttpSession session) {
     setSessionLoginUser(session, userService.signUp(requestDto));
     return "redirect:/";
   }
-
-
   private void setSessionLoginUser(HttpSession session, User user) {
     session.setAttribute("loginUser", user);
   }
 
-    /**
-     * 회원가입 처리 로직
-     *
-     * @param requestDto
-     * @return
-     */
-    @PostMapping("/signup")
-    public String signUp(SignUpRequestDto requestDto, HttpSession session) {
-        setSessionLoginUser(session, userService.signUp(requestDto));
-        return "redirect:/";
-    }
-    private void setSessionLoginUser(HttpSession session, User user) {
-        session.setAttribute("loginUser", user);
-    }
-    
-    @ResponseBody
-    @PostMapping("/session-info")
-    public Map<String, Long> paymentSessionInfoRtn(HttpSession session) {
-        User temp = (User)session.getAttribute("loginUser");
-        Long userId = userService.findUserById(temp.getId()).orElseThrow(
-                () -> UserNotFoundException.EXCEPTION
-        ).getId();
-        return new HashMap<String, Long>(){{
-            put("userId", userId);
-        }};
-    }
-
+  @ResponseBody
+  @PostMapping("/session-info")
+  public Map<String, Long> paymentSessionInfoRtn(HttpSession session) {
+    User temp = (User)session.getAttribute("loginUser");
+    Long userId = userService.findUserById(temp.getId()).orElseThrow(
+            () -> UserNotFoundException.EXCEPTION
+    ).getId();
+    return new HashMap<String, Long>(){{
+      put("userId", userId);
+    }};
+  }
 }

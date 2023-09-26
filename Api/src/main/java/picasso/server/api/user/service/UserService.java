@@ -27,7 +27,7 @@ public class UserService {
             throw EmailErrorException.EXCEPTION; // 중복 이메일 체크
         }
 
-    return userRepository.save(User.builder()
+        return userRepository.save(User.builder()
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .nickName(userDto.getNickName())
@@ -58,7 +58,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-
+    //??
     public Optional<User> findUserByIdAndEmail(Long userId, String email) {
         return userRepository.findByIdAndEmail(userId, email);
     }
@@ -66,6 +66,7 @@ public class UserService {
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
     public Optional<User> findById(Long userId) {
         return userRepository.findById(userId);
     }
