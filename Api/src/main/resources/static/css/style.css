@@ -1,9 +1,14 @@
 body {
-    background: linear-gradient(180deg, #7B37EA 0%, rgba(42, 70, 50, 0.00) 100%);
+    background: linear-gradient(#B924A0, #000000);
+    min-height: 100vh !important;
 }
 
 .container {
     max-width:936px !important;
+}
+
+#picasso-header {
+    padding-top: 20px;
 }
 
 button.before-login-btn {
@@ -25,29 +30,35 @@ header .main-header > div .before-login-area {
 
 /* footer */
 footer {
-    border-top: 1px solid #eee;
+    height: 140px;
+    position : relative;
     padding-top: 12px;
     padding-bottom: 10px;
-    background-color: #bdbdbd;
+    background-color: #120410;
+    width: 100%;
 }
+
 footer .title {
     font-weight: 700;
     font-size: 16px;
-    color: #242424;
+    color: #FFFFFF;
     padding-left: 10px;
     margin-bottom: 0;
+    margin-left: 15px;
 }
 footer .footer-menu {
     margin-top: 24px;
     display: flex;
     justify-content: space-between;
+    color: #FFFFFF;
 }
 footer .footer-menu li a {
     font-size: 12px;
-    color: #6f6f6f;
+    align-items: center;
+    color: #FFFFFF;
 }
 footer .copyright {
-    color: #6f6f6f;
+    color: #FFFFFF;
     font-size: 10px;
     margin-top: 10px;
     padding-left: 10px;

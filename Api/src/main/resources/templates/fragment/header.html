@@ -1,25 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <header class="main-header" th:fragment="headerFragment">
-        <div class="row text-center">
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col">
-                <div class="title">
+<header class="main-header" th:fragment="headerFragment">
+    <div class="row text-center" id="picasso-header">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <div class="title">
+                <a href="/">
                     <img src="/static/asset/logo.png" alt="logo" height="100px"/>
-                </div>
-            </div>
-            <div class="col"></div>
-            <div class="col before-login-area" style="display: flex; align-items: center;">
-                <div class="row" >
-                    <div class="col">
-                        <button type="button" class="btn btn-primary before-login-btn" onclick="">LOGIN</button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-primary before-login-btn" onclick="/api/user">JOIN</button>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
-    </header>
+        <div class="col"></div>
+        <div class="col before-login-area" style="display: flex; align-items: center;">
+            <div class="row align-items-center">
+                <th:block th:if="${session.loginUser == null} ">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary before-login-btn"
+                                onclick="location.href='/auth/login'">LOGIN
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-primary before-login-btn"
+                                onclick="location.href='/auth/signup'">JOIN
+                        </button>
+                    </div>
+                </th:block>
+                <th:block th:if="${session.loginUser != null}">
+                    <div class="col">
+                        <div class="username-box">
+                            <b class="profile-name">
+                                <a class="link-info link-offset-1  link-underline-opacity-0 " href="/user/mypage" th:text="${session.loginUser.nickName}"></a>
+                            </b> 님
+                        </div>
+                        <small><a href="#" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" th:text="${session.loginUser.point}"></a> P</small>
+                    </div>
+                    <!--로그인 사용자가 존재하고, Profile이 없는 경우-->
+                    <div class="col">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                   aria-expanded="false">
+                                    <div class="profile-box"
+                                         style="width: 50px; height: 50px; border-radius: 70%; overflow: hidden; background-color: white"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"
+                                             style="width: 100%; height: 100%;"
+                                             th:if="${session.loginUser.profile == null}">
+                                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                        </svg>
+                                        <img th:if="${session.loginUser.profile != null}"
+                                             th:src="${session.loginUser.profile}" alt="User Profile"/>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/user/mypage">마이 페이지</a></li>
+                                    <li><a class="dropdown-item" onclick="requestPayment(event)">포인트 환전</a></li>
+                                    <th:block  th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/admin/list">경매품 인가 대시보드</a></li>
+                                        <li><a class="dropdown-item" href="/admin/user/list">관리자 계정 관리</a></li>
+                                    </th:block>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                                </ul>
+                                <script>
+                                    function requestPayment(e) {
+                                        e.preventDefault();
+                                        window.open(window.location.origin + '/exchange/payment', 'paymentPage', "scrollbars=no, menubar=no, width=500px, height=700px");
+                                    }
+                                </script>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</header>
 </html>

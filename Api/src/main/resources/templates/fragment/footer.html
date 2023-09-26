@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <footer th:fragment="footerFragment">
@@ -7,35 +6,21 @@
             <div class="title">Picasso</div>
             <ul class="footer-menu clearfix">
                 <li><a href="#">김선래</a></li>
-                <li><a href="#">곽나현</a></li>
-                <li><a href="#">오동현</a></li>
-                <li><a href="#">김현덕</a></li>
-                <li><a href="#">봉세환</a></li>
-                <li><a href="#">김종원</a></li>
+                <li><a href="https://github.com/knh0113">곽나현</a></li>
+                <li><a href="https://github.com/5dongdong">오동현</a></li>
+                <li><a href="https://github.com/Romangduck">김현덕</a></li>
+                <li><a href="https://github.com/bongsh0112">봉세환</a></li>
+                <li><a href="https://github.com/donsonioc2010">김종원</a></li>
             </ul>
-            <p class="copyright">Copyright © 2023</p>
+            <ul class="copyright" style="display: flex; justify-content: flex-end;">
+                <li style="margin-right: 10px;">
+                    <a style="text-decoration: none;" href="https://github.com/donsonioc2010/picasso">
+                        ProjectLink
+                    </a>
+                </li>
+                <li style="color: white">Copyright © 2023</li>
+            </ul>
         </div>
     </div>
 </footer>
 </html>
-
-<!--
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="${title}">Login</title>
-
-</head>
-<body>
-<header th:replace="header :: header"></header>
-
-<form th:action="@{/login}" method="post">
-    <input type="email" name="email" placeholder="Email" th:field="*{email}">
-    <input type="password" name="password" placeholder="Password" th:field="*{password}">
-    <button type="submit">Login</button>
-</form>
-
-<footer th:replace="footer :: footer"></footer>
-</body>
-</html>
--->
