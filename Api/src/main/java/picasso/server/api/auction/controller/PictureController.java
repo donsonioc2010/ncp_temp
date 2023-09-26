@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import picasso.server.api.auction.dto.response.PictureBidHistoryAmountCreatedAtResponse;
 import picasso.server.api.auction.service.PictureBidHistoryService;
 import picasso.server.api.auction.service.PictureService;
 import picasso.server.api.user.service.UserService;
@@ -23,6 +24,7 @@ import picasso.server.domain.domains.picture.items.PictureInfo;
 import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.user.entity.User;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,7 +139,15 @@ public class PictureController {
         Picture picture = pictureService.getPictureById(id).orElseThrow(() -> NotFoundException.EXCEPTION);
         model.addAllAttributes(new HashMap<>() {{
             put("picture", picture);
-            put("pictureBidHistory", pictureBidHistoryService.getBidAmountListDescByPicture(picture));
+            put("pictureBidHistory",
+                    pictureBidHistoryService.getBidAmountListDescByPicture(picture)
+                            .stream()
+                            .map(
+                                    pictureBidHistory -> PictureBidHistoryAmountCreatedAtResponse.builder()
+                                            .bidAmount(String.valueOf(pictureBidHistory.getBidAmount()))
+                                            .createdAt(pictureBidHistory.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                                            .build()
+                            ).toList());
             put("topBidHistory", pictureBidHistoryService.getTopBidAmountByPicture(picture));
         }});
         return "pictures/pictureDetail";

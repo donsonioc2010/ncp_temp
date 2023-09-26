@@ -8,7 +8,7 @@ import lombok.Data;
  * 입찰시, 입찰 가능여부 확인을 위한 RequestDTO
  */
 @Data
-public class PictureBiddingValidRequestDto {
+public class PictureBiddingRequestDto {
     @PositiveOrZero
     @NotNull(message = "PictureId는 필수 입력을 하셔야 합니다.")
     private Long pictureId;

@@ -4,15 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import picasso.server.api.user.service.UserService;
 import picasso.server.api.user.vo.request.LoginRequestDto;
 import picasso.server.api.user.vo.request.SignUpRequestDto;
+import picasso.server.common.exception.NotFoundException;
+import picasso.server.common.exception.UserNotFoundException;
 import picasso.server.domain.domains.user.entity.User;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -76,5 +82,17 @@ public class AuthController {
     }
     private void setSessionLoginUser(HttpSession session, User user) {
         session.setAttribute("loginUser", user);
+    }
+    
+    @ResponseBody
+    @PostMapping("/session-info")
+    public Map<String, Long> paymentSessionInfoRtn(HttpSession session) {
+        User temp = (User)session.getAttribute("loginUser");
+        Long userId = userService.findUserById(temp.getId()).orElseThrow(
+                () -> UserNotFoundException.EXCEPTION
+        ).getId();
+        return new HashMap<String, Long>(){{
+            put("userId", userId);
+        }};
     }
 }
