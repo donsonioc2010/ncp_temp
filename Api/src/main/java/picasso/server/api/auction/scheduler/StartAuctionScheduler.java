@@ -5,9 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import picasso.server.api.auction.service.PictureService;
+import picasso.server.api.mail.service.SendMailService;
 import picasso.server.common.util.DateStaticConstants;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static picasso.server.domain.domains.picture.items.PictureStatus.AFTER_APPROVE;
+import static picasso.server.domain.domains.picture.items.PictureStatus.BIDDING;
 
 /**
  * 9시에 경매 전 상태인 게시물들을 처리하는 스케쥴러
@@ -18,12 +25,27 @@ import java.time.LocalDate;
 @EnableAsync
 @RequiredArgsConstructor
 public class StartAuctionScheduler {
+    private final PictureService pictureService;
+    private final SendMailService sendMailService;
 
+    @Transactional
     @Scheduled(cron = "0 0 9 * * *", zone = DateStaticConstants.ZONE_SEOUL)
-    public void startAuction() {
-        log.info("Starting Todays Auctions Open : TodayDate >>> {}", LocalDate.now());
-        // TODO : 관리자 승인된 게시물 경매 시작 상태로 Status 변경 로직 추가
+    public void startApprovePictureToBiddingAuction() {
+        log.info("Start Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
+        pictureService
+                .changePictureStatusByPictureStatusAndBidEndDate(AFTER_APPROVE, BIDDING, LocalDate.now())
+                .forEach(sendMailService::startBiddingMail);
+        log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
+    }
 
-        // TODO : 관리자 승인이 되지 않은 게시물 유찰상태로 변경Status로직 추가 및 메일발송 로직 추가
+
+    @Transactional
+    @Scheduled(cron = "0 0 9 * * *", zone = DateStaticConstants.ZONE_SEOUL)
+    public void startNotApprovePictureToRejectAuction() {
+        log.info("Start Reject Picture Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
+        pictureService
+                .changePictureStatusByPictureStatusAndBidEndDate(AFTER_APPROVE, BIDDING, LocalDate.now())
+                .forEach(sendMailService::pictureRejectMailWithNotApproveAdmin);
+        log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }
 }
