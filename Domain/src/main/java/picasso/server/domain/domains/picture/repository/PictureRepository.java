@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.items.PictureStatus;
+import picasso.server.domain.domains.user.entity.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,5 +26,6 @@ public interface PictureRepository extends JpaRepository<Picture, Long>{
     Page<Picture> findAllByPictureStatusOrderByBidStartDateAsc(PictureStatus status, Pageable pageable);
 
     Optional<Picture> findByPictureIdAndPictureStatus(Long id, PictureStatus status);
-
+    
+    List<Picture> findAllByPictureStatusAndUser(PictureStatus status, User user);
 }
