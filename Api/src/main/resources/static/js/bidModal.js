@@ -65,7 +65,7 @@ const bidButton  = document.getElementById('bidButton')
 function bidProcess() {
     let minPictureBidAmount = nowPictureAmountVal+incrementAmountVal
     if(parseInt(bidInput.value) < minPictureBidAmount){
-        alert('입찰 최소 금액은 '+minPictureBidAmount+'원 입니다' )
+        alert('입찰 최소 금액은 '+ minPictureBidAmount+'원 입니다' )
         return false
     }
 
@@ -74,27 +74,43 @@ function bidProcess() {
         return false
     }
 
+    let pictureId =  document.getElementById('pictureId')
 
+
+    //입찰
     $.ajax({
-        type : 'post',
-        url : '/user/session-info',
+        type : 'get',
+        url : '/api/bidding/'+parseInt(pictureId.value),
         success : function(data, status, xhr) {
-            userId = data.userId
+            console.log(data)
+            if(data.result) {
+                $.ajax({
+                    type: 'post',
+                    url: '/api/bidding',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        "pictureId" : parseInt(pictureId.value),
+                        "amount" :  parseInt(bidInput.value)
+                    }),
+                    success : (data, status, xhr) => {
+                        alert('입찰이 완료되었습니다.')
+                        location.reload();
+                    },
+                    error: (xhr, status, error) => {
+                        alert('입찰 도중 오류가 발생하였습니다.')
+                        location.reload();
+                    }
+                })
+
+            }else {
+                alert(data.message)
+            }
         },
         error : function(xhr, status, error) {
-            alert('입찰 불가')
+            alert('입찰 도중 오류가 발생하였습니다.')
         },
     })
 
-    var price = document.getElementById("inputPrice").value;
-    $.ajax({
-        type: 'post',
-        url: 'urlurlurl',
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({
-            "bidPrice" : price
-        })
-    })
 }
 bidButton.addEventListener('click', bidProcess);

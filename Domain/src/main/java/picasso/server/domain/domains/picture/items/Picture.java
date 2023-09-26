@@ -67,7 +67,7 @@ public class Picture {
     private LocalDate bidEndDate; // 경매 종료일
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     //경매 내역 History
