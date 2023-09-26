@@ -1,0 +1,41 @@
+signup-container {
+  margin: 80px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 70px;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-left: 37%;
+  border: 10px solid #18ACDB;
+  width: 380px;
+}
+
+signup-form {
+  /* form 관련 스타일 추가 */
+}
+
+signup-title {
+  text-align: center;
+  font-family: Sigmar One;
+  font-style: normal;
+  color: #18ACDB;
+}
+
+signup-table {
+  /* table 관련 스타일 추가 */
+}
+
+#nickname,
+#email,
+#password,
+#repeatPassword {
+  background-color: #E8F0FE;
+  text-align: center;
+}
+
+register-button {
+  text-align: center;
+  margin-left: 20%;
+}

@@ -1,15 +1,11 @@
 package picasso.server.api.user.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import picasso.server.api.user.exception.EmailErrorException;
 import picasso.server.api.user.vo.request.LoginRequestDto;
 import picasso.server.api.user.vo.request.SignUpRequestDto;
-import picasso.server.domain.domains.user.dto.UserDTO;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 
@@ -22,9 +18,15 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final ObjectMapper objectMapper;
 
     public User signUp(SignUpRequestDto userDto) {
+
+        Optional<User> existingUser = userRepository.findByEmail(userDto.getEmail());
+        if (existingUser.isPresent()) {
+            // TODO : Custom Exception ㅇㄷ?
+            throw EmailErrorException.EXCEPTION; // 중복 이메일 체크
+        }
+
         return userRepository.save(User.builder()
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
@@ -38,24 +40,6 @@ public class UserService {
         return findUser;
     }
 
-    public boolean isUserValid(UserDTO userDto, HttpServletRequest request) throws JsonProcessingException {
-        // 1. 쿠키에서 "user" 데이터를 가져옵니다.
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("user".equals(cookie.getName())) {
-                    // 2. 가져온 데이터를 User 객체로 변환합니다.
-                    User userFromCookie = objectMapper.readValue(cookie.getValue(), User.class);
-
-                    // 3. 변환된 User 객체와 입력받은 UserDTO 데이터를 비교합니다.
-                    if (userDto.getEmail().equals(userFromCookie.getEmail()) && userDto.getPassword().equals(userFromCookie.getPassword())) {
-                        return true; // 쿠키의 데이터와 입력된 데이터가 일치합니다.
-                    }
-                }
-            }
-        }
-        return false; // 일치하는 쿠키 데이터가 없거나, 데이터가 입력과 일치하지 않습니다.
-    }
 
 
     public Optional<User> findUserByEmailAndPassword(String email, String password) {
@@ -66,11 +50,21 @@ public class UserService {
         return userRepository.findByNickName(nickname);
     }
 
+
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    //??
+    public Optional<User> findUserByIdAndEmail(Long userId, String email) {
+        return userRepository.findByIdAndEmail(userId, email);
+    }
+
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public Optional<User> findById(Long userId) {

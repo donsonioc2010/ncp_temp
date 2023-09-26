@@ -91,6 +91,7 @@ public class User {
   private LocalDateTime updatedAt = LocalDateTime.now();
 
   @NotNull
+  @Column
   @Builder.Default
   private LocalDateTime loginAt = LocalDateTime.now();
 
