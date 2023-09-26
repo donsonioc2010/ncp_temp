@@ -11,6 +11,7 @@ import picasso.server.common.exception.NotFoundRestException;
 import picasso.server.common.exception.NotLoginUserRestException;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.items.PictureBidHistory;
+import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.picture.repository.PictureBidHistoryRepository;
 import picasso.server.domain.domains.picture.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
@@ -90,14 +91,14 @@ public class PictureBidHistoryService {
     public PictureAbleBidResponseDto getSessionUserBiddingResult(User sessionHaveLoginUser, Long pictureId) {
         Picture findPicture = pictureRepository.findById(pictureId).orElseThrow(() -> NotFoundRestException.EXCEPTION);
         Optional<PictureBidHistory> optionalTopHistory = pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(findPicture);
-        if(sessionHaveLoginUser.getEmail().equals(findPicture.getUser().getEmail())) {
+        if (sessionHaveLoginUser.getEmail().equals(findPicture.getUser().getEmail())) {
             return PictureAbleBidResponseDto.builder()
                     .result(false)
                     .message("경매품 등록자는 입찰이 불가합니다.")
                     .build();
         }
 
-        if(optionalTopHistory.isPresent() && optionalTopHistory.get().getUser().getEmail().equals(sessionHaveLoginUser.getEmail())) {
+        if (optionalTopHistory.isPresent() && optionalTopHistory.get().getUser().getEmail().equals(sessionHaveLoginUser.getEmail())) {
             return PictureAbleBidResponseDto.builder()
                     .result(false)
                     .message("가장 최근 입찰자 입니다.")
@@ -107,5 +108,12 @@ public class PictureBidHistoryService {
         return PictureAbleBidResponseDto.builder()
                 .result(true)
                 .build();
+    }
+    public List<PictureBidHistory> retrieveMyBidHistoryList(User user) {
+        return pictureBidHistoryRepository.findAllByUserOrderByCreatedAt(user);
+    }
+    
+    public List<Picture> retrieveMyPictureList(User user, PictureStatus pictureStatus) {
+        return pictureRepository.findAllByPictureStatusAndUser(pictureStatus, user);
     }
 }

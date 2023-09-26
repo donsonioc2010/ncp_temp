@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/layout}"
+>
+  <main layout:fragment="content">
+    <link rel="stylesheet" type="text/css" href="/static/css/mybid.css" />
+    <div class="container">
+      <h2>내 입찰 목록</h2>
+      <p>나의 입찰 내역을 확인할 수 있습니다.</p>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>입찰번호</th>
+          <th>그림 이름</th>
+          <th>입찰가</th>
+          <th>입찰 일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bid : ${bidList}">
+          <td th:text="${bid.getId()}"></td>
+          <td th:text="${bid.getPicture().getPictureName()}">
+            <a th:href="'/pictures/' + ${bid.getPicture().getPictureId()}"></a>
+          </td>
+          <td th:text="${bid.getBidAmount()}"></td>
+          <td th:text="${bid.getCreatedAt()}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </th:block>
+</html>

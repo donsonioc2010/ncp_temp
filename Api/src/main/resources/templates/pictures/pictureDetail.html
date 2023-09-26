@@ -8,6 +8,7 @@
 >
 <main layout:fragment="content">
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css"/>
+
     <div class="container body" style="margin-top: 100px;">
         <div th:if="${picture}" class="picture-details">
             <input type="hidden" name="pictureId" id="pictureId" th:value="${picture.pictureId}"/>
