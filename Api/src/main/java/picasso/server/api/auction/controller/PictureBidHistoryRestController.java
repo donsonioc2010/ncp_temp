@@ -5,19 +5,17 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import picasso.server.api.auction.dto.request.PictureBiddingValidRequestDto;
+import picasso.server.api.auction.dto.request.PictureBiddingRequestDto;
+import picasso.server.api.auction.dto.response.PictureAbleBidResponseDto;
 import picasso.server.api.auction.service.PictureBidHistoryService;
 import picasso.server.common.exception.NotLoginUserRestException;
-import picasso.server.domain.domains.picture.items.PictureBidHistory;
 import picasso.server.domain.domains.user.entity.User;
-
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -34,14 +32,30 @@ public class PictureBidHistoryRestController {
      */
     @PostMapping
     public ResponseEntity<Boolean> isAblePictureBidding(
-            @Valid @RequestBody PictureBiddingValidRequestDto requestDto, HttpSession session
+            @Valid @RequestBody PictureBiddingRequestDto requestDto, HttpSession session
     ) {
+        return ResponseEntity.ok(
+                pictureBidHistoryService.biddingProcess(session, isSessionHaveLoginUser(session), requestDto)
+        );
+    }
+
+    @GetMapping("/{pictureId}")
+    public ResponseEntity<PictureAbleBidResponseDto> isAblePictureBidding(
+            @PathVariable Long pictureId, HttpSession session
+    ) {
+        return ResponseEntity.ok(
+                pictureBidHistoryService.getSessionUserBiddingResult(
+                        isSessionHaveLoginUser(session),
+                        pictureId
+                )
+        );
+    }
+
+    private User isSessionHaveLoginUser(HttpSession session) {
         User user = (User) session.getAttribute("loginUser");
         if (user == null) {
             throw NotLoginUserRestException.EXCEPTION;
         }
-        return ResponseEntity.ok(
-                pictureBidHistoryService.biddingProcess(user, requestDto.getPictureId(), requestDto.getAmount())
-        );
+        return user;
     }
 }
