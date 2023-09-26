@@ -1,7 +1,7 @@
-package picasso.server.domain.domains.repository;
+package picasso.server.domain.domains.payments.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import picasso.server.domain.domains.items.PaymentHistory;
+import picasso.server.domain.domains.payments.entity.PaymentHistory;
 
 import java.util.Optional;
 

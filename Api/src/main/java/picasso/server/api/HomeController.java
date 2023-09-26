@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import picasso.server.api.auction.service.PictureService;
-import picasso.server.domain.domains.items.PictureStatus;
+import picasso.server.domain.domains.picture.items.PictureStatus;
 
 
 @Slf4j

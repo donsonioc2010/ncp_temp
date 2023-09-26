@@ -4,13 +4,24 @@ swiper-container {
 }
 
 swiper-slide {
-    max-height: 400px;
+    min-height: 449px;
     text-align: center;
     font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: #FFFFFF;
+}
+
+swiper-slide.no-pictures{
+    width:936px;
+    height:400px;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 swiper-slide.no-pictures{

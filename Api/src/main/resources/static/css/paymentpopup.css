@@ -1,0 +1,61 @@
+#popup-menu {
+    display: flex;
+    height: 700px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: #000000;
+}
+
+#popup-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#popup-body {
+    display: flex;
+    height: 50%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#kakaopay {
+    background: url("./static/asset/payment_icon_yellow_large.png") no-repeat;
+    border: none;
+}
+
+#kakaopayimg {
+    width: 120px;
+    height: 50px;
+}
+
+#tosspay {
+    background: url("./static/asset/logo-toss-symbol-alpha.png") no-repeat;
+    border: none;
+}
+
+#tosspayimg {
+    width: 70px;
+    height: 70px;
+}
+
+#payment-body {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+#payment-method {
+    margin-top: 10px;
+}
+
+#popup-footer {
+    display: flex;
+    justify-content: center;
+}
+
+#inputPrice::placeholder {
+    text-align: center;
+}

@@ -1,4 +1,4 @@
-package picasso.server.domain.domains.items;
+package picasso.server.domain.domains.payments.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import picasso.server.domain.domains.payments.items.PGName;
 
 @Entity
 @Getter
