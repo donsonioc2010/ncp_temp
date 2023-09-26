@@ -33,7 +33,7 @@
                                 <a class="link-info link-offset-1  link-underline-opacity-0 " href="/user/mypage" th:text="${session.loginUser.nickName}"></a>
                             </b> 님
                         </div>
-                        <small><a href="#" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" th:text="${session.loginUser.point}"></a> P</small>
+                        <small><a onclick="requestPayment(event)" class="link-primary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" th:text="${session.loginUser.point}"></a> P</small>
                     </div>
                     <!--로그인 사용자가 존재하고, Profile이 없는 경우-->
                     <div class="col">
@@ -56,6 +56,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user/mypage">마이 페이지</a></li>
+                                    <li><a class="dropdown-item" href="/bid-history/myPictureList">내가 등록한 경매</a></li>
                                     <li><a class="dropdown-item" onclick="requestPayment(event)">포인트 환전</a></li>
                                     <th:block  th:if="${session.loginUser.userRole.name() == 'ADMIN'}">
                                         <li><hr class="dropdown-divider"></li>

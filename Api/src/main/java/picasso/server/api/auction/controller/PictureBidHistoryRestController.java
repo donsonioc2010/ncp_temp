@@ -5,6 +5,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import picasso.server.api.auction.dto.request.PictureBiddingValidRequestDto;
 import picasso.server.api.auction.service.PictureBidHistoryService;
 import picasso.server.common.exception.NotLoginUserRestException;
+import picasso.server.domain.domains.picture.items.PictureBidHistory;
 import picasso.server.domain.domains.user.entity.User;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor

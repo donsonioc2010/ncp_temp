@@ -7,6 +7,7 @@ import picasso.server.common.exception.NotFoundRestException;
 import picasso.server.common.exception.NotLoginUserRestException;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.items.PictureBidHistory;
+import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.picture.repository.PictureBidHistoryRepository;
 import picasso.server.domain.domains.picture.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
@@ -70,5 +71,13 @@ public class PictureBidHistoryService {
 
         // 사용자가 최종 입찰자가 아니거나 또는
         return !topHistory.getUser().equals(user) && amount <= topHistory.getBidAmount() + picture.getIncrementAmount();
+    }
+    
+    public List<PictureBidHistory> retrieveMyBidHistoryList(User user) {
+        return pictureBidHistoryRepository.findAllByUserOrderByCreatedAt(user);
+    }
+    
+    public List<Picture> retrieveMyPictureList(User user, PictureStatus pictureStatus) {
+        return pictureRepository.findAllByPictureStatusAndUser(pictureStatus, user);
     }
 }
