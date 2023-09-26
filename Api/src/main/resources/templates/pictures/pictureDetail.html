@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <th:block th:if="${session.loginUser != null}">
+            <th:block th:if="${session.loginUser != null && picture.pictureStatus.name()=='BIDDING'}">
                 <input type="hidden" name="userPoint" id="userPoint" th:value="${session.loginUser.point}"/>
 
                 <div class="row justify-content-md-center">

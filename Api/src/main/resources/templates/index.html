@@ -31,8 +31,7 @@
                 <th:block th:if="${afterApprove.size() != 0}" >
                     <swiper-slide data-swiper-autoplay="2000" th:each=" picture : ${afterApprove}">
                         <div class="box">
-                            <!--TODO : 그림 상세 페이지 완료시 링크 연결 필요-->
-                            <a href="#">
+                            <a th:href="'/pictures/'+${picture.id}">
                                 <img
                                         th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/'+${picture.imageUrl}+'?type=f&w=936&h=600'"
                                         th:alt="${picture.pictureName}"
@@ -66,8 +65,7 @@
             <th:block th:if="${bidding.size() != 0}" >
                 <swiper-slide data-swiper-autoplay="2000" th:each=" picture : ${bidding}">
                     <div class="box">
-                        <!--TODO : 그림 상세 페이지 완료시 링크 연결 필요-->
-                        <a href="#">
+                        <a th:href="'/pictures/'+${picture.id}">
                             <img
                                     th:src="'http://xgrnsxldyejc19608959.cdn.ntruss.com/'+${picture.imageUrl}+'?type=f&w=936&h=600'"
                                     th:alt="${picture.pictureName}"
