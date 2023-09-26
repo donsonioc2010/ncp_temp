@@ -61,7 +61,6 @@ public class PictureService {
         return pictureRepository.findById(id);
     }
 
-
     public List<String> extractImageUrlsSortedByDateTime() {
         return pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(BIDDING)
                 .stream()

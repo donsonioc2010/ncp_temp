@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import picasso.server.api.auction.service.PictureBidHistoryService;
 import picasso.server.api.auction.service.PictureService;
 import picasso.server.api.user.service.UserService;
 import picasso.server.common.exception.NotFoundException;
@@ -23,6 +24,7 @@ import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.user.entity.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -35,6 +37,7 @@ public class PictureController {
     private final PictureService pictureService;
     private final UserService userService;
     private final NaverObjectStorageUtil naverObjectStorageUtil;
+    private final PictureBidHistoryService pictureBidHistoryService;
 
     /**
      * 경매품 게시물에 대해 등록할 수 있는 페이지로 이동한다.
@@ -131,7 +134,12 @@ public class PictureController {
      */
     @GetMapping("/{id}")
     public String viewPictureDetail(@PathVariable Long id, Model model) {
-        model.addAttribute("picture", pictureService.getPictureById(id).orElseThrow(() -> NotFoundException.EXCEPTION));
+        Picture picture = pictureService.getPictureById(id).orElseThrow(() -> NotFoundException.EXCEPTION);
+        model.addAllAttributes(new HashMap<>() {{
+            put("picture", picture);
+            put("pictureBidHistory", pictureBidHistoryService.getBidAmountListDescByPicture(picture));
+            put("topBidHistory", pictureBidHistoryService.getTopBidAmountByPicture(picture));
+        }});
         return "pictures/pictureDetail";
     }
 }

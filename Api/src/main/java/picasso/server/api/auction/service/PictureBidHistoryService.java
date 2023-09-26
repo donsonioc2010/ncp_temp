@@ -7,11 +7,12 @@ import picasso.server.common.exception.NotFoundRestException;
 import picasso.server.common.exception.NotLoginUserRestException;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.items.PictureBidHistory;
+import picasso.server.domain.domains.picture.repository.PictureBidHistoryRepository;
 import picasso.server.domain.domains.picture.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
-import picasso.server.domain.domains.picture.repository.PictureBidHistoryRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -22,6 +23,14 @@ public class PictureBidHistoryService {
     private final UserRepository userRepository;
     private final PictureRepository pictureRepository;
     private final PictureBidHistoryRepository pictureBidHistoryRepository;
+
+    public List<PictureBidHistory> getBidAmountListDescByPicture(Picture picture){
+        return pictureBidHistoryRepository.findByPictureOrderByBidAmountDesc(picture);
+    }
+
+    public PictureBidHistory getTopBidAmountByPicture(Picture picture) {
+        return pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(picture).orElse(null);
+    }
 
     /**
      * 입찰 프로세스

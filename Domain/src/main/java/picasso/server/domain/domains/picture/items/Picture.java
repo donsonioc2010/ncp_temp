@@ -77,6 +77,4 @@ public class Picture {
     public void addBidHistory(PictureBidHistory pictureBidHistory) {
         bidHistory.add(pictureBidHistory);
     }
-
-
 }
