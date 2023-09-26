@@ -2,21 +2,32 @@ package picasso.server.api.admin.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.admin.exception.AlreadyChangePictureException;
+import picasso.server.api.admin.exception.NotActiveStatusException;
+import picasso.server.api.admin.exception.NotFoundUserException;
 import picasso.server.common.exception.NotFoundException;
-import picasso.server.domain.domains.picture.items.Picture;
-import picasso.server.domain.domains.picture.repository.PictureRepository;
+import picasso.server.domain.domains.admin.vo.request.ListAdminRequestDto;
+import picasso.server.domain.domains.items.Picture;
+import picasso.server.domain.domains.items.PictureStatus;
+import picasso.server.domain.domains.repository.PictureRepository;
 import picasso.server.domain.domains.user.entity.User;
 import picasso.server.domain.domains.user.repository.UserRepository;
 import picasso.server.domain.domains.user.type.UserRole;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static picasso.server.domain.domains.picture.items.PictureStatus.AFTER_APPROVE;
-import static picasso.server.domain.domains.picture.items.PictureStatus.BEFORE_APPROVE;
+import static picasso.server.domain.domains.items.PictureStatus.AFTER_APPROVE;
+import static picasso.server.domain.domains.items.PictureStatus.BEFORE_APPROVE;
+import static picasso.server.domain.domains.user.type.UserStatus.ACTIVE;
+import static picasso.server.domain.domains.user.type.UserStatus.SUSPENSION;
 
 @Slf4j
 @Service
@@ -28,7 +39,7 @@ public class AdminService {
 
     // TODO : 추후 Pagenation으로의 수정 필요함.
     @Transactional(readOnly = true)
-    public List<Picture> findAll() {
+    public List<Picture> findAllPicture() {
         return pictureRepository.findAll();
     }
 
@@ -45,6 +56,7 @@ public class AdminService {
 
     /**
      * 관리자 승인전의 게시물을 관리자 승인 상태로 변경  하는 기능
+     *
      * @param pictureId
      */
     public void approvePicture(Long pictureId) {
@@ -66,11 +78,65 @@ public class AdminService {
         throw NotFoundException.EXCEPTION;
     }
 
-
     @Transactional(readOnly = true)
     public List<User> findAllAdmin() {
         return userRepository.findByUserRole(UserRole.ADMIN);
     }
+    @Transactional(readOnly = true)
+    public List<User> findAllUser() {
+        return userRepository.findByUserRole(UserRole.USER);
+    }
+
+    /**
+     * 관리자가 멤버의 상태를 정지로 변환시킬 수 있는 기능
+     *
+     * @param userId
+     */
+    public void suspendUser(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getUserStatus().equals(ACTIVE)) {
+                user.setUserStatus(SUSPENSION);
+                userRepository.save(user);
+                log.info("SuspendUser Success >>> User ID : {}, Title : {}",
+                        user.getId(), user.getEmail());
+                return;
+
+            } log.warn("SuspendUser Failure >>> User Id : {}, Title : {}",
+                    user.getId(), user.getEmail());
+            throw NotActiveStatusException.EXCEPTION;
+        }
+        throw NotFoundUserException.EXCEPTION;
+    }
+
+//    public Page<ListAdminRequestDto> prepareApprovePage(int page, int pageSize , PictureStatus pictureStatus) {
+//        Pageable pageable = PageRequest.of(page, pageSize);
+//
+//        Page<Picture> picturePage = pictureRepository.findAllByPictureStatusOrderByBidStartDateAsc(pictureStatus, pageable);
+//
+//        List<ListAdminRequestDto> DetailAdminDto = picturePage.getContent().stream()
+//                .map(this::mapToListAdminRequestDto)
+//                .collect(Collectors.toList());
+//
+//        return new PageImpl<>(DetailAdminDto ,pageable,picturePage.getTotalElements());
+//    }
+//
+//    private ListAdminRequestDto mapToListAdminRequestDto(Picture picture) {
+//        ListAdminRequestDto dto = new ListAdminRequestDto();
+//        dto.setPictureId(picture.getPictureId());
+//        dto.setImageUrl(picture.getImgUrl());
+//        dto.setPictureName(picture.getPictureName());
+//        dto.setPainterName(picture.getPainterName());
+//        dto.setDetails(picture.getDetails());
+//        dto.setStartingPrice(picture.getStartingPrice());
+//        dto.setIncrementAmount(picture.getIncrementAmount());
+//        dto.setBidStartDate(picture.getBidStartDate());
+//        return dto;
+//    }
+    // 리스트 페이지 네이션
+
+
 }
 
 
