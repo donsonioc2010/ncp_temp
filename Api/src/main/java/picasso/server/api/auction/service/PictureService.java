@@ -1,18 +1,19 @@
 package picasso.server.api.auction.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import picasso.server.domain.domains.picture.items.Picture;
 import picasso.server.domain.domains.picture.items.PictureInfo;
 import picasso.server.domain.domains.picture.items.PictureStatus;
 import picasso.server.domain.domains.picture.repository.PictureRepository;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -54,6 +55,9 @@ public class PictureService {
         pictureInfo.setStartPrice(picture.getStartingPrice());
         pictureInfo.setIncrementAmount(picture.getIncrementAmount());
         pictureInfo.setEndDay(picture.getBidEndDate());
+        pictureInfo.setStartDate(picture.getBidStartDate().format(DateTimeFormatter.ofPattern("yy/MM/dd")));
+        pictureInfo.setEndDate(picture.getBidEndDate().format(DateTimeFormatter.ofPattern("yy/MM/dd")));
+
         return pictureInfo;
     }
 
@@ -92,6 +96,7 @@ public class PictureService {
      * @param bidEndDate   찾아야 하는 경매 종료 일자
      * @return Picture List를 반환한다.
      */
+    @Transactional(readOnly = true)
     public List<Picture> changePictureStatusByPictureStatusAndBidEndDate(PictureStatus searchStatus, PictureStatus updateStatus, LocalDate bidEndDate) {
         List<Picture> result = pictureRepository
                 .findAllByPictureStatusAndBidEndDate(searchStatus, bidEndDate);
@@ -100,7 +105,7 @@ public class PictureService {
         return result;
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Picture> findPictureStatusByStatusAndBidEndDate(PictureStatus searchStatus, LocalDate bidEndDate) {
         return pictureRepository
                 .findAllByPictureStatusAndBidEndDate(searchStatus, bidEndDate);

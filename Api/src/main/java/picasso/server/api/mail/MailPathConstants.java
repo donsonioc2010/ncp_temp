@@ -15,13 +15,5 @@ public class MailPathConstants {
     // 경매 시작 안내 메일
     public static final String PICTURE_BIDDING_MAIL = "mail/bidding-picture-mail";
 
-    /*TODO : 시간 될 떄 추가구현!*/
-    // 게시물 관리자 승인 안내 메일
     public static final String PICTURE_APPROVE_MAIL = "mail/approve-picture-mail";
-
-    // 입찰자 추가 발생 안내 ( 판매자 )
-    public static final String PICTURE_NEW_BID_SELLER_MAIL = "mail/new-bid-picture-mail-seller";
-
-    // 입찰자 추가 발생 안내 ( 구매자 )
-    public static final String PICTURE_NEW_BID_BUYER_MAIL = "mail/new-bid-picture-mail-buyer";
 }
