@@ -9,7 +9,6 @@ import picasso.server.common.exception.NotFoundException;
 import picasso.server.common.util.NaverObjectStorageUsageType;
 import picasso.server.common.util.NaverObjectStorageUtil;
 import picasso.server.domain.domains.user.entity.User;
-import picasso.server.domain.domains.user.repository.MypageRepository;
 import picasso.server.domain.domains.user.repository.UserRepository;
 
 @Service
@@ -17,12 +16,11 @@ import picasso.server.domain.domains.user.repository.UserRepository;
 @RequiredArgsConstructor
 public class MypageService {
 
-  private final MypageRepository mypageRepository;
   private final UserRepository userRepository;
   private final NaverObjectStorageUtil naverObjectStorageUtil;
 
   public User getUserDetail(Long id) {
-    return mypageRepository.findById(id).orElse(null);
+    return userRepository.findById(id).orElse(null);
   }
 
   /**
