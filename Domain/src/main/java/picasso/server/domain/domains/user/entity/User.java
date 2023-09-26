@@ -102,5 +102,8 @@ public class User {
   public void updatePoint(Long point) {
     this.point += point;
   }
+  public void minusPoint(Long point) {
+    this.point -= point;}
+
 
 }

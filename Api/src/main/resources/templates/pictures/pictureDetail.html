@@ -11,8 +11,8 @@
 
     <div class="container body" style="margin-top: 100px;">
         <div th:if="${picture}" class="picture-details">
-            <input type="hidden" name="pictureId" id="pictureId" th:value="${picture.pictureId}" />
-            <input type="hidden" name="incrementAmount" id="incrementAmount" th:value="${picture.incrementAmount}" />
+            <input type="hidden" name="pictureId" id="pictureId" th:value="${picture.pictureId}"/>
+            <input type="hidden" name="incrementAmount" id="incrementAmount" th:value="${picture.incrementAmount}"/>
 
             <div class="row" style="margin-bottom: 30px">
                 <div class="col">
@@ -100,7 +100,7 @@
                 </div>
             </div>
             <th:block th:if="${session.loginUser != null}">
-                <input type="hidden" name="userPoint" id="userPoint" th:value="${session.loginUser.point}" />
+                <input type="hidden" name="userPoint" id="userPoint" th:value="${session.loginUser.point}"/>
 
                 <div class="row justify-content-md-center">
                     <div class="col-md-4">
@@ -121,16 +121,15 @@
                                     입찰내역이 존재하지 않습니다.
                                 </th:block>
                                 <th:block th:if="${pictureBidHistory.size() != 0}">
-                                    입찰내역이 존재합니다.
+                                    <ul class="list-group" th:each=" history : ${pictureBidHistory}">
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-md-6" th:text="${history.bidAmount}"></div>
+                                                <div class="col-md-6" th:text="${history.createdAt}"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </th:block>
-
-                                <ul class="list-group">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
-                                    <li class="list-group-item">A fourth item</li>
-                                    <li class="list-group-item">And a fifth one</li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -155,8 +154,14 @@
                                                 <p class="h5  align-baseline">현재 입찰가</p>
                                             </div>
                                             <div class="col-md-9">
-                                                <input class="form-control" id="nowPictureAmount" type="text" placeholder="현재 최소 입찰가"  th:if="${topBidHistory != null}" th:value="${topBidHistory.bidAmount}" aria-label="Disabled input example" disabled>
-                                                <input class="form-control" id="nowPictureAmount" type="text" placeholder="현재 최소 입찰가"  th:if="${topBidHistory == null}" th:value="${picture.startingPrice}" aria-label="Disabled input example" disabled>
+                                                <input class="form-control" id="nowPictureAmount" type="text"
+                                                       placeholder="현재 최소 입찰가" th:if="${topBidHistory != null}"
+                                                       th:value="${topBidHistory.bidAmount}"
+                                                       aria-label="Disabled input example" disabled>
+                                                <input class="form-control" id="nowPictureAmount" type="text"
+                                                       placeholder="현재 최소 입찰가" th:if="${topBidHistory == null}"
+                                                       th:value="${picture.startingPrice}"
+                                                       aria-label="Disabled input example" disabled>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -164,8 +169,14 @@
                                                 <p class="h5 align-baseline">입찰 희망가</p>
                                             </div>
                                             <div class="col-md-7">
-                                                <input id="bidInput" class="form-control me-auto" th:if="${topBidHistory != null}" th:value="${topBidHistory.bidAmount} + ${picture.incrementAmount}"  placeholder="입찰 금액 입력"/>
-                                                <input id="bidInput" class="form-control me-auto" th:if="${topBidHistory == null}" th:value="${picture.startingPrice} + ${picture.incrementAmount}"  placeholder="입찰 금액 입력"/>
+                                                <input id="bidInput" class="form-control me-auto"
+                                                       th:if="${topBidHistory != null}"
+                                                       th:value="${topBidHistory.bidAmount} + ${picture.incrementAmount}"
+                                                       placeholder="입찰 금액 입력"/>
+                                                <input id="bidInput" class="form-control me-auto"
+                                                       th:if="${topBidHistory == null}"
+                                                       th:value="${picture.startingPrice} + ${picture.incrementAmount}"
+                                                       placeholder="입찰 금액 입력"/>
                                             </div>
                                             <div class="col-md-2">
                                                 <button id="bidButton" class="btn btn-primary w-100">
