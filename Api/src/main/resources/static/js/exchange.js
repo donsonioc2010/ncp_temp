@@ -14,9 +14,11 @@ var paymentResult = obj => {
         type : 'post',
         url : '/user/session-info',
         success : function(data, status, xhr) {
+            console.log(data)
             userId = data.userId
         },
         error : function(xhr, status, error) {
+            console.log(data)
             alert('결제 불가')
         },
     })
