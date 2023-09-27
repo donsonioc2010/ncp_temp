@@ -2,6 +2,7 @@ package picasso.server.api.exchange.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import picasso.server.api.exchange.model.request.PostCreatePaymentRequest;
 import picasso.server.api.exchange.validator.PaymentValidator;
 import picasso.server.domain.domains.payments.items.PGName;

@@ -103,7 +103,6 @@ public class User {
     this.point += point;
   }
   public void minusPoint(Long point) {
-    this.point -= point;}
-
-
+    this.point -= point;
+  }
 }
