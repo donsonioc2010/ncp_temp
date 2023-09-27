@@ -43,6 +43,6 @@ public class PaymentController {
   @PostMapping("/payment")
   public void createPayment(@RequestBody PostCreatePaymentRequest body) {
     paymentService.savePaymentHistory(body);
-    userService.findUserById(body.getUserId()).ifPresent(u -> u.updatePoint(body.getPaidAmount()));
+    userService.updatePoint(body);
   }
 }
