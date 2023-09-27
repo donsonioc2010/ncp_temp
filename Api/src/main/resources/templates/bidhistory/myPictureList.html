@@ -22,12 +22,12 @@
       </thead>
       <tbody>
       <tr th:each="picture : ${pictureList}">
-        <td th:text="${picture.getId()}"></td>
-        <td th:text="${picture.getPicture().getPictureName()}">
-          <a th:href="'/pictures/' + ${picture.getPicture().getPictureId()}"></a>
+        <td th:text="${picture.id}"></td>
+        <td th:text="${picture.pictureName}">
+          <a th:href="'/pictures/' + ${picture.pictureId}"></a>
         </td>
-        <td th:text="${picture.getBidAmount()}"></td>
-        <td th:text="${picture.getCreatedAt()}"></td>
+        <td th:text="${picture.startingPrice}"></td>
+        <td th:text="${picture.bidStartDate}"></td>
       </tr>
       </tbody>
     </table>
