@@ -12,7 +12,7 @@ var userId;
 var paymentResult = obj => {
     $.ajax({
         type : 'post',
-        url : '/user/session-info',
+        url : '/auth/session-info',
         success : function(data, status, xhr) {
             console.log(data)
             userId = data.userId
