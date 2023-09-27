@@ -22,7 +22,7 @@
       </thead>
       <tbody>
       <tr th:each="picture : ${pictureList}">
-        <td th:text="${picture.id}"></td>
+        <td th:text="${picture.pictureId}"></td>
         <td th:text="${picture.pictureName}">
           <a th:href="'/pictures/' + ${picture.pictureId}"></a>
         </td>
