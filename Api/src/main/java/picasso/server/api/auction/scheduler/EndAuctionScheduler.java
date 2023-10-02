@@ -40,10 +40,10 @@ public class EndAuctionScheduler {
                 picture -> {
                     if (picture.getBidHistory().isEmpty()) {
                         picture.setPictureStatus(REJECT);
-                        sendMailService.pictureRejectMailWithFinishDate(picture);
+//                        sendMailService.pictureRejectMailWithFinishDate(picture);
                     } else {
                         picture.setPictureStatus(SUCCESS_BID);
-                        sendMailService.pictureSuccessBidMail(picture);
+//                        sendMailService.pictureSuccessBidMail(picture);
                     }
                 }
         );

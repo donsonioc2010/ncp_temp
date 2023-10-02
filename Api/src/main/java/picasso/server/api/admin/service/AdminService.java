@@ -63,7 +63,7 @@ public class AdminService {
                 pictureRepository.save(picture);
                 log.info("ApprovePicture Success >>> Picture Id : {}, Title : {}",
                         picture.getPictureId(), picture.getPictureName());
-                sendMailService.adminApproveMail(picture);
+//                sendMailService.adminApproveMail(picture);
                 return;
             }
             log.warn("ApprovePicture Failure >>> Picture Id : {}, Title : {}",

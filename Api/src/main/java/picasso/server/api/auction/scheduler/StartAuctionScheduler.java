@@ -33,9 +33,9 @@ public class StartAuctionScheduler {
     @Scheduled(cron = "0 * * * * *", zone = DateStaticConstants.ZONE_SEOUL)
     public void startApprovePictureToBiddingAuction() {
         log.info("Start Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
-        pictureService
-                .changePictureStatusByPictureStatusAndBidStartDate(AFTER_APPROVE, BIDDING, LocalDate.now())
-                .forEach(sendMailService::startBiddingMail);
+//        pictureService
+//                .changePictureStatusByPictureStatusAndBidStartDate(AFTER_APPROVE, BIDDING, LocalDate.now())
+//                .forEach(sendMailService::startBiddingMail);
         log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }
 
@@ -44,9 +44,9 @@ public class StartAuctionScheduler {
     @Scheduled(cron = "0 0 9 * * *", zone = DateStaticConstants.ZONE_SEOUL)
     public void startNotApprovePictureToRejectAuction() {
         log.info("Start Reject Picture Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
-        pictureService
-                .changePictureStatusByPictureStatusAndBidStartDate(BEFORE_APPROVE, BIDDING, LocalDate.now())
-                .forEach(sendMailService::pictureRejectMailWithNotApproveAdmin);
+//        pictureService
+//                .changePictureStatusByPictureStatusAndBidStartDate(BEFORE_APPROVE, BIDDING, LocalDate.now())
+//                .forEach(sendMailService::pictureRejectMailWithNotApproveAdmin);
         log.info("End Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
     }
 }
