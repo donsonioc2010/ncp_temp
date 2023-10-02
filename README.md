@@ -161,11 +161,15 @@
 - [와이어프레임](https://devjong12.tistory.com/102)
 - [프로젝트의 CI / CD](https://devjong12.tistory.com/103)
 - [NCloud ObjectStorage 업로드 공통기능 구현](https://devjong12.tistory.com/104)
+- [Mail을 Template화 하여 사용하는 방법](https://devjong12.tistory.com/105)
+- [@Scheduler어노테이션을 활용한 경매의 변경방법](https://devjong12.tistory.com/106)
+- [Scheduler와 Mail서바스, 이슈 회고](https://devjong12.tistory.com/107)
 
 ### 세환
 
 - [프로젝트 개요](https://dev-sh-bong.tistory.com/6)
 - [CI와 CD, DBDocs의 CD구축](https://dev-sh-bong.tistory.com/7)
+- [MultiPart 파일의 ObjetctStroage로의 업로드 방법](https://dev-sh-bong.tistory.com/8)
 
 ---
 
