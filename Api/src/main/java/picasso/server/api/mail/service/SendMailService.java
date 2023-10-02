@@ -44,7 +44,7 @@ public class SendMailService {
      * @param picture
      */
     @Async
-    public void adminApproveMail(Picture picture) throws InterruptedException {
+    public void adminApproveMail(Picture picture) {
 //        sendMailUtil.sendMail(
 //                picture.getUser().getEmail(),
 //                REJECT.getMailTitle(),
@@ -55,7 +55,11 @@ public class SendMailService {
 //                    put("link", picassoProperties.getDomain() + "pictures/" + picture.getPictureId());
 //                }}
 //        );
-      Thread.sleep(500);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        
+        }
     }
 
     /**
@@ -64,7 +68,7 @@ public class SendMailService {
      * @param picture
      */
     @Async
-    public void startBiddingMail(Picture picture) throws InterruptedException {
+    public void startBiddingMail(Picture picture) {
 //        sendMailUtil.sendMail(
 //                picture.getUser().getEmail(),
 //                BIDDING.getMailTitle(),
@@ -75,7 +79,11 @@ public class SendMailService {
 //                    put("link", picassoProperties.getDomain() + "pictures/" + picture.getPictureId());
 //                }}
 //        );
-      Thread.sleep(500);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        
+        }
     }
 
     /**
@@ -84,7 +92,7 @@ public class SendMailService {
      * @param picture
      */
     @Async
-    public void pictureSuccessBidMail(Picture picture) throws InterruptedException {
+    public void pictureSuccessBidMail(Picture picture) {
 //        PictureBidHistory topHistory = pictureBidHistoryRepository.findTopByPictureOrderByBidAmountDesc(picture)
 //                .orElseThrow(() -> NotFoundException.EXCEPTION);
 //
@@ -111,7 +119,11 @@ public class SendMailService {
 //                    put("link", picassoProperties.getDomain() + "pictures/" + picture.getPictureId());
 //                }}
 //        );
-      Thread.sleep(500);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        
+        }
     }
 
     /**
@@ -120,7 +132,7 @@ public class SendMailService {
      * @param picture
      */
     @Async
-    public void pictureRejectMailWithNotApproveAdmin(Picture picture) throws InterruptedException {
+    public void pictureRejectMailWithNotApproveAdmin(Picture picture) {
 //        sendMailUtil.sendMail(
 //                picture.getUser().getEmail(),
 //                REJECT.getMailTitle(),
@@ -130,7 +142,11 @@ public class SendMailService {
 //                    put("link", picassoProperties.getDomain() + "pictures/" + picture.getPictureId());
 //                }}
 //        );
-      Thread.sleep(500);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        
+        }
     }
 
     /**
@@ -139,7 +155,7 @@ public class SendMailService {
      * @param picture
      */
     @Async
-    public void pictureRejectMailWithFinishDate(Picture picture) throws InterruptedException {
+    public void pictureRejectMailWithFinishDate(Picture picture) {
 //        sendMailUtil.sendMail(
 //                picture.getUser().getEmail(),
 //                REJECT.getMailTitle(),
@@ -149,6 +165,10 @@ public class SendMailService {
 //                    put("link", picassoProperties.getDomain() + "pictures/" + picture.getPictureId());
 //                }}
 //        );
-      Thread.sleep(500);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        
+        }
     }
 }
