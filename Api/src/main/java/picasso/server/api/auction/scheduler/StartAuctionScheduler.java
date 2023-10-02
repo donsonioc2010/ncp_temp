@@ -30,7 +30,7 @@ public class StartAuctionScheduler {
     private final SendMailService sendMailService;
 
     @Transactional
-    @Scheduled(cron = "0 0 9 * * *", zone = DateStaticConstants.ZONE_SEOUL)
+    @Scheduled(cron = "0 * * * * *", zone = DateStaticConstants.ZONE_SEOUL)
     public void startApprovePictureToBiddingAuction() {
         log.info("Start Todays Auctions Open Schedule Runtime : NowTime >>> {}", LocalDateTime.now());
         pictureService
