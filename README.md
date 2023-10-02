@@ -84,11 +84,52 @@
 ### ERD Image
 ![ERD](Docs/erd.png)
 
-
----
-## 구현 기능
-
 ---
 ## CI/CD
 
 ![Github Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=Github-Actions&logoColor=white)
+
+---
+## 구현 기능
+
+### 마이페이지
+![마이페이지](Docs/Implementation/마이페이지%20수정방법.gif)
+
+### 경매품 기능
+![경매품 등록](Docs/Implementation/경매품등록.gif)
+![등록된경매품확인](Docs/Implementation/등록된%20경매품의%20사용자%20확인.gif)
+![승인및확인](Docs/Implementation/관리자%20승인%20후%20상태%20확인.gif)
+
+### 결제
+> 결제의 경우 실제 개발자 테스트계정이기 떄문에 로직 개발이 완료된 부분까지만 진행하였습니다.
+
+![결제](Docs/Implementation/결제.gif)
+
+### 발송메일 알림 모습
+![메일](Docs/Implementation/발송%20메일.png)
+
+### 스케쥴링
+#### 비동기전 동기화 상태의 코드 및 성능
+> 해당 로직에서 실제 많은 시간이 소요되는 것을 볼 수가 있다.
+
+##### 시작 데이터 건수
+![시작 데이터 건수](Docs/Implementation/스케쥴링/동기/동기%20테스트%20데이터%20100건.png)
+
+##### 스케쥴링 시작시
+![스케쥴링 시작](Docs/Implementation/스케쥴링/동기/동기%20스케쥴링%20시작시.png)
+
+##### 스케쥴링 종료후
+![스케쥴링 종료](Docs/Implementation/스케쥴링/동기/동기%20스케쥴링%20종료%20때.png)
+
+#### 비동기로 변경 후 성능
+> 0초...!
+> 
+##### 실행 데이터 2000건
+
+![시작 데이터](Docs/Implementation/스케쥴링/비동기/스케쥴링%20실해%20전%20데이터.png)
+
+##### 스케쥴링 시작 전
+> 실행과 동시에 데이터가 바뀌면서 종료되고 메일메소드 기능이 실행된다.
+
+![스케쥴링 비동기 시작](Docs/Implementation/스케쥴링/비동기/스케쥴%20중%20메일서비스%20비동기%20실행%20로그.png)
+![실행후 변경된 데이터](Docs/Implementation/스케쥴링/비동기/스케쥴링%20실행%20후.png)
